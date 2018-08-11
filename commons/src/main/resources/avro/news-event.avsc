@@ -1,0 +1,13 @@
+{
+	"namespace": "com.mycompany.commons.avro",
+	"type": "record",
+	"name": "NewsEvent",
+	"fields": [
+		{"name": "id", "type": "string"},
+		{"name": "title", "type": "string"},
+		{"name": "text", "type": "string"},
+		{"name": "datetime", "type": "string"},
+		{"name": "category", "type": ["null", "string"], "default": null}
+
+	]
+}

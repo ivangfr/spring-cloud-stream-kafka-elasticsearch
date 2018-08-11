@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.mycompany</groupId>
+	<artifactId>commons</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
+
+	<properties>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+		<avro.version>1.8.2</avro.version>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.apache.avro</groupId>
+			<artifactId>avro</artifactId>
+			<version>${avro.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.avro</groupId>
+			<artifactId>avro-ipc</artifactId>
+			<version>${avro.version}</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.avro</groupId>
+				<artifactId>avro-maven-plugin</artifactId>
+				<version>${avro.version}</version>
+				<executions>
+					<execution>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>schema</goal>
+							<goal>protocol</goal>
+							<goal>idl-protocol</goal>
+						</goals>
+						<configuration>
+							<sourceDirectory>${project.basedir}/src/main/resources/avro</sourceDirectory>
+							<outputDirectory>${project.basedir}/src/main/java</outputDirectory>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+
+		<pluginManagement>
+			<plugins>
+				<!-- This plugin's configuration is used to store Eclipse m2e settings
+					only. It has no influence on the Maven build itself. -->
+				<!--<plugin>-->
+					<!--<groupId>org.eclipse.m2e</groupId>-->
+					<!--<artifactId>lifecycle-mapping</artifactId>-->
+					<!--<version>1.0.0</version>-->
+					<!--<configuration>-->
+						<!--<lifecycleMappingMetadata>-->
+							<!--<pluginExecutions>-->
+								<!--<pluginExecution>-->
+									<!--<pluginExecutionFilter>-->
+										<!--<groupId>-->
+											<!--org.apache.avro-->
+										<!--</groupId>-->
+										<!--<artifactId>-->
+											<!--avro-maven-plugin-->
+										<!--</artifactId>-->
+										<!--<versionRange>-->
+											<!--[1.8.2,)-->
+										<!--</versionRange>-->
+										<!--<goals>-->
+											<!--<goal>-->
+												<!--idl-protocol-->
+											<!--</goal>-->
+											<!--<goal>protocol</goal>-->
+											<!--<goal>schema</goal>-->
+										<!--</goals>-->
+									<!--</pluginExecutionFilter>-->
+									<!--<action>-->
+										<!--<ignore></ignore>-->
+									<!--</action>-->
+								<!--</pluginExecution>-->
+							<!--</pluginExecutions>-->
+						<!--</lifecycleMappingMetadata>-->
+					<!--</configuration>-->
+				<!--</plugin>-->
+			</plugins>
+		</pluginManagement>
+	</build>
+
+
+</project>

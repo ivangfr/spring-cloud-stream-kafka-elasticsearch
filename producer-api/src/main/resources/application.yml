@@ -1,0 +1,30 @@
+management:
+  security:
+    enabled: false
+  endpoints:
+    web:
+      base-path: /
+      exposure.include: "*"
+  endpoint:
+    health:
+      show-details: always
+  health:
+    binders:
+      enabled: true
+
+spring:
+  cloud:
+    stream:
+      kafka:
+        binder:
+          auto-add-partitions: true
+      bindings:
+        output:
+          destination: com.mycompany.newspipeline.producer.news
+          content-type: application/*+avro
+          producer:
+            partition-key-expression: headers['partitionKey']
+            partition-count: 2
+  sleuth:
+    sampler.probability: 1.0
+#    web.skipPattern: (^cleanup.*|.+favicon.*)

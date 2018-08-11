@@ -1,0 +1,84 @@
+= news-pipeline
+
+== Goal
+
+The goal of this project is to implement a `News` processing pipeline composed of 4 microservices. First, there is the
+`producer-api` that pushes news events to a kafka topic X. Then, there is the `categorizer-service` that listens for news
+events in kafka topic X, categorizes and pushes them to the topic Y. The `collector-service` listens for news events in
+topic Y, saves them in Elasticsearch and pushes the news events to kafka topic Z. Finally, the `publisher-api` reads
+from Elasticsearch and exposes REST and Websockets endpoints, so that clients can consume the news.
+
+* We are using https://docs.spring.io/spring-cloud-stream/docs/current/reference/htmlsingle/[Spring Cloud Stream]
+framework to implement the communication between the microservices.
+* We are using https://docs.spring.io/spring-data/elasticsearch/docs/current/reference/html/[Spring Data Elasticsearch]
+to persist data in Elasticsearch.
+
+== Start Environment
+
+=== Docker Compose
+
+1. Open one terminal
+
+2. In `/news-pipeline` root folder run
+```
+docker-compose up -d
+```
+[NOTE]
+====
+To stop and remove containers, networks, images, and volumes
+```
+docker-compose down -v
+```
+====
+
+=== Generate NewsEvent
+
+Inside `/news-pipeline/commons` folder run
+```
+mvn clean install
+```
+It will install `commons-0.0.1-SNAPSHOT.jar` in you local maven repository, so that it can be visible for all services.
+
+== Start Services
+
+=== produtor-api
+
+. Open a new terminal
+. Inside `/news-pipeline/produtor-api` folder run
+[source]
+----
+mvn spring-boot:run
+----
+
+=== categorizer-service
+
+. Open a new terminal
+. Inside `/news-pipeline/categorizer-service` folder run
+[source]
+----
+mvn spring-boot:run
+----
+
+=== collector-service
+
+. Open a new terminal
+. Inside `/news-pipeline/collector-service` folder run
+[source]
+----
+mvn spring-boot:run
+----
+
+=== publisher-api
+
+. Open a new terminal
+. Inside `/news-pipeline/publisher-api` folder run
+[source]
+----
+mvn spring-boot:run
+----
+
+== TODO
+
+- In order to do something different, in collector-service, replace the spring-cloud-stream by spring-integration;
+- Implement Websocket endpoint in publisher-api;
+- Implement a HTML/JS client for publisher-api;
