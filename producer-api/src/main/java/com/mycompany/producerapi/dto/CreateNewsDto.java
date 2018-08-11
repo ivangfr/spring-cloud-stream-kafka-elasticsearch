@@ -9,7 +9,7 @@ import javax.validation.constraints.NotNull;
 @Data
 public class CreateNewsDto {
 
-    @ApiModelProperty(position = 0, value = "the title of the news", example = "Brazil")
+    @ApiModelProperty(value = "the title of the news", example = "Brazil")
     @NotNull
     @NotEmpty
     private String title;

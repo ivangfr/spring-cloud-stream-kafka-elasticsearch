@@ -37,7 +37,7 @@ Inside `/news-pipeline/commons` folder run
 ```
 mvn clean install
 ```
-It will install `commons-0.0.1-SNAPSHOT.jar` in you local maven repository, so that it can be visible for all services.
+It will install `commons-news-0.0.1-SNAPSHOT.jar` in you local maven repository, so that it can be visible by all services.
 
 == Start Services
 
