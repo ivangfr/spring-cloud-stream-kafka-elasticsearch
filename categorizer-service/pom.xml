@@ -11,7 +11,7 @@
 
 	<parent>
 		<groupId>com.mycompany</groupId>
-		<artifactId>news-pipeline</artifactId>
+		<artifactId>spring-cloud-stream-elasticsearch</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>

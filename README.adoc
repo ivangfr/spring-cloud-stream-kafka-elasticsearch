@@ -1,4 +1,4 @@
-= news-pipeline
+= spring-cloud-stream-elastisearch
 
 == Goal
 
@@ -19,7 +19,7 @@ to persist data in Elasticsearch.
 
 1. Open one terminal
 
-2. In `/news-pipeline` root folder run
+2. In `/spring-cloud-stream-elasticsearch` root folder run
 ```
 docker-compose up -d
 ```
@@ -33,7 +33,7 @@ docker-compose down -v
 
 === Generate NewsEvent
 
-Inside `/news-pipeline/commons` folder run
+Inside `/spring-cloud-stream-elasticsearch/commons` folder run
 ```
 mvn clean install
 ```
@@ -44,7 +44,7 @@ It will install `commons-news-0.0.1-SNAPSHOT.jar` in you local maven repository,
 === produtor-api
 
 . Open a new terminal
-. Inside `/news-pipeline/produtor-api` folder run
+. Inside `/spring-cloud-stream-elasticsearch/produtor-api` folder run
 [source]
 ----
 mvn spring-boot:run
@@ -53,7 +53,7 @@ mvn spring-boot:run
 === categorizer-service
 
 . Open a new terminal
-. Inside `/news-pipeline/categorizer-service` folder run
+. Inside `/spring-cloud-stream-elasticsearch/categorizer-service` folder run
 [source]
 ----
 mvn spring-boot:run
@@ -62,7 +62,7 @@ mvn spring-boot:run
 === collector-service
 
 . Open a new terminal
-. Inside `/news-pipeline/collector-service` folder run
+. Inside `/spring-cloud-stream-elasticsearch/collector-service` folder run
 [source]
 ----
 mvn spring-boot:run
@@ -71,7 +71,7 @@ mvn spring-boot:run
 === publisher-api
 
 . Open a new terminal
-. Inside `/news-pipeline/publisher-api` folder run
+. Inside `/spring-cloud-stream-elasticsearch/publisher-api` folder run
 [source]
 ----
 mvn spring-boot:run

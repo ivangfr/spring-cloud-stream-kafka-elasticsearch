@@ -3,11 +3,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.mycompany</groupId>
-	<artifactId>news-pipeline</artifactId>
+	<artifactId>spring-cloud-stream-elasticsearch</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
-	<name>News Pipeline</name>
+	<name>spring-cloud-stream-elastisearch</name>
 	<description>News Pipeline</description>
 
 	<parent>
