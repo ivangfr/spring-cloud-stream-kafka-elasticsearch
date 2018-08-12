@@ -36,7 +36,7 @@ public class NewsStream {
     public NewsEvent handleNewsEvent(Message<NewsEvent> message,
                                      @Header(KafkaHeaders.RECEIVED_TOPIC) String topic,
                                      @Header(KafkaHeaders.RECEIVED_PARTITION_ID) int partition,
-                                     @Header(KafkaHeaders.OFFSET) int offset,
+                                     @Header(KafkaHeaders.OFFSET) long offset,
                                      @Header(IntegrationMessageHeaderAccessor.DELIVERY_ATTEMPT) int deliveryAttempt) {
         NewsEvent newsEvent = message.getPayload();
         log.info("NewsEvent with id '{}' and title '{}' received from bus. topic: {}, partition: {}, offset: {}, deliveryAttempt: {}",
