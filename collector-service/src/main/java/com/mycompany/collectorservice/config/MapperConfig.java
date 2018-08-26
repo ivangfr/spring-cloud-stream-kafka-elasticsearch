@@ -1,4 +1,4 @@
-package com.mycompany.producerapi.config;
+package com.mycompany.collectorservice.config;
 
 import ma.glasnost.orika.MapperFacade;
 import ma.glasnost.orika.MapperFactory;
@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class MappingConfig {
+public class MapperConfig {
 
     @Bean
     MapperFactory mapperFactory() {

@@ -25,15 +25,14 @@ public class ElasticsearchConfig {
 
     @Bean
     Client client() throws Exception {
-        Settings settings = Settings.builder()
-                .put("cluster.name", publisherApiProperties.getElasticsearch().getClustername())
-                .build();
-
-        InetSocketTransportAddress inetSocketTransportAddress = new InetSocketTransportAddress(
+        InetSocketTransportAddress transportAddress = new InetSocketTransportAddress(
                 InetAddress.getByName(publisherApiProperties.getElasticsearch().getHost()),
                 publisherApiProperties.getElasticsearch().getPort());
 
-        return new PreBuiltTransportClient(settings).addTransportAddress(inetSocketTransportAddress);
+        Settings settings = Settings.builder()
+                .put("cluster.name", publisherApiProperties.getElasticsearch().getClustername()).build();
+
+        return new PreBuiltTransportClient(settings).addTransportAddress(transportAddress);
     }
 
     @Bean

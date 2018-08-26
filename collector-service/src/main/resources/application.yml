@@ -14,7 +14,7 @@ management:
 
 collector-service:
   elasticsearch:
-    clustername: docker-cluster
+    clustername: docker-es-cluster
     host: localhost
     port: 9300
 

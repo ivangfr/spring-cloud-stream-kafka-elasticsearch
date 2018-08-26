@@ -79,6 +79,6 @@ mvn spring-boot:run
 
 == TODO
 
-- In order to do something different, in collector-service, replace the spring-cloud-stream by spring-integration;
+- In publisher-api, implement an endpoint for searching news;
 - Implement Websocket endpoint in publisher-api;
 - Implement a HTML/JS client for publisher-api;

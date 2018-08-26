@@ -12,6 +12,7 @@ import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
 import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
 
 import java.net.InetAddress;
+import java.net.UnknownHostException;
 
 @Configuration
 @EnableConfigurationProperties(CollectorServiceProperties.class)
@@ -24,20 +25,19 @@ public class ElasticsearchConfig {
     }
 
     @Bean
-    Client client() throws Exception {
-        Settings settings = Settings.builder()
-                .put("cluster.name", collectorServiceProperties.getElasticsearch().getClustername())
-                .build();
-
-        InetSocketTransportAddress inetSocketTransportAddress = new InetSocketTransportAddress(
+    Client client() throws UnknownHostException {
+        InetSocketTransportAddress transportAddress = new InetSocketTransportAddress(
                 InetAddress.getByName(collectorServiceProperties.getElasticsearch().getHost()),
                 collectorServiceProperties.getElasticsearch().getPort());
 
-        return new PreBuiltTransportClient(settings).addTransportAddress(inetSocketTransportAddress);
+        Settings settings = Settings.builder()
+                .put("cluster.name", collectorServiceProperties.getElasticsearch().getClustername()).build();
+
+        return new PreBuiltTransportClient(settings).addTransportAddress(transportAddress);
     }
 
     @Bean
-    ElasticsearchOperations elasticsearchTemplate() throws Exception {
+    ElasticsearchOperations elasticsearchTemplate() throws UnknownHostException {
         return new ElasticsearchTemplate(client());
     }
 
