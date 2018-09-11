@@ -18,6 +18,7 @@
     </parent>
 
     <modules>
+        <module>/eureka-server</module>
         <module>/producer-api</module>
         <module>/categorizer-service</module>
         <module>/collector-service</module>
