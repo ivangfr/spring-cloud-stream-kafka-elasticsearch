@@ -32,6 +32,12 @@ spring:
           consumer:
             max-attempts: 4
             back-off-initial-interval: 10000
+        output:
+          destination: com.mycompany.newspipeline.publisher.news
+          content-type: application/*+avro
+          producer:
+            partition-key-expression: headers['partitionKey']
+            partition-count: 2
   sleuth:
     sampler.probability: 1.0
 #    web.skipPattern: (^cleanup.*|.+favicon.*)

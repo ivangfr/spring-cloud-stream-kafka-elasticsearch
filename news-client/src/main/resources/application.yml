@@ -12,6 +12,20 @@ management:
       enabled: true
 
 spring:
+  cloud:
+    stream:
+      kafka:
+        binder:
+          auto-add-partitions: true
+          min-partition-count: 2
+      bindings:
+        input:
+          destination: com.mycompany.newspipeline.publisher.news
+          content-type: application/*+avro
+          group: newsClientGroup
+          consumer:
+            max-attempts: 4
+            back-off-initial-interval: 10000
   sleuth:
     sampler.probability: 1.0
 #    web.skipPattern: (^cleanup.*|.+favicon.*)

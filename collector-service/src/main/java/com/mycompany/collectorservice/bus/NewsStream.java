@@ -8,7 +8,6 @@ import ma.glasnost.orika.MapperFacade;
 import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.cloud.stream.annotation.StreamListener;
 import org.springframework.cloud.stream.messaging.Processor;
-import org.springframework.cloud.stream.messaging.Sink;
 import org.springframework.integration.IntegrationMessageHeaderAccessor;
 import org.springframework.kafka.support.KafkaHeaders;
 import org.springframework.messaging.Message;
@@ -20,7 +19,7 @@ import java.util.Optional;
 
 @Slf4j
 @Component
-@EnableBinding(Sink.class)
+@EnableBinding(Processor.class)
 public class NewsStream {
 
     private final NewsService newsService;
@@ -45,7 +44,7 @@ public class NewsStream {
         News news = mapperFacade.map(newsEvent, News.class);
 
         Optional<News> optionalNews = newsService.createNews(news);
-        News newSaved = optionalNews.get(); //TODO Handle ES Error
+        News newSaved = optionalNews.orElseThrow(() -> new RuntimeException("Unable to save news in Elasticsearch"));
         log.info("News with id {} saved in Elasticsearch.", newSaved.getId());
 
         return newsEvent;

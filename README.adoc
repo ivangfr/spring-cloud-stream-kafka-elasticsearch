@@ -17,9 +17,9 @@ to persist data in Elasticsearch.
 
 === Docker Compose
 
-1. Open one terminal
+- Open one terminal
 
-2. In `/spring-cloud-stream-elasticsearch` root folder run
+- In `/spring-cloud-stream-elasticsearch` root folder run
 ```
 docker-compose up -d
 ```
@@ -30,6 +30,27 @@ To stop and remove containers, networks, images, and volumes
 docker-compose down -v
 ```
 ====
+
+- Wait a little bit until all containers are Up (healthy). You can check their status running
+```
+docker-compose ps
+```
+
+- In `/spring-cloud-stream-elasticsearch/scripts` and run the following script
+```
+./create-index.sh
+```
+It will create an index `news_v1` (with alias `news`) in Elasticsearch.
+
+* Check _news_v1_ index mapping
+```
+curl http://localhost:9200/news_v1/_mapping
+```
+
+* Check existing ES alias
+```
+curl http://localhost:9200/_aliases
+```
 
 === Generate NewsEvent
 
@@ -43,67 +64,61 @@ It will install `commons-news-0.0.1-SNAPSHOT.jar` in you local maven repository,
 
 === eureka-server
 
-. Open a new terminal
-. Inside `/spring-cloud-stream-elasticsearch/eureka-server` folder run
-[source]
-----
+- Open a new terminal
+- Inside `/spring-cloud-stream-elasticsearch/eureka-server` folder run
+```
 mvn spring-boot:run
-----
-. The link for eureka-server is http://localhost:8761
+```
+- The link for eureka-server is http://localhost:8761
 
 === producer-api
 
-. Open a new terminal
-. Inside `/spring-cloud-stream-elasticsearch/producer-api` folder run
-[source]
-----
+- Open a new terminal
+- Inside `/spring-cloud-stream-elasticsearch/producer-api` folder run
+```
 mvn spring-boot:run
-----
-. The link for producer-api swagger is http://localhost:8081/swagger-ui.html
+```
+- The link for producer-api swagger is http://localhost:8081/swagger-ui.html
 
 === categorizer-service
 
-. Open a new terminal
-. Inside `/spring-cloud-stream-elasticsearch/categorizer-service` folder run
-[source]
-----
+- Open a new terminal
+- Inside `/spring-cloud-stream-elasticsearch/categorizer-service` folder run
+```
 mvn spring-boot:run
-----
+```
 
 === collector-service
 
-. Open a new terminal
-. Inside `/spring-cloud-stream-elasticsearch/collector-service` folder run
-[source]
-----
+- Open a new terminal
+- Inside `/spring-cloud-stream-elasticsearch/collector-service` folder run
+```
 mvn spring-boot:run
-----
+```
 
 === publisher-api
 
-. Open a new terminal
-. Inside `/spring-cloud-stream-elasticsearch/publisher-api` folder run
-[source]
-----
+- Open a new terminal
+- Inside `/spring-cloud-stream-elasticsearch/publisher-api` folder run
+```
 mvn spring-boot:run
-----
-. The link for publisher-api swagger is http://localhost:8084/swagger-ui.html
+```
+- The link for publisher-api swagger is http://localhost:8084/swagger-ui.html
 
 === news-client
 
-. Open a new terminal
-. Inside `/spring-cloud-stream-elasticsearch/news-client` folder run
-[source]
-----
+- Open a new terminal
+- Inside `/spring-cloud-stream-elasticsearch/news-client` folder run
+```
 mvn spring-boot:run
-----
-. The link for news-client website is http://localhost:8085
+```
+- The link for news-client website is http://localhost:8085
 
 == Useful links
 
-. Zipkin can be accessed at http://localhost:9411
+- Zipkin can be accessed at http://localhost:9411
 
 == TODO
 
-- In publisher-api, implement an endpoint for searching news;
-- Implement Websocket endpoint in publisher-api;
+- news-client: implement search functionality;
+- news-client: add buttons to enable/disable websocket;

@@ -14,7 +14,7 @@ public class CreateNewsDto {
     @NotEmpty
     private String title;
 
-    @ApiModelProperty(position = 1, value = "the text of the news", example = "This news is about Brazil")
+    @ApiModelProperty(position = 1, value = "the text of the news", example = "This news is about Brasilia")
     @NotNull
     @NotEmpty
     private String text;
