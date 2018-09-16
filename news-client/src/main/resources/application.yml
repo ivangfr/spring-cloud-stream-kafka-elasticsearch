@@ -1,0 +1,24 @@
+management:
+  security:
+    enabled: false
+  endpoints:
+    web:
+      exposure.include: "*"
+  endpoint:
+    health:
+      show-details: always
+  health:
+    binders:
+      enabled: true
+
+spring:
+  sleuth:
+    sampler.probability: 1.0
+#    web.skipPattern: (^cleanup.*|.+favicon.*)
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}
+  instance:
+    preferIpAddress: true

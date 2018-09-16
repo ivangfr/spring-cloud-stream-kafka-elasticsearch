@@ -49,6 +49,7 @@ It will install `commons-news-0.0.1-SNAPSHOT.jar` in you local maven repository,
 ----
 mvn spring-boot:run
 ----
+. The link for eureka-server is http://localhost:8761
 
 === producer-api
 
@@ -58,6 +59,7 @@ mvn spring-boot:run
 ----
 mvn spring-boot:run
 ----
+. The link for producer-api swagger is http://localhost:8081/swagger-ui.html
 
 === categorizer-service
 
@@ -85,9 +87,23 @@ mvn spring-boot:run
 ----
 mvn spring-boot:run
 ----
+. The link for publisher-api swagger is http://localhost:8084/swagger-ui.html
+
+=== news-client
+
+. Open a new terminal
+. Inside `/spring-cloud-stream-elasticsearch/news-client` folder run
+[source]
+----
+mvn spring-boot:run
+----
+. The link for news-client website is http://localhost:8085
+
+== Useful links
+
+. Zipkin can be accessed at http://localhost:9411
 
 == TODO
 
 - In publisher-api, implement an endpoint for searching news;
 - Implement Websocket endpoint in publisher-api;
-- Implement a HTML/JS client for publisher-api;
