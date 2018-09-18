@@ -25,15 +25,29 @@
 </nav>
 <div class="container">
     <div class="row">
-        <div class="col s12">
-            <!-- Search -->
-            <div class="input-field col s12">
-                <i class="material-icons prefix">search</i>
-                <input type="text" id="autocomplete-input" class="autocomplete">
-                <label for="autocomplete-input">Search</label>
-            </div>
+        <!-- Search -->
+        <div class="input-field col s9">
+            <i class="material-icons prefix">search</i>
+            <input type="text" id="autocomplete-input" class="autocomplete">
+            <label for="autocomplete-input">Search</label>
+        </div>
 
-            <div class="clearfix"></div>
+        <!-- Websocket -->
+        <div class="col s3">
+            <p>Websocket Connection</p>
+            <div class="switch">
+                <label>
+                    Off
+                    <input id="websocketSwitch" type="checkbox" checked>
+                    <span class="lever"></span>
+                    On
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col s12">
 
             <!-- News List -->
             <div id="newsList">

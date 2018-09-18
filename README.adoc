@@ -121,4 +121,3 @@ mvn spring-boot:run
 == TODO
 
 - news-client: implement search functionality;
-- news-client: add buttons to enable/disable websocket;
