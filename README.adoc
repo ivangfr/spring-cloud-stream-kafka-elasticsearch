@@ -120,4 +120,6 @@ mvn spring-boot:run
 
 == TODO
 
-- news-client: implement search functionality;
+- news-client: bug. everytime sync is clicked, it enables websocket;
+- news-client: if websocket is enabled/disabled, sync button should be disabled/enabled;
+- news-client: implement pagination;

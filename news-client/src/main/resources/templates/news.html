@@ -25,16 +25,34 @@
 </nav>
 <div class="container">
     <div class="row">
-        <!-- Search -->
-        <div class="input-field col s9">
-            <i class="material-icons prefix">search</i>
-            <input type="text" id="autocomplete-input" class="autocomplete">
-            <label for="autocomplete-input">Search</label>
+        <!-- Search Form-->
+        <div class="col s8">
+            <form th:action="@{/news/search}" th:object="${searchDto}" method="post">
+                <div class="valign-wrapper">
+                    <div class="input-field col s11">
+                        <input type="text" id="searchInput" th:field="*{text}">
+                        <label for="searchInput">Search</label>
+                    </div>
+                    <div class="col s1">
+                        <button class="btn btn-floating waves-effect waves-light" type="submit">
+                            <i class=" material-icons right">search</i>
+                        </button>
+                    </div>
+                </div>
+            </form>
         </div>
 
-        <!-- Websocket -->
+        <!-- Manual Sync -->
+        <div class="col s1">
+            <label>Sync</label>
+            <a th:href="@{/news}" class="btn btn-floating waves-effect waves-light">
+                <i class="material-icons">refresh</i>
+            </a>
+        </div>
+
+        <!-- Websocket Connection -->
         <div class="col s3">
-            <p>Websocket Connection</p>
+            <label>Websocket</label>
             <div class="switch">
                 <label>
                     Off
