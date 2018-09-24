@@ -4,8 +4,6 @@ function connect() {
     var socket = new SockJS('/news-websocket');
     stompClient = Stomp.over(socket);
 
-    var successCallback =
-
     stompClient.connect({},
         function (frame) {
             console.log('Connected: ' + frame);
@@ -25,7 +23,7 @@ function connect() {
             });
         },
         function() {
-            console.log('Unable to connect to Websocket!')
+            console.log('Unable to connect to Websocket!');
             $('#websocketSwitch').prop('checked', false);
         }
      );
