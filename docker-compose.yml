@@ -3,7 +3,7 @@ version: "3.5"
 services:
 
   zookeeper:
-    image: confluentinc/cp-zookeeper:4.1.0
+    image: confluentinc/cp-zookeeper:5.0.0
     container_name: zookeeper
     restart: unless-stopped
     ports:
@@ -16,7 +16,7 @@ services:
       start_period: 20s
 
   kafka:
-    image: confluentinc/cp-kafka:4.1.0
+    image: confluentinc/cp-kafka:5.0.0
     container_name: kafka
     restart: unless-stopped
     depends_on:
@@ -34,7 +34,7 @@ services:
       start_period: 20s
 
   elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch-oss:6.2.2
+    image: docker.elastic.co/elasticsearch/elasticsearch-oss:6.4.2
     container_name: elasticsearch
     restart: unless-stopped
     ports:
@@ -52,20 +52,20 @@ services:
         soft: -1
         hard: -1
 
-  kibana:
-    image: docker.elastic.co/kibana/kibana-oss:6.2.1
-    container_name: kibana
-    restart: unless-stopped
-    ports:
-      - "5601:5601"
-    environment:
-      ELASTICSEARCH_URL: http://elasticsearch:9200
-    healthcheck:
-      test: "curl -f http://localhost:5601 || exit 1"
+#  kibana:
+#    image: docker.elastic.co/kibana/kibana-oss:6.4.1
+#    container_name: kibana
+#    restart: unless-stopped
+#    ports:
+#      - "5601:5601"
+#    environment:
+#      ELASTICSEARCH_URL: http://elasticsearch:9200
+#    healthcheck:
+#      test: "curl -f http://localhost:5601 || exit 1"
 
   zipkin:
     container_name: zipkin
-    image: openzipkin/zipkin:2.11
+    image: openzipkin/zipkin:2.11.7
     restart: unless-stopped
     ports:
       - 9411:9411

@@ -2,16 +2,34 @@
 
 == Goal
 
-The goal of this project is to implement a `News` processing pipeline composed of 4 microservices. First, there is the
-`producer-api` that pushes news events to a kafka topic X. Then, there is the `categorizer-service` that listens for news
-events in kafka topic X, categorizes and pushes them to the topic Y. The `collector-service` listens for news events in
-topic Y, saves them in Elasticsearch and pushes the news events to kafka topic Z. Finally, the `publisher-api` reads
-from Elasticsearch and exposes REST and Websockets endpoints, so that clients can consume the news.
+The goal of this project is to implement a `News` processing pipeline composed of 5 micro-services.
+
+image::images/project-diagram.png[]
+
+=== producer-api
+Spring-boot application that creates news and pushes news events to a kafka topic `producer.news`.
+
+=== categorizer-service
+Spring-boot application that listens for news events in kafka topic `producer.news`, categorizes and pushes them to the
+topic `categorizer.news`.
+
+=== collector-service
+Spring-boot application that listens for news events in topic `categorizer.news`, saves them in Elasticsearch and pushes
+the news events to kafka topic `collector.news`.
+
+=== publisher-api
+Spring-boot application that reads directly from Elasticsearch and exposes a REST. It doesn't listen from kafka.
+
+=== news-client
+Spring-boot application that provides an user interface for the News. It listens for news events in topic `collector.news`
+and those events are consumed by the service's **Websocket**, so that news are updated on the fly on the main page. Besides,
+`news-client` communicates directly with `publisher-api` for news update or search.
 
 * We are using https://docs.spring.io/spring-cloud-stream/docs/current/reference/htmlsingle/[Spring Cloud Stream]
-framework to implement the communication between the microservices.
+framework to implement the communication between the micro-services.
 * We are using https://docs.spring.io/spring-data/elasticsearch/docs/current/reference/html/[Spring Data Elasticsearch]
 to persist data in Elasticsearch.
+* We are using https://www.thymeleaf.org/[Thymeleaf] as HTML template
 
 == Start Environment
 
@@ -120,6 +138,8 @@ mvn spring-boot:run
 
 == TODO
 
+- publisher-api: remove connection to kafka topic
+- news-client: read from collector-service output topic instead of publisher-api
 - news-client: bug. everytime sync is clicked, it enables websocket;
 - news-client: if websocket is enabled/disabled, sync button should be disabled/enabled;
 - news-client: implement pagination;

@@ -20,7 +20,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
-        <spring-cloud.version>Finchley.SR1</spring-cloud.version>
+        <spring-cloud.version>Finchley.SR2</spring-cloud.version>
     </properties>
 
     <dependencies>
@@ -51,6 +51,16 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+
+                <!-- add app info on /actuator/info endpoint -->
+                <executions>
+                    <execution>
+                        <id>build-info</id>
+                        <goals>
+                            <goal>build-info</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

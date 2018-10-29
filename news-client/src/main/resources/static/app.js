@@ -11,7 +11,7 @@ function connect() {
                 var newsBody = JSON.parse(news.body);
                 var card = '<div class="card">' +
                                '<div class="card-content">' +
-                                   '<span class="left blue lighten-4">'+newsBody.category+'</span>' +
+                                   '<span class="left blue lighten-4">'+newsBody.category.toUpperCase()+'</span>' +
                                    '<span class="right grey-text lighten-4">'+moment(newsBody.datetime).format("DD-MMM-YYYY HH:mm:ss")+'</span>' +
                                    '<div class="clearfix"></div>' +
                                    '<h5>'+newsBody.title+'</h5>' +
