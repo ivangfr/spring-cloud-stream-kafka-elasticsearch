@@ -41,10 +41,10 @@ Spring-boot application that provides a News user interface. It implements a *We
 the topic `collector.news`. So, news are updated on the fly on the main page. Besides, `news-client` communicates directly
 with `publisher-api` whenever search for a specific news or news update are needed.
 
-The video bellow shows the websocket operation. An new is created in `producer-api` and, immediately, it is shown in
-`news-client`
+The Websocket operation is shown in the short gif bellow. An news is created in `producer-api` and, immediately, it is
+shown in `news-client`
 
-video::images/websocket-operation.mp4[options=autoplay,loop]
+image::images/websocket-operation.gif[]
 
 == Start Environment
 
