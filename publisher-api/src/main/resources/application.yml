@@ -18,26 +18,6 @@ publisher-api:
     port: 9300
 
 spring:
-  cloud:
-    stream:
-      kafka:
-        binder:
-          auto-add-partitions: true
-          min-partition-count: 2
-      bindings:
-        input:
-          destination: com.mycompany.newspipeline.collector.news
-          content-type: application/*+avro
-          group: publisherGroup
-          consumer:
-            max-attempts: 4
-            back-off-initial-interval: 10000
-        output:
-          destination: com.mycompany.newspipeline.publisher.news
-          content-type: application/*+avro
-          producer:
-            partition-key-expression: headers['partitionKey']
-            partition-count: 2
   sleuth:
     sampler.probability: 1.0
 #    web.skipPattern: (^cleanup.*|.+favicon.*)

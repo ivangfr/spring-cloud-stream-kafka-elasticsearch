@@ -1,14 +1,13 @@
 package com.mycompany.publisherapi.service;
 
+import com.mycompany.publisherapi.exception.NewsNotFoundException;
 import com.mycompany.publisherapi.model.News;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import java.util.Optional;
-
 public interface NewsService {
 
-    Optional<News> getNewsById(String uuid);
+    News validateAndGetNewsById(String id) throws NewsNotFoundException;
 
     Page<News> listAllNewsByPage(Pageable pageable);
 

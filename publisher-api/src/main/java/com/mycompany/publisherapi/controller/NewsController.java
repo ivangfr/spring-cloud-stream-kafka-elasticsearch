@@ -10,7 +10,6 @@ import io.swagger.annotations.ApiResponses;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -19,9 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
-import java.io.IOException;
 
 @RestController
 @RequestMapping("/api/news")
@@ -55,8 +52,7 @@ public class NewsController {
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/{id}")
     public News getNewsById(@PathVariable String id) throws NewsNotFoundException {
-        return newsService.getNewsById(id)
-                .orElseThrow(() -> new NewsNotFoundException(String.format("News with id '%s' doesn't exist", id)));
+        return newsService.validateAndGetNewsById(id);
     }
 
     @ApiOperation(
@@ -72,11 +68,6 @@ public class NewsController {
     @PutMapping("/search")
     public Page<News> searchNews(@Valid @RequestBody SearchDto searchDto, Pageable pageable) {
         return newsService.search(searchDto.getText(), pageable);
-    }
-
-    @ExceptionHandler(NewsNotFoundException.class)
-    public void handleNotFoundException(Exception e, HttpServletResponse response) throws IOException {
-        response.sendError(HttpStatus.NOT_FOUND.value(), e.getMessage());
     }
 
 }

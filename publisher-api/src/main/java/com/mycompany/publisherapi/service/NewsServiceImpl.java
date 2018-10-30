@@ -1,5 +1,6 @@
 package com.mycompany.publisherapi.service;
 
+import com.mycompany.publisherapi.exception.NewsNotFoundException;
 import com.mycompany.publisherapi.model.News;
 import com.mycompany.publisherapi.repository.NewsRepository;
 import org.elasticsearch.index.query.QueryBuilder;
@@ -10,8 +11,6 @@ import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilde
 import org.springframework.data.elasticsearch.core.query.SearchQuery;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-
 @Service
 public class NewsServiceImpl implements NewsService {
 
@@ -21,9 +20,11 @@ public class NewsServiceImpl implements NewsService {
         this.newsRepository = newsRepository;
     }
 
+
     @Override
-    public Optional<News> getNewsById(String id) {
-        return newsRepository.findById(id);
+    public News validateAndGetNewsById(String id) throws NewsNotFoundException {
+        return newsRepository.findById(id)
+                .orElseThrow(() -> new NewsNotFoundException(String.format("News with id '%s' doesn't exist", id)));
     }
 
     @Override
