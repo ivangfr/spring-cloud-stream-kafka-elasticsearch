@@ -160,6 +160,7 @@ image::images/zipkin-sample.png[]
 
 == TODO
 
+- update spring boot version. references: springboot-elasticsearch-thymeleaf (ES config) and springboot-kafka-mysql-cassandra.
 - news-client: bug. everytime sync is clicked, it enables websocket;
 - news-client: if websocket is enabled/disabled, sync button should be disabled/enabled;
 - news-client: implement pagination;
