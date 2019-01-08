@@ -13,7 +13,7 @@ services:
       TZ: "${TZ-Europe/Berlin}"
     healthcheck:
       test: "echo stat | nc localhost $$ZOOKEEPER_CLIENT_PORT"
-      start_period: 20s
+      start_period: 30s
 
   kafka:
     image: confluentinc/cp-kafka:5.1.0
@@ -32,7 +32,43 @@ services:
       TZ: "${TZ-Europe/Berlin}"
     healthcheck:
       test: [ "CMD", "nc", "-z", "localhost", "9092" ]
-      start_period: 20s
+      start_period: 30s
+
+  kafka-rest-proxy:
+    image: confluentinc/cp-kafka-rest:5.1.0
+    container_name: kafka-rest-proxy
+    restart: unless-stopped
+    depends_on:
+      - zookeeper
+      - kafka
+    ports:
+      - "9082:8082"
+    environment:
+      KAFKA_REST_BOOTSTRAP_SERVERS: PLAINTEXT://kafka:9092
+      KAFKA_REST_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_REST_HOST_NAME: kafka-rest-proxy
+      KAFKA_REST_LISTENERS: http://0.0.0.0:8082
+      KAFKA_REST_SCHEMA_REGISTRY_URL: http://schema-registry:8081
+      KAFKA_REST_CONSUMER_REQUEST_TIMEOUT_MS: 30000
+      TZ: "${TZ-Europe/Berlin}"
+    healthcheck:
+      test: "curl -f http://localhost:8082 || exit 1"
+      start_period: 30s
+
+  kafka-topics-ui:
+    image: landoop/kafka-topics-ui:0.9.4
+    container_name: kafka-topics-ui
+    restart: unless-stopped
+    depends_on:
+      - kafka-rest-proxy
+    ports:
+      - "9085:8000"
+    environment:
+      KAFKA_REST_PROXY_URL: http://kafka-rest-proxy:8082
+      PROXY: "true"
+    healthcheck:
+      test: "wget --quiet --tries=1 --spider http://localhost:8000 || exit 1"
+      start_period: 30s
 
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch-oss:6.4.2
@@ -52,6 +88,7 @@ services:
         hard: -1
     healthcheck:
       test: "curl -f http://localhost:9200 || exit 1"
+      start_period: 30s
 
   zipkin:
     container_name: zipkin
@@ -61,4 +98,4 @@ services:
       - "9411:9411"
     healthcheck:
       test: "curl -f http://localhost:9411 || exit 1"
-      start_period: 20s
+      start_period: 30s

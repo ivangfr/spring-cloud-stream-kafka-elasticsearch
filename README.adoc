@@ -2,7 +2,7 @@
 
 == Goal
 
-The goal of this project is to implement a `News` processing pipeline composed of 5 microservices: producer-api,
+The goal of this project is to implement a "News" processing pipeline composed of 5 microservices: producer-api,
 categorizer-service, collector-service, publisher-api and news-client.
 
 image::images/project-diagram.png[]
@@ -58,7 +58,7 @@ docker-compose up -d
 ```
 [NOTE]
 ====
-To stop and remove containers, networks, images, and volumes
+To stop and remove containers, networks and volumes
 ```
 docker-compose down -v
 ```
@@ -68,6 +68,8 @@ docker-compose down -v
 ```
 docker-compose ps
 ```
+
+=== Create Elasticsearch Index
 
 - In `/spring-cloud-stream-elasticsearch/scripts` and run the following script
 ```
@@ -149,6 +151,10 @@ mvn spring-boot:run
 
 == Useful links
 
+=== Kafka Topics UI
+
+- Kafka Topics UI can be accessed at http://localhost:9085
+
 === Zipkin
 
 - Zipkin can be accessed at http://localhost:9411
@@ -160,7 +166,10 @@ image::images/zipkin-sample.png[]
 
 == TODO
 
-- update spring boot version. references: springboot-elasticsearch-thymeleaf (ES config) and springboot-kafka-mysql-cassandra.
+- update spring-boot version >= 2.1.1 (and spring-cloud)
+tried but occurred an exception saying that could not send generic message.
+At class `com.mycompany.newsclient.bus.NewsStream.java`, line "simpMessagingTemplate.convertAndSend("/topic/news", news);"
+
 - news-client: bug. everytime sync is clicked, it enables websocket;
 - news-client: if websocket is enabled/disabled, sync button should be disabled/enabled;
 - news-client: implement pagination;
