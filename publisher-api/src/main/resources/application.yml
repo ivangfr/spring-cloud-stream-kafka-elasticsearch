@@ -7,9 +7,6 @@ management:
   endpoint:
     health:
       show-details: always
-  health:
-    binders:
-      enabled: true
 
 publisher-api:
   elasticsearch:

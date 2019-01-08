@@ -1,4 +1,4 @@
-= spring-cloud-stream-elastisearch
+= spring-cloud-stream-elasticsearch
 
 == Goal
 

@@ -3,7 +3,7 @@ version: "3.5"
 services:
 
   zookeeper:
-    image: confluentinc/cp-zookeeper:5.0.0
+    image: confluentinc/cp-zookeeper:5.1.0
     container_name: zookeeper
     restart: unless-stopped
     ports:
@@ -16,17 +16,18 @@ services:
       start_period: 20s
 
   kafka:
-    image: confluentinc/cp-kafka:5.0.0
+    image: confluentinc/cp-kafka:5.1.0
     container_name: kafka
     restart: unless-stopped
     depends_on:
       - zookeeper
     ports:
-      - "9092:9092"
+      - "29092:29092"
     environment:
-      KAFKA_ZOOKEEPER_CONNECT: "zookeeper:2181"
-      KAFKA_ADVERTISED_LISTENERS: "PLAINTEXT://localhost:9092"
-      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: "1"
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,PLAINTEXT_HOST://localhost:29092
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
       KAFKA_DELETE_TOPIC_ENABLE: "true"
       TZ: "${TZ-Europe/Berlin}"
     healthcheck:
@@ -45,30 +46,19 @@ services:
       discovery.type: single-node
       bootstrap.memory_lock: "true"
       ES_JAVA_OPTS: "-Xms512m -Xmx512m"
-    healthcheck:
-      test: "curl -f http://localhost:9200 || exit 1"
     ulimits:
       memlock:
         soft: -1
         hard: -1
-
-#  kibana:
-#    image: docker.elastic.co/kibana/kibana-oss:6.4.2
-#    container_name: kibana
-#    restart: unless-stopped
-#    ports:
-#      - "5601:5601"
-#    environment:
-#      ELASTICSEARCH_URL: http://elasticsearch:9200
-#    healthcheck:
-#      test: "curl -f http://localhost:5601 || exit 1"
+    healthcheck:
+      test: "curl -f http://localhost:9200 || exit 1"
 
   zipkin:
     container_name: zipkin
     image: openzipkin/zipkin:2.11.7
     restart: unless-stopped
     ports:
-      - 9411:9411
+      - "9411:9411"
     healthcheck:
       test: "curl -f http://localhost:9411 || exit 1"
       start_period: 20s
