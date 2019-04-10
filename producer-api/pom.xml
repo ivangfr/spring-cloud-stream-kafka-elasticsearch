@@ -17,10 +17,10 @@
     </parent>
 
     <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
+        <mycompany.commons-news.version>0.0.1-SNAPSHOT</mycompany.commons-news.version>
         <springfox.version>2.9.2</springfox.version>
+        <orika.version>1.5.2</orika.version>
     </properties>
 
     <dependencies>
@@ -53,6 +53,13 @@
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
         </dependency>
 
+        <!-- commons-news -->
+        <dependency>
+            <groupId>com.mycompany</groupId>
+            <artifactId>commons-news</artifactId>
+            <version>${mycompany.commons-news.version}</version>
+        </dependency>
+
         <!-- Swagger2 -->
         <dependency>
             <groupId>io.springfox</groupId>
@@ -64,6 +71,31 @@
             <artifactId>springfox-swagger-ui</artifactId>
             <version>${springfox.version}</version>
         </dependency>
+
+        <!-- Orika -->
+        <dependency>
+            <groupId>ma.glasnost.orika</groupId>
+            <artifactId>orika-core</artifactId>
+            <version>${orika.version}</version>
+        </dependency>
+
+        <!-- Lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-stream-test-support</artifactId>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>
@@ -71,8 +103,6 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-
-                <!-- add app info on /actuator/info endpoint -->
                 <executions>
                     <execution>
                         <id>build-info</id>

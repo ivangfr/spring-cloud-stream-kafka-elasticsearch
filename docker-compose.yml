@@ -92,10 +92,10 @@ services:
 
   zipkin:
     container_name: zipkin
-    image: openzipkin/zipkin:2.11.7
+    image: openzipkin/zipkin:2.12.6
     restart: unless-stopped
     ports:
       - "9411:9411"
     healthcheck:
-      test: "curl -f http://localhost:9411 || exit 1"
+      test: [ "CMD", "nc", "-z", "localhost", "9411" ]
       start_period: 30s

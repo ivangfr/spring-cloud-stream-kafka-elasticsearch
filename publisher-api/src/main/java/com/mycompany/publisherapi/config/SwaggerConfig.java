@@ -18,9 +18,10 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
-import static avro.shaded.com.google.common.collect.Lists.newArrayList;
 import static springfox.documentation.builders.PathSelectors.regex;
 import static springfox.documentation.schema.AlternateTypeRules.newRule;
 
@@ -47,7 +48,7 @@ public class SwaggerConfig {
     }
 
     // --
-    // The bean bellow is needed for fix Pageable in Swagger. Otherwise, the arguments page, size and sort won't be shown.
+    // The bean below is needed for fix Pageable in Swagger. Otherwise, the arguments page, size and sort won't be shown.
 
     @Bean
     public AlternateTypeRuleConvention pageableConvention(final TypeResolver resolver) {
@@ -59,7 +60,7 @@ public class SwaggerConfig {
 
             @Override
             public List<AlternateTypeRule> rules() {
-                return newArrayList(newRule(resolver.resolve(Pageable.class), resolver.resolve(pageableMixin())));
+                return Collections.singletonList(newRule(resolver.resolve(Pageable.class), resolver.resolve(pageableMixin())));
             }
         };
     }
@@ -67,7 +68,7 @@ public class SwaggerConfig {
     private Type pageableMixin() {
         return new AlternateTypeBuilder()
                 .fullyQualifiedClassName(String.format("%s.generated.%s", Pageable.class.getPackage().getName(), Pageable.class.getSimpleName()))
-                .withProperties(newArrayList(property(Integer.class, "page"), property(Integer.class, "size"), property(String.class, "sort")))
+                .withProperties(Arrays.asList(property(Integer.class, "page"), property(Integer.class, "size"), property(String.class, "sort")))
                 .build();
     }
 

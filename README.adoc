@@ -1,11 +1,7 @@
-= spring-cloud-stream-elasticsearch
+= `spring-cloud-stream-elasticsearch`
 
-== Goal
-
-The goal of this project is to implement a "News" processing pipeline composed of 5 microservices: producer-api,
-categorizer-service, collector-service, publisher-api and news-client.
-
-image::images/project-diagram.png[]
+The goal of this project is to implement a "News" processing pipeline composed of 5 microservices: `producer-api`,
+`categorizer-service`, `collector-service`, `publisher-api` and `news-client`.
 
 * We are using https://docs.spring.io/spring-cloud-stream/docs/current/reference/htmlsingle[Spring Cloud Stream]
 framework for building highly scalable event-driven microservices connected with shared messaging systems.
@@ -22,37 +18,37 @@ microservices.
 
 == Microservices
 
+image::images/project-diagram.png[]
+
 === producer-api
-Spring-boot application that creates news and pushes news events to a kafka topic `producer.news`.
+Spring-boot application that creates news and pushes news events to `producer.news` kafka topic.
 
 === categorizer-service
-Spring-boot application that listens for news events in kafka topic `producer.news`, categorizes and pushes them to the
-topic `categorizer.news`.
+Spring-boot application that listens for news events in `producer.news` kafka topic, categorizes and pushes them to
+`categorizer.news` kafka topic.
 
 === collector-service
-Spring-boot application that listens for news events in topic `categorizer.news`, saves them in Elasticsearch and pushes
-the news events to kafka topic `collector.news`.
+Spring-boot application that listens for news events in `categorizer.news` kafka topic, saves them in Elasticsearch and
+pushes the news events to `collector.news` kafka topic.
 
 === publisher-api
 Spring-boot application that reads directly from Elasticsearch and exposes a REST. It doesn't listen from kafka.
 
 === news-client
-Spring-boot application that provides a News user interface. It implements a *Websocket* that consumes news events from
+Spring-boot application that provides a News user interface. It implements a `Websocket` that consumes news events from
 the topic `collector.news`. So, news are updated on the fly on the main page. Besides, `news-client` communicates directly
 with `publisher-api` whenever search for a specific news or news update are needed.
 
-The Websocket operation is shown in the short gif bellow. An news is created in `producer-api` and, immediately, it is
-shown in `news-client`
+The Websocket operation is shown in the short gif below. A news is created in `producer-api` and, immediately, it is
+shown in `news-client`.
 
 image::images/websocket-operation.gif[]
 
 == Start Environment
 
-=== Docker Compose
-
 - Open one terminal
 
-- In `/spring-cloud-stream-elasticsearch` root folder run
+- In `spring-cloud-stream-elasticsearch` root folder run
 ```
 docker-compose up -d
 ```
@@ -71,7 +67,7 @@ docker-compose ps
 
 === Create Elasticsearch Index
 
-- In `/spring-cloud-stream-elasticsearch/scripts` and run the following script
+- In `spring-cloud-stream-elasticsearch/scripts` and run the following script
 ```
 ./create-index.sh
 ```
@@ -89,9 +85,9 @@ curl http://localhost:9200/_aliases
 
 === Generate NewsEvent
 
-Inside `/spring-cloud-stream-elasticsearch/commons` folder run
+In `spring-cloud-stream-elasticsearch` folder run
 ```
-mvn clean install
+./mvnw clean install --projects commons-news
 ```
 It will install `commons-news-0.0.1-SNAPSHOT.jar` in you local Maven repository, so that it can be visible by all services.
 
@@ -100,52 +96,52 @@ It will install `commons-news-0.0.1-SNAPSHOT.jar` in you local Maven repository,
 === eureka-server
 
 - Open a new terminal
-- Inside `/spring-cloud-stream-elasticsearch/eureka-server` folder run
+- In `spring-cloud-stream-elasticsearch` folder run
 ```
-mvn spring-boot:run
+./mvnw spring-boot:run --projects eureka-server
 ```
 - The link for `eureka-server` is http://localhost:8761
 
 === producer-api
 
 - Open a new terminal
-- Inside `/spring-cloud-stream-elasticsearch/producer-api` folder run
+- In `spring-cloud-stream-elasticsearch` folder run
 ```
-mvn spring-boot:run
+./mvnw spring-boot:run --projects producer-api
 ```
 - The link for `producer-api` swagger is http://localhost:8081/swagger-ui.html
 
 === categorizer-service
 
 - Open a new terminal
-- Inside `/spring-cloud-stream-elasticsearch/categorizer-service` folder run
+- In `spring-cloud-stream-elasticsearch` folder run
 ```
-mvn spring-boot:run
+./mvnw spring-boot:run --projects categorizer-service
 ```
 
 === collector-service
 
 - Open a new terminal
-- Inside `/spring-cloud-stream-elasticsearch/collector-service` folder run
+- In `spring-cloud-stream-elasticsearch` folder run
 ```
-mvn spring-boot:run
+./mvnw spring-boot:run --projects collector-service
 ```
 
 === publisher-api
 
 - Open a new terminal
-- Inside `/spring-cloud-stream-elasticsearch/publisher-api` folder run
+- In `spring-cloud-stream-elasticsearch` folder run
 ```
-mvn spring-boot:run
+./mvnw spring-boot:run --projects publisher-api
 ```
 - The link for `publisher-api` swagger is http://localhost:8084/swagger-ui.html
 
 === news-client
 
 - Open a new terminal
-- Inside `/spring-cloud-stream-elasticsearch/news-client` folder run
+- In `spring-cloud-stream-elasticsearch` folder run
 ```
-mvn spring-boot:run
+./mvnw spring-boot:run --projects news-client
 ```
 - The link for `news-client` website is http://localhost:8085
 
@@ -159,7 +155,7 @@ mvn spring-boot:run
 
 - Zipkin can be accessed at http://localhost:9411
 
-- In figure bellow is shown an example of all flow that a news passes, since `producer-api`, where it is created, until
+- In figure below is shown an example of all flow that a news passes, since `producer-api`, where it is created, until
 `news-client` where it is consumed.
 
 image::images/zipkin-sample.png[]

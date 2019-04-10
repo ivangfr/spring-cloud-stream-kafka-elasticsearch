@@ -24,45 +24,12 @@
         <module>/collector-service</module>
         <module>/publisher-api</module>
         <module>/news-client</module>
+        <module>/commons-news</module>
     </modules>
 
     <properties>
-        <mycompany.commons.version>0.0.1-SNAPSHOT</mycompany.commons.version>
-        <orika.version>1.5.2</orika.version>
         <spring-cloud.version>Finchley.SR2</spring-cloud.version>
     </properties>
-
-    <dependencies>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <optional>true</optional>
-        </dependency>
-
-        <dependency>
-            <groupId>com.mycompany</groupId>
-            <artifactId>commons-news</artifactId>
-            <version>${mycompany.commons.version}</version>
-        </dependency>
-
-        <!-- Orika -->
-        <dependency>
-            <groupId>ma.glasnost.orika</groupId>
-            <artifactId>orika-core</artifactId>
-            <version>${orika.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-stream-test-support</artifactId>
-            <scope>test</scope>
-        </dependency>
-    </dependencies>
 
     <dependencyManagement>
         <dependencies>
