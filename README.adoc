@@ -169,3 +169,85 @@ At class `com.mycompany.newsclient.bus.NewsStream.java`, line "simpMessagingTemp
 - news-client: bug. everytime sync is clicked, it enables websocket;
 - news-client: if websocket is enabled/disabled, sync button should be disabled/enabled;
 - news-client: implement pagination;
+
+== Issues
+
+I am facing the following exception. It seems related to sleuth & websocket. It started happen when I update spring-boot to
+2.1.4 and also spring-cloud to Greenwich.SR1.
+At class `com.mycompany.newsclient.bus.NewsStream.java`, line "simpMessagingTemplate.convertAndSend("/topic/news", news);"
+
+> _"The workaround is to disable Sleuth's websocket messaging support via spring.sleuth.integration.websockets.enabled=false"_
+https://github.com/spring-cloud/spring-cloud-sleuth/issues/1184
+
+```
+... ERROR [news-client,d18dbfca6f0585ec,0ab140955dcc177b,true] 5545 --- [container-0-C-1] o.s.m.s.b.SimpleBrokerMessageHandler     : Failed to send GenericMessage [payload=byte[161], headers={simpMessageType=MESSAGE, simpDestination=/topic/news, spanTraceId=d18dbfca6f0585ec, spanId=dad2c6dd978293e9, spanParentSpanId=0d8526540d74fdb5, nativeHeaders={spanTraceId=[d18dbfca6f0585ec], spanId=[dad2c6dd978293e9], spanParentSpanId=[0d8526540d74fdb5], spanSampled=[1]}, spanSampled=1, contentType=application/json;charset=UTF-8}]
+
+org.springframework.messaging.MessageDeliveryException: Failed to send message to ExecutorSubscribableChannel[clientOutboundChannel]; nested exception is java.lang.UnsupportedOperationException
+        at org.springframework.messaging.support.AbstractMessageChannel.send(AbstractMessageChannel.java:146) ~[spring-messaging-5.1.6.RELEASE.jar:5.1.6.RELEASE]
+        at org.springframework.messaging.support.AbstractMessageChannel.send(AbstractMessageChannel.java:122) ~[spring-messaging-5.1.6.RELEASE.jar:5.1.6.RELEASE]
+        at org.springframework.messaging.simp.broker.SimpleBrokerMessageHandler.lambda$sendMessageToSubscribers$0(SimpleBrokerMessageHandler.java:401) ~[spring-messaging-5.1.6.RELEASE.jar:5.1.6.RELEASE]
+        at java.util.Map.forEach(Map.java:630) ~[na:1.8.0_102]
+        at org.springframework.messaging.simp.broker.SimpleBrokerMessageHandler.sendMessageToSubscribers(SimpleBrokerMessageHandler.java:388) ~[spring-messaging-5.1.6.RELEASE.jar:5.1.6.RELEASE]
+        at org.springframework.messaging.simp.broker.SimpleBrokerMessageHandler.handleMessageInternal(SimpleBrokerMessageHandler.java:304) ~[spring-messaging-5.1.6.RELEASE.jar:5.1.6.RELEASE]
+        at org.springframework.messaging.simp.broker.AbstractBrokerMessageHandler.handleMessage(AbstractBrokerMessageHandler.java:256) ~[spring-messaging-5.1.6.RELEASE.jar:5.1.6.RELEASE]
+        at org.springframework.messaging.support.ExecutorSubscribableChannel$SendTask.run(ExecutorSubscribableChannel.java:144) ~[spring-messaging-5.1.6.RELEASE.jar:5.1.6.RELEASE]
+        at org.springframework.messaging.support.ExecutorSubscribableChannel.sendInternal(ExecutorSubscribableChannel.java:100) ~[spring-messaging-5.1.6.RELEASE.jar:5.1.6.RELEASE]
+        at org.springframework.messaging.support.AbstractMessageChannel.send(AbstractMessageChannel.java:136) ~[spring-messaging-5.1.6.RELEASE.jar:5.1.6.RELEASE]
+        at org.springframework.messaging.support.AbstractMessageChannel.send(AbstractMessageChannel.java:122) ~[spring-messaging-5.1.6.RELEASE.jar:5.1.6.RELEASE]
+        at org.springframework.messaging.simp.SimpMessagingTemplate.sendInternal(SimpMessagingTemplate.java:187) ~[spring-messaging-5.1.6.RELEASE.jar:5.1.6.RELEASE]
+        at org.springframework.messaging.simp.SimpMessagingTemplate.doSend(SimpMessagingTemplate.java:162) ~[spring-messaging-5.1.6.RELEASE.jar:5.1.6.RELEASE]
+        at org.springframework.messaging.simp.SimpMessagingTemplate.doSend(SimpMessagingTemplate.java:48) ~[spring-messaging-5.1.6.RELEASE.jar:5.1.6.RELEASE]
+        at org.springframework.messaging.core.AbstractMessageSendingTemplate.send(AbstractMessageSendingTemplate.java:109) ~[spring-messaging-5.1.6.RELEASE.jar:5.1.6.RELEASE]
+        at org.springframework.messaging.core.AbstractMessageSendingTemplate.convertAndSend(AbstractMessageSendingTemplate.java:151) ~[spring-messaging-5.1.6.RELEASE.jar:5.1.6.RELEASE]
+        at org.springframework.messaging.core.AbstractMessageSendingTemplate.convertAndSend(AbstractMessageSendingTemplate.java:129) ~[spring-messaging-5.1.6.RELEASE.jar:5.1.6.RELEASE]
+        at org.springframework.messaging.core.AbstractMessageSendingTemplate.convertAndSend(AbstractMessageSendingTemplate.java:122) ~[spring-messaging-5.1.6.RELEASE.jar:5.1.6.RELEASE]
+        at com.mycompany.newsclient.bus.NewsStream.handleNewsEvent(NewsStream.java:44) ~[classes/:na]
+        at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_102]
+        at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:1.8.0_102]
+        at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_102]
+        at java.lang.reflect.Method.invoke(Method.java:498) ~[na:1.8.0_102]
+        at org.springframework.messaging.handler.invocation.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:170) ~[spring-messaging-5.1.6.RELEASE.jar:5.1.6.RELEASE]
+        at org.springframework.messaging.handler.invocation.InvocableHandlerMethod.invoke(InvocableHandlerMethod.java:120) ~[spring-messaging-5.1.6.RELEASE.jar:5.1.6.RELEASE]
+        at org.springframework.cloud.stream.binding.StreamListenerMessageHandler.handleRequestMessage(StreamListenerMessageHandler.java:55) ~[spring-cloud-stream-2.1.2.RELEASE.jar:2.1.2.RELEASE]
+        at org.springframework.integration.handler.AbstractReplyProducingMessageHandler.handleMessageInternal(AbstractReplyProducingMessageHandler.java:123) ~[spring-integration-core-5.1.4.RELEASE.jar:5.1.4.RELEASE]
+        at org.springframework.integration.handler.AbstractMessageHandler.handleMessage(AbstractMessageHandler.java:162) ~[spring-integration-core-5.1.4.RELEASE.jar:5.1.4.RELEASE]
+        at org.springframework.integration.dispatcher.AbstractDispatcher.tryOptimizedDispatch(AbstractDispatcher.java:115) ~[spring-integration-core-5.1.4.RELEASE.jar:5.1.4.RELEASE]
+        at org.springframework.integration.dispatcher.UnicastingDispatcher.doDispatch(UnicastingDispatcher.java:132) ~[spring-integration-core-5.1.4.RELEASE.jar:5.1.4.RELEASE]
+        at org.springframework.integration.dispatcher.UnicastingDispatcher.dispatch(UnicastingDispatcher.java:105) ~[spring-integration-core-5.1.4.RELEASE.jar:5.1.4.RELEASE]
+        at org.springframework.integration.channel.AbstractSubscribableChannel.doSend(AbstractSubscribableChannel.java:73) ~[spring-integration-core-5.1.4.RELEASE.jar:5.1.4.RELEASE]
+        at org.springframework.integration.channel.AbstractMessageChannel.send(AbstractMessageChannel.java:453) ~[spring-integration-core-5.1.4.RELEASE.jar:5.1.4.RELEASE]
+        at org.springframework.integration.channel.AbstractMessageChannel.send(AbstractMessageChannel.java:401) ~[spring-integration-core-5.1.4.RELEASE.jar:5.1.4.RELEASE]
+        at org.springframework.messaging.core.GenericMessagingTemplate.doSend(GenericMessagingTemplate.java:187) ~[spring-messaging-5.1.6.RELEASE.jar:5.1.6.RELEASE]
+        at org.springframework.messaging.core.GenericMessagingTemplate.doSend(GenericMessagingTemplate.java:166) ~[spring-messaging-5.1.6.RELEASE.jar:5.1.6.RELEASE]
+        at org.springframework.messaging.core.GenericMessagingTemplate.doSend(GenericMessagingTemplate.java:47) ~[spring-messaging-5.1.6.RELEASE.jar:5.1.6.RELEASE]
+        at org.springframework.messaging.core.AbstractMessageSendingTemplate.send(AbstractMessageSendingTemplate.java:109) ~[spring-messaging-5.1.6.RELEASE.jar:5.1.6.RELEASE]
+        at org.springframework.integration.endpoint.MessageProducerSupport.sendMessage(MessageProducerSupport.java:205) ~[spring-integration-core-5.1.4.RELEASE.jar:5.1.4.RELEASE]
+        at org.springframework.integration.kafka.inbound.KafkaMessageDrivenChannelAdapter.sendMessageIfAny(KafkaMessageDrivenChannelAdapter.java:369) ~[spring-integration-kafka-3.1.0.RELEASE.jar:3.1.0.RELEASE]
+        at org.springframework.integration.kafka.inbound.KafkaMessageDrivenChannelAdapter.access$400(KafkaMessageDrivenChannelAdapter.java:74) ~[spring-integration-kafka-3.1.0.RELEASE.jar:3.1.0.RELEASE]
+        at org.springframework.integration.kafka.inbound.KafkaMessageDrivenChannelAdapter$IntegrationRecordMessageListener.onMessage(KafkaMessageDrivenChannelAdapter.java:431) ~[spring-integration-kafka-3.1.0.RELEASE.jar:3.1.0.RELEASE]
+        at org.springframework.integration.kafka.inbound.KafkaMessageDrivenChannelAdapter$IntegrationRecordMessageListener.onMessage(KafkaMessageDrivenChannelAdapter.java:402) ~[spring-integration-kafka-3.1.0.RELEASE.jar:3.1.0.RELEASE]
+        at org.springframework.kafka.listener.adapter.RetryingMessageListenerAdapter.lambda$onMessage$0(RetryingMessageListenerAdapter.java:120) ~[spring-kafka-2.2.5.RELEASE.jar:2.2.5.RELEASE]
+        at org.springframework.retry.support.RetryTemplate.doExecute(RetryTemplate.java:287) ~[spring-retry-1.2.4.RELEASE.jar:na]
+        at org.springframework.retry.support.RetryTemplate.execute(RetryTemplate.java:211) ~[spring-retry-1.2.4.RELEASE.jar:na]
+        at org.springframework.kafka.listener.adapter.RetryingMessageListenerAdapter.onMessage(RetryingMessageListenerAdapter.java:114) ~[spring-kafka-2.2.5.RELEASE.jar:2.2.5.RELEASE]
+        at org.springframework.kafka.listener.adapter.RetryingMessageListenerAdapter.onMessage(RetryingMessageListenerAdapter.java:40) ~[spring-kafka-2.2.5.RELEASE.jar:2.2.5.RELEASE]
+        at org.springframework.kafka.listener.KafkaMessageListenerContainer$ListenerConsumer.doInvokeOnMessage(KafkaMessageListenerContainer.java:1263) ~[spring-kafka-2.2.5.RELEASE.jar:2.2.5.RELEASE]
+        at org.springframework.kafka.listener.KafkaMessageListenerContainer$ListenerConsumer.invokeOnMessage(KafkaMessageListenerContainer.java:1256) ~[spring-kafka-2.2.5.RELEASE.jar:2.2.5.RELEASE]
+        at org.springframework.kafka.listener.KafkaMessageListenerContainer$ListenerConsumer.doInvokeRecordListener(KafkaMessageListenerContainer.java:1217) ~[spring-kafka-2.2.5.RELEASE.jar:2.2.5.RELEASE]
+        at org.springframework.kafka.listener.KafkaMessageListenerContainer$ListenerConsumer.doInvokeWithRecords(KafkaMessageListenerContainer.java:1198) ~[spring-kafka-2.2.5.RELEASE.jar:2.2.5.RELEASE]
+        at org.springframework.kafka.listener.KafkaMessageListenerContainer$ListenerConsumer.invokeRecordListener(KafkaMessageListenerContainer.java:1118) ~[spring-kafka-2.2.5.RELEASE.jar:2.2.5.RELEASE]
+        at org.springframework.kafka.listener.KafkaMessageListenerContainer$ListenerConsumer.invokeListener(KafkaMessageListenerContainer.java:933) ~[spring-kafka-2.2.5.RELEASE.jar:2.2.5.RELEASE]
+        at org.springframework.kafka.listener.KafkaMessageListenerContainer$ListenerConsumer.pollAndInvoke(KafkaMessageListenerContainer.java:749) ~[spring-kafka-2.2.5.RELEASE.jar:2.2.5.RELEASE]
+        at org.springframework.kafka.listener.KafkaMessageListenerContainer$ListenerConsumer.run(KafkaMessageListenerContainer.java:698) ~[spring-kafka-2.2.5.RELEASE.jar:2.2.5.RELEASE]
+        at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511) ~[na:1.8.0_102]
+        at java.util.concurrent.FutureTask.run(FutureTask.java:266) ~[na:1.8.0_102]
+        at java.lang.Thread.run(Thread.java:745) ~[na:1.8.0_102]
+Caused by: java.lang.UnsupportedOperationException: null
+        at java.util.Collections$UnmodifiableMap.remove(Collections.java:1460) ~[na:1.8.0_102]
+        at org.springframework.messaging.support.NativeMessageHeaderAccessor.removeNativeHeader(NativeMessageHeaderAccessor.java:209) ~[spring-messaging-5.1.6.RELEASE.jar:5.1.6.RELEASE]
+        at org.springframework.cloud.sleuth.instrument.messaging.MessageHeaderPropagation.removeAnyTraceHeaders(MessageHeaderPropagation.java:86) ~[spring-cloud-sleuth-core-2.1.1.RELEASE.jar:2.1.1.RELEASE]
+        at org.springframework.cloud.sleuth.instrument.messaging.TracingChannelInterceptor.preSend(TracingChannelInterceptor.java:173) ~[spring-cloud-sleuth-core-2.1.1.RELEASE.jar:2.1.1.RELEASE]
+        at org.springframework.messaging.support.AbstractMessageChannel$ChannelInterceptorChain.applyPreSend(AbstractMessageChannel.java:178) ~[spring-messaging-5.1.6.RELEASE.jar:5.1.6.RELEASE]
+        at org.springframework.messaging.support.AbstractMessageChannel.send(AbstractMessageChannel.java:132) ~[spring-messaging-5.1.6.RELEASE.jar:5.1.6.RELEASE]
+        ... 58 common frames omitted
+```
