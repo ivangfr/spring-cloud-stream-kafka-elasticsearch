@@ -12,15 +12,17 @@
     <parent>
         <groupId>com.mycompany</groupId>
         <artifactId>spring-cloud-stream-elasticsearch</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
+        <version>1.0.0</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
     <properties>
         <java.version>1.8</java.version>
         <brave.version>5.6.3</brave.version>
-        <mycompany.commons-news.version>0.0.1-SNAPSHOT</mycompany.commons-news.version>
         <orika.version>1.5.2</orika.version>
+        <mycompany.commons-news.version>0.0.1-SNAPSHOT</mycompany.commons-news.version>
+        <dockerfile-maven-plugin.version>1.4.10</dockerfile-maven-plugin.version>
+        <docker.image.prefix>docker.mycompany.com</docker.image.prefix>
     </properties>
 
     <dependencies>
@@ -120,6 +122,18 @@
                         </goals>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>dockerfile-maven-plugin</artifactId>
+                <version>${dockerfile-maven-plugin.version}</version>
+                <configuration>
+                    <repository>${docker.image.prefix}/${project.artifactId}</repository>
+                    <tag>${project.version}</tag>
+                    <buildArgs>
+                        <JAR_FILE>target/${project.build.finalName}.jar</JAR_FILE>
+                    </buildArgs>
+                </configuration>
             </plugin>
         </plugins>
     </build>

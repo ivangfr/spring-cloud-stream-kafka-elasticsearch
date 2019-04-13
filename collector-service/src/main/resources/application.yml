@@ -14,15 +14,15 @@ management:
 collector-service:
   elasticsearch:
     clustername: docker-es-cluster
-    host: localhost
-    port: 9300
+    host: ${ELASTICSEARCH_HOST:localhost}
+    port: ${ELASTICSEARCH_PORT:9300}
 
 spring:
   cloud:
     stream:
       kafka:
         binder:
-          brokers: localhost:29092
+          brokers: ${KAFKA_HOST:localhost}:${KAFKA_PORT:29092}
           auto-add-partitions: true
           min-partition-count: 2
       bindings:
@@ -46,6 +46,6 @@ spring:
 eureka:
   client:
     serviceUrl:
-      defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}
+      defaultZone: http://${EUREKA_HOST:localhost}:${EUREKA_PORT:8761}/eureka
   instance:
     preferIpAddress: true

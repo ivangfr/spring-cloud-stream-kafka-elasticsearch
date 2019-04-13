@@ -11,8 +11,8 @@ management:
 publisher-api:
   elasticsearch:
     clustername: docker-es-cluster
-    host: localhost
-    port: 9300
+    host: ${ELASTICSEARCH_HOST:localhost}
+    port: ${ELASTICSEARCH_PORT:9300}
 
 spring:
   sleuth:
@@ -22,6 +22,6 @@ spring:
 eureka:
   client:
     serviceUrl:
-      defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}
+      defaultZone: http://${EUREKA_HOST:localhost}:${EUREKA_PORT:8761}/eureka
   instance:
     preferIpAddress: true

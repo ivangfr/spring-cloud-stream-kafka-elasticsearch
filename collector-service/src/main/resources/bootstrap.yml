@@ -1,8 +1,6 @@
-server.port: 8083
-
 spring:
   application:
     name: collector-service
   zipkin:
-    baseUrl: http://localhost:9411
+    baseUrl: http://${ZIPKIN_HOST:localhost}:${ZIPKIN_PORT:9411}
     sender.type: web

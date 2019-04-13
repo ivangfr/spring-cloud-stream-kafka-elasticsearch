@@ -4,7 +4,7 @@
 
     <groupId>com.mycompany</groupId>
     <artifactId>spring-cloud-stream-elasticsearch</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0</version>
     <packaging>pom</packaging>
 
     <name>spring-cloud-stream-elastisearch</name>

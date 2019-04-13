@@ -42,7 +42,7 @@ services:
       - zookeeper
       - kafka
     ports:
-      - "9082:8082"
+      - "8082:8082"
     environment:
       KAFKA_REST_BOOTSTRAP_SERVERS: PLAINTEXT://kafka:9092
       KAFKA_REST_ZOOKEEPER_CONNECT: zookeeper:2181
@@ -62,7 +62,7 @@ services:
     depends_on:
       - kafka-rest-proxy
     ports:
-      - "9085:8000"
+      - "8085:8000"
     environment:
       KAFKA_REST_PROXY_URL: http://kafka-rest-proxy:8082
       PROXY: "true"
@@ -99,3 +99,109 @@ services:
     healthcheck:
       test: [ "CMD", "nc", "-z", "localhost", "9411" ]
       start_period: 30s
+
+  eureka:
+    container_name: eureka
+    image: docker.mycompany.com/eureka-server:1.0.0
+    restart: unless-stopped
+    ports:
+      - "8761:8761"
+    healthcheck:
+      test: [ "CMD", "nc", "-z", "localhost", "8761" ]
+      start_period: 1m
+
+  producer-api:
+    container_name: producer-api
+    image: docker.mycompany.com/producer-api:1.0.0
+    restart: unless-stopped
+    ports:
+      - "9080:8080"
+    depends_on:
+      - kafka
+      - eureka
+      - zipkin
+    environment:
+      KAFKA_HOST: kafka
+      KAFKA_PORT: 9092
+      EUREKA_HOST: eureka
+      ZIPKIN_HOST: zipkin
+    healthcheck:
+      test: [ "CMD", "nc", "-z", "localhost", "8080" ]
+      start_period: 2m
+
+  categorizer-service:
+    container_name: categorizer-service
+    image: docker.mycompany.com/categorizer-service:1.0.0
+    restart: unless-stopped
+    ports:
+      - "9081:8080"
+    depends_on:
+      - kafka
+      - eureka
+      - zipkin
+    environment:
+      KAFKA_HOST: kafka
+      KAFKA_PORT: 9092
+      EUREKA_HOST: eureka
+      ZIPKIN_HOST: zipkin
+    healthcheck:
+      test: [ "CMD", "nc", "-z", "localhost", "8080" ]
+      start_period: 2m
+
+  collector-service:
+    container_name: collector-service
+    image: docker.mycompany.com/collector-service:1.0.0
+    restart: unless-stopped
+    ports:
+      - "9082:8080"
+    depends_on:
+      - kafka
+      - elasticsearch
+      - eureka
+      - zipkin
+    environment:
+      KAFKA_HOST: kafka
+      KAFKA_PORT: 9092
+      ELASTICSEARCH_HOST: elasticsearch
+      EUREKA_HOST: eureka
+      ZIPKIN_HOST: zipkin
+    healthcheck:
+      test: [ "CMD", "nc", "-z", "localhost", "8080" ]
+      start_period: 2m
+
+  publisher-api:
+    container_name: publisher-api
+    image: docker.mycompany.com/publisher-api:1.0.0
+    restart: unless-stopped
+    ports:
+      - "9083:8080"
+    depends_on:
+      - elasticsearch
+      - eureka
+      - zipkin
+    environment:
+      ELASTICSEARCH_HOST: elasticsearch
+      EUREKA_HOST: eureka
+      ZIPKIN_HOST: zipkin
+    healthcheck:
+      test: [ "CMD", "nc", "-z", "localhost", "8080" ]
+      start_period: 2m
+
+  news-client:
+    container_name: news-client
+    image: docker.mycompany.com/news-client:1.0.0
+    restart: unless-stopped
+    ports:
+      - "9084:8080"
+    depends_on:
+      - elasticsearch
+      - eureka
+      - zipkin
+    environment:
+      KAFKA_HOST: kafka
+      KAFKA_PORT: 9092
+      EUREKA_HOST: eureka
+      ZIPKIN_HOST: zipkin
+    healthcheck:
+      test: [ "CMD", "nc", "-z", "localhost", "8080" ]
+      start_period: 2m
