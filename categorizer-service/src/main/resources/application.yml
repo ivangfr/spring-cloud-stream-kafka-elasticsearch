@@ -1,16 +1,3 @@
-management:
-  security:
-    enabled: false
-  endpoints:
-    web:
-      exposure.include: "*"
-  endpoint:
-    health:
-      show-details: always
-  health:
-    binders:
-      enabled: true
-
 spring:
   cloud:
     stream:
@@ -35,7 +22,19 @@ spring:
             partition-count: 2
   sleuth:
     sampler.probability: 1.0
-#    web.skipPattern: (^cleanup.*|.+favicon.*)
+
+management:
+  security:
+    enabled: false
+  endpoints:
+    web:
+      exposure.include: "*"
+  endpoint:
+    health:
+      show-details: always
+  health:
+    binders:
+      enabled: true
 
 eureka:
   client:

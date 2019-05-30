@@ -1,23 +1,10 @@
-management:
-  security:
-    enabled: false
-  endpoints:
-    web:
-      exposure.include: "*"
-  endpoint:
-    health:
-      show-details: always
-  health:
-    binders:
-      enabled: true
-
-collector-service:
-  elasticsearch:
-    clustername: docker-es-cluster
-    host: ${ELASTICSEARCH_HOST:localhost}
-    port: ${ELASTICSEARCH_PORT:9300}
-
 spring:
+  data:
+    elasticsearch:
+      cluster-name: docker-es-cluster
+      cluster-nodes: ${ELASTICSEARCH_HOST:localhost}:${ELASTICSEARCH_PORT:9300}
+  sleuth:
+    sampler.probability: 1.0
   cloud:
     stream:
       kafka:
@@ -39,9 +26,19 @@ spring:
           producer:
             partition-key-expression: headers['partitionKey']
             partition-count: 2
-  sleuth:
-    sampler.probability: 1.0
-#    web.skipPattern: (^cleanup.*|.+favicon.*)
+
+management:
+  security:
+    enabled: false
+  endpoints:
+    web:
+      exposure.include: "*"
+  endpoint:
+    health:
+      show-details: always
+  health:
+    binders:
+      enabled: true
 
 eureka:
   client:

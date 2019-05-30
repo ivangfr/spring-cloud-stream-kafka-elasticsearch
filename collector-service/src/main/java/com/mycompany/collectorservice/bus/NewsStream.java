@@ -15,8 +15,6 @@ import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Component;
 
-import java.util.Optional;
-
 @Slf4j
 @Component
 @EnableBinding(Processor.class)
@@ -41,10 +39,8 @@ public class NewsStream {
                 newsEvent.getId(), newsEvent.getTitle(), topic, partition, offset, deliveryAttempt);
 
         News news = mapperFacade.map(newsEvent, News.class);
-
-        Optional<News> optionalNews = newsService.createNews(news);
-        News newSaved = optionalNews.orElseThrow(() -> new RuntimeException("Unable to save news in Elasticsearch"));
-        log.info("News with id {} saved in Elasticsearch.", newSaved.getId());
+        news = newsService.createNews(news);
+        log.info("News with id {} saved in Elasticsearch.", news.getId());
 
         return newsEvent;
     }

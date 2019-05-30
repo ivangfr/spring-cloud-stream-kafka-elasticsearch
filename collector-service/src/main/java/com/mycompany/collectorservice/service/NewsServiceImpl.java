@@ -1,22 +1,21 @@
 package com.mycompany.collectorservice.service;
 
 import com.mycompany.collectorservice.model.News;
+import com.mycompany.collectorservice.repository.NewsRepository;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 @Service
 public class NewsServiceImpl implements NewsService {
 
-    private final ElasticsearchService elasticsearchService;
+    private final NewsRepository newsRepository;
 
-    public NewsServiceImpl(ElasticsearchService elasticsearchService) {
-        this.elasticsearchService = elasticsearchService;
+    public NewsServiceImpl(NewsRepository newsRepository) {
+        this.newsRepository = newsRepository;
     }
 
     @Override
-    public Optional<News> createNews(News news) {
-        return elasticsearchService.createNews(news);
+    public News createNews(News news) {
+        return newsRepository.save(news);
     }
 
 }

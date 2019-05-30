@@ -16,25 +16,25 @@ to persist data in https://www.elastic.co/products/elasticsearch[Elasticsearch].
 * We are using https://github.com/Netflix/eureka/wiki[Eureka], also known as Discovery Server, it is an application that holds the information about all
 microservices.
 
-= Microservices
+== Microservices
 
 image::images/project-diagram.png[]
 
-== producer-api
+=== producer-api
 Spring-boot application that creates news and pushes news events to `producer.news` kafka topic.
 
-== categorizer-service
+=== categorizer-service
 Spring-boot application that listens for news events in `producer.news` kafka topic, categorizes and pushes them to
 `categorizer.news` kafka topic.
 
-== collector-service
+=== collector-service
 Spring-boot application that listens for news events in `categorizer.news` kafka topic, saves them in Elasticsearch and
 pushes the news events to `collector.news` kafka topic.
 
-== publisher-api
+=== publisher-api
 Spring-boot application that reads directly from Elasticsearch and exposes a REST. It doesn't listen from kafka.
 
-== news-client
+=== news-client
 Spring-boot application that provides a News user interface. It implements a `Websocket` that consumes news events from
 the topic `collector.news`. So, news are updated on the fly on the main page. Besides, `news-client` communicates directly
 with `publisher-api` whenever search for a specific news or news update are needed.
@@ -44,7 +44,7 @@ shown in `news-client`.
 
 image::images/websocket-operation.gif[]
 
-= Generate NewsEvent
+== Generate NewsEvent
 
 In `spring-cloud-stream-elasticsearch` folder run
 ```
@@ -52,14 +52,14 @@ In `spring-cloud-stream-elasticsearch` folder run
 ```
 It will install `commons-news-0.0.1-SNAPSHOT.jar` in you local Maven repository, so that it can be visible by all services.
 
-= Build Docker images
+== Build Docker images
 
-== eureka-server
+=== eureka-server
 ```
 ./mvnw clean package dockerfile:build -DskipTests --projects eureka-server
 ```
 
-== producer-api
+=== producer-api
 ```
 ./mvnw clean package dockerfile:build -DskipTests --projects producer-api
 ```
@@ -86,7 +86,7 @@ It will install `commons-news-0.0.1-SNAPSHOT.jar` in you local Maven repository,
 
 |===
 
-== categorizer-service
+=== categorizer-service
 ```
 ./mvnw clean package dockerfile:build -DskipTests --projects categorizer-service
 ```
@@ -113,7 +113,7 @@ It will install `commons-news-0.0.1-SNAPSHOT.jar` in you local Maven repository,
 
 |===
 
-== collector-service
+=== collector-service
 ```
 ./mvnw clean package dockerfile:build -DskipTests --projects collector-service
 ```
@@ -146,7 +146,7 @@ It will install `commons-news-0.0.1-SNAPSHOT.jar` in you local Maven repository,
 
 |===
 
-== publisher-api
+=== publisher-api
 ```
 ./mvnw clean package dockerfile:build -DskipTests --projects publisher-api
 ```
@@ -173,7 +173,7 @@ It will install `commons-news-0.0.1-SNAPSHOT.jar` in you local Maven repository,
 
 |===
 
-== news-client
+=== news-client
 ```
 ./mvnw clean package dockerfile:build -DskipTests --projects news-client
 ```
@@ -200,7 +200,7 @@ It will install `commons-news-0.0.1-SNAPSHOT.jar` in you local Maven repository,
 
 |===
 
-= Start Environment
+== Start Environment
 
 - Open one terminal
 
@@ -221,7 +221,7 @@ docker-compose down -v
 docker-compose ps
 ```
 
-= Microservice Links
+== Microservice Links
 
 |===
 |Microservice |URL
@@ -237,12 +237,13 @@ docker-compose ps
 
 |===
 
-= Running microservices with Maven
+== Running microservices with Maven
 
-During development, it is better to just run the microservices with Maven instead of always build the docker images and
-run it. In order to do that, comment the microservice(s) in `docker-compose.yml` file and run the them with Maven Wrapper.
+During development, it is better to just run the microservices instead of always build the docker images and run it.
+In order to do that, comment the microservice(s) in `docker-compose.yml` file or stop it if it is already running. Then,
+run them with Maven Wrapper.
 
-== eureka-server
+=== eureka-server
 ```
 ./mvnw spring-boot:run --projects eureka-server
 ```
@@ -272,17 +273,17 @@ run it. In order to do that, comment the microservice(s) in `docker-compose.yml`
 ./mvnw spring-boot:run --projects news-client -Dspring-boot.run.jvmArguments="-Dserver.port=9084"
 ```
 
-= Useful links
+== Useful links
 
-== Eureka
+=== Eureka
 
 - Eureka can be accessed at http://localhost:8761
 
-== Kafka Topics UI
+=== Kafka Topics UI
 
 - Kafka Topics UI can be accessed at http://localhost:8085
 
-== Zipkin
+=== Zipkin
 
 - Zipkin can be accessed at http://localhost:9411
 
@@ -291,7 +292,7 @@ run it. In order to do that, comment the microservice(s) in `docker-compose.yml`
 
 image::images/zipkin-sample.png[]
 
-= TODO
+== TODO
 
 - **add alias to the index**: wait for this feature be available in Spring Data Elasticsearch (https://jira.spring.io/browse/DATAES-192)
 
@@ -299,7 +300,7 @@ image::images/zipkin-sample.png[]
 - news-client: if websocket is enabled/disabled, sync button should be disabled/enabled;
 - news-client: implement pagination;
 
-= Issues
+== Issues
 
 I am facing the following exception. It seems related to sleuth & websocket. It started happen when I update spring-boot to
 2.1.4 and also spring-cloud to Greenwich.SR1.

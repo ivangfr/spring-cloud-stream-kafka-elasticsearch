@@ -36,7 +36,8 @@ public class NewsServiceImpl implements NewsService {
     public Page<News> search(String text, Pageable pageable) {
         QueryBuilder queryBuilder = QueryBuilders.boolQuery()
                 .should(QueryBuilders.matchPhraseQuery("title", text))
-                .should(QueryBuilders.matchPhraseQuery("text", text));
+                .should(QueryBuilders.matchPhraseQuery("text", text))
+                .should(QueryBuilders.matchPhraseQuery("category", text));
 
         SearchQuery searchQuery = new NativeSearchQueryBuilder()
                 .withQuery(queryBuilder)

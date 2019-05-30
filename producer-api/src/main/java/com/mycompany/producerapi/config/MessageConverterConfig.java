@@ -12,7 +12,7 @@ public class MessageConverterConfig {
 
     @Bean
     @StreamMessageConverter
-    public MessageConverter newsMessageConverter() {
+    MessageConverter newsMessageConverter() {
         return new AvroSchemaMessageConverter(MimeType.valueOf("application/*+avro"));
     }
 

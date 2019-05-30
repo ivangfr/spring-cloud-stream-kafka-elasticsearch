@@ -1,7 +1,7 @@
-package com.mycompany.producerapi.controller;
+package com.mycompany.producerapi.rest;
 
 import com.mycompany.producerapi.bus.NewsStream;
-import com.mycompany.producerapi.dto.CreateNewsDto;
+import com.mycompany.producerapi.rest.dto.CreateNewsDto;
 import com.mycompany.producerapi.model.News;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;

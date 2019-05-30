@@ -1,17 +1,15 @@
-package com.mycompany.publisherapi.dto;
+package com.mycompany.publisherapi.rest.dto;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotBlank;
 
 @Data
 public class SearchDto {
 
     @ApiModelProperty(value = "text to be searched", example = "Brazil")
-    @NotNull
-    @NotEmpty
+    @NotBlank
     private String text;
 
 }

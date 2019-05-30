@@ -22,7 +22,7 @@ public class News {
     @Field(type = FieldType.Date)
     private String datetime;
 
-    @Field(type = FieldType.Keyword)
+    @Field(type = FieldType.Text)
     private String category;
 
 }

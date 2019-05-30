@@ -1,3 +1,11 @@
+spring:
+  data:
+    elasticsearch:
+      cluster-name: docker-es-cluster
+      cluster-nodes: ${ELASTICSEARCH_HOST:localhost}:${ELASTICSEARCH_PORT:9300}
+  sleuth:
+    sampler.probability: 1.0
+
 management:
   security:
     enabled: false
@@ -7,17 +15,6 @@ management:
   endpoint:
     health:
       show-details: always
-
-publisher-api:
-  elasticsearch:
-    clustername: docker-es-cluster
-    host: ${ELASTICSEARCH_HOST:localhost}
-    port: ${ELASTICSEARCH_PORT:9300}
-
-spring:
-  sleuth:
-    sampler.probability: 1.0
-#    web.skipPattern: (^cleanup.*|.+favicon.*)
 
 eureka:
   client:

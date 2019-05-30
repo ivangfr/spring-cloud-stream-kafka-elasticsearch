@@ -1,16 +1,3 @@
-management:
-  security:
-    enabled: false
-  endpoints:
-    web:
-      exposure.include: "*"
-  endpoint:
-    health:
-      show-details: always
-  health:
-    binders:
-      enabled: true
-
 spring:
   cloud:
     stream:
@@ -34,7 +21,19 @@ spring:
       websockets:
         enabled: false
     #--
-#    web.skipPattern: (^cleanup.*|.+favicon.*)
+
+management:
+  security:
+    enabled: false
+  endpoints:
+    web:
+      exposure.include: "*"
+  endpoint:
+    health:
+      show-details: always
+  health:
+    binders:
+      enabled: true
 
 eureka:
   client:
