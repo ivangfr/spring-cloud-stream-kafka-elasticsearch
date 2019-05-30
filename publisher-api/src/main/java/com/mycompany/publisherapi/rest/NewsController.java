@@ -53,7 +53,7 @@ public class NewsController {
 
     @ApiOperation(
             value = "Search for News",
-            notes = "This endpoint does a query for the 'string' informed in the fields 'title' and 'text'\n" +
+            notes = "This endpoint does a query for the 'string' informed in the fields 'title', 'text' and 'category'\n" +
                     "To sort the results by a specified field (ex. 'datetime'), use in 'sort' field a string like: datetime,[asc|desc]")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "OK"),
