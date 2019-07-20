@@ -16,11 +16,6 @@ spring:
             back-off-initial-interval: 10000
   sleuth:
     sampler.probability: 1.0
-    #-- Sleuth & Websocket issue workaround (https://github.com/spring-cloud/spring-cloud-sleuth/issues/1184)
-    integration:
-      websockets:
-        enabled: false
-    #--
 
 management:
   security:

@@ -11,7 +11,7 @@ public class MapperConfig {
 
     @Bean
     MapperFactory mapperFactory() {
-        return new DefaultMapperFactory.Builder().useAutoMapping(true).build();
+        return new DefaultMapperFactory.Builder().useAutoMapping(true).mapNulls(false).build();
     }
 
     @Bean
