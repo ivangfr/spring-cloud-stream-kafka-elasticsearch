@@ -1,7 +1,7 @@
 = `spring-cloud-stream-elasticsearch`
 
-The goal of this project is to implement a "News" processing pipeline composed of 5 microservices: `producer-api`,
-`categorizer-service`, `collector-service`, `publisher-api` and `news-client`.
+The goal of this project is to implement a "News" processing pipeline composed of 5 https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/[Spring Boot]
+applications: `producer-api`, `categorizer-service`, `collector-service`, `publisher-api` and `news-client`.
 
 * We are using https://docs.spring.io/spring-cloud-stream/docs/current/reference/htmlsingle[Spring Cloud Stream]
 framework for building highly scalable event-driven microservices connected with shared messaging systems.
@@ -23,22 +23,22 @@ image::images/project-diagram.png[]
 == Microservices
 
 === producer-api
-Spring-boot Web Java application that creates news and pushes news events to `producer.news` topic in `Kafka`.
+Spring Boot Web Java application that creates news and pushes news events to `producer.news` topic in `Kafka`.
 
 === categorizer-service
-Spring-boot Web Java application that listens to news events in `producer.news` topic in `Kafka`, categorizes and pushes
+Spring Boot Web Java application that listens to news events in `producer.news` topic in `Kafka`, categorizes and pushes
 them to `categorizer.news` topic.
 
 === collector-service
-Spring-boot Web Java application that listens for news events in `categorizer.news` topic in `Kafka`, saves them in
+Spring Boot Web Java application that listens for news events in `categorizer.news` topic in `Kafka`, saves them in
 `Elasticsearch` and pushes the news events to `collector.news` topic.
 
 === publisher-api
-Spring-boot Web Java application that reads directly from `Elasticsearch` and exposes a REST API. It doesn't listen
+Spring Boot Web Java application that reads directly from `Elasticsearch` and exposes a REST API. It doesn't listen
 from `Kafka`.
 
 === news-client
-Spring-boot Web java application that provides a User Interface to see the news. It implements a `Websocket` that
+Spring Boot Web java application that provides a User Interface to see the news. It implements a `Websocket` that
 consumes news events from the topic `collector.news`. So, news are updated on the fly on the main page. Besides,
 `news-client` communicates directly with `publisher-api` whenever search for a specific news or news update are needed.
 
@@ -53,7 +53,7 @@ In `spring-cloud-stream-elasticsearch` folder run
 ```
 ./mvnw clean install --projects commons-news
 ```
-It will install `commons-news-0.0.1-SNAPSHOT.jar` in you local Maven repository, so that it can be visible by all services.
+It will install `commons-news-1.0.0.jar` in you local Maven repository, so that it can be visible by all services.
 
 == Build Docker images
 

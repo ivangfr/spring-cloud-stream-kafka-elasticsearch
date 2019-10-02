@@ -28,17 +28,12 @@ spring:
             partition-count: 2
 
 management:
-  security:
-    enabled: false
   endpoints:
     web:
       exposure.include: "*"
   endpoint:
     health:
       show-details: always
-  health:
-    binders:
-      enabled: true
 
 eureka:
   client:

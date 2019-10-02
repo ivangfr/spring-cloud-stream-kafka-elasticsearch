@@ -7,8 +7,6 @@ spring:
     sampler.probability: 1.0
 
 management:
-  security:
-    enabled: false
   endpoints:
     web:
       exposure.include: "*"

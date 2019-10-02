@@ -4,7 +4,10 @@ import java.time.Instant;
 
 public class DateTimeUtil {
 
-    public static String createCurrentDateAsString(){
+    private DateTimeUtil() {
+    }
+
+    public static String createCurrentDateAsString() {
         return Instant.ofEpochSecond(Instant.now().getEpochSecond()).toString();
     }
 
