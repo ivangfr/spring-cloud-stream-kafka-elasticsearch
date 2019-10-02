@@ -13,14 +13,14 @@ to persist data in https://www.elastic.co/products/elasticsearch[Elasticsearch].
 
 * We are using https://zipkin.io[Zipkin] for visualizing traces between and within microservices.
 
-* We are using https://github.com/Netflix/eureka/wiki[Eureka], also known as Discovery Server, it is an application that holds the information about all
-microservices.
+* We are using https://github.com/Netflix/eureka/wiki[Eureka], also known as Discovery Server, it is an application
+that holds the information about all microservices.
 
 == Project Architecture
 
 image::images/project-diagram.png[]
 
-== Microservices
+== Applications
 
 === producer-api
 Spring Boot Web Java application that creates news and pushes news events to `producer.news` topic in `Kafka`.
@@ -216,10 +216,10 @@ You can check their status by running
 docker-compose ps
 ```
 
-== Microservice Links
+== Application URLs
 
 |===
-|Microservice |URL
+|Application |URL
 
 |`producer-api`
 |http://localhost:9080/swagger-ui.html
@@ -232,10 +232,10 @@ docker-compose ps
 
 |===
 
-== Running microservices with Maven
+== Running Applications with Maven
 
-During development, it is better to just run the microservices instead of always build the docker images and run it.
-In order to do that, comment the microservices in `docker-compose.yml` file or stop them in case they are running. Then,
+During development, it is better to just run the applications instead of always build the docker images and run it.
+In order to do that, comment the applications in `docker-compose.yml` file or stop them in case they are running. Then,
 run them with Maven Wrapper.
 
 === eureka-server
