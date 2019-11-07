@@ -4,17 +4,17 @@ The goal of this project is to implement a "News" processing pipeline composed o
 applications: `producer-api`, `categorizer-service`, `collector-service`, `publisher-api` and `news-client`.
 
 * We are using https://docs.spring.io/spring-cloud-stream/docs/current/reference/htmlsingle[Spring Cloud Stream]
-framework for building highly scalable event-driven microservices connected with shared messaging systems.
+framework for building highly scalable event-driven applications connected with shared messaging systems.
 
 * We are using https://docs.spring.io/spring-data/elasticsearch/docs/current/reference/html/[Spring Data Elasticsearch]
 to persist data in https://www.elastic.co/products/elasticsearch[Elasticsearch].
 
 * We are using https://www.thymeleaf.org/[Thymeleaf] as HTML template
 
-* We are using https://zipkin.io[Zipkin] for visualizing traces between and within microservices.
+* We are using https://zipkin.io[Zipkin] for visualizing traces between and within applications.
 
-* We are using https://github.com/Netflix/eureka/wiki[Eureka], also known as Discovery Server, it is an application
-that holds the information about all microservices.
+* We are using https://github.com/Netflix/eureka/wiki[Eureka], also known as Discovery Server, it is a service that
+holds the information about all applications.
 
 == Project Architecture
 
@@ -23,22 +23,22 @@ image::images/project-diagram.png[]
 == Applications
 
 === producer-api
-Spring Boot Web Java application that creates news and pushes news events to `producer.news` topic in `Kafka`.
+`Spring Boot` Web Java application that creates news and pushes news events to `producer.news` topic in `Kafka`.
 
 === categorizer-service
-Spring Boot Web Java application that listens to news events in `producer.news` topic in `Kafka`, categorizes and pushes
-them to `categorizer.news` topic.
+`Spring Boot` Web Java application that listens to news events in `producer.news` topic in `Kafka`, categorizes and
+pushes  them to `categorizer.news` topic.
 
 === collector-service
-Spring Boot Web Java application that listens for news events in `categorizer.news` topic in `Kafka`, saves them in
+`Spring Boot` Web Java application that listens for news events in `categorizer.news` topic in `Kafka`, saves them in
 `Elasticsearch` and pushes the news events to `collector.news` topic.
 
 === publisher-api
-Spring Boot Web Java application that reads directly from `Elasticsearch` and exposes a REST API. It doesn't listen
+`Spring Boot` Web Java application that reads directly from `Elasticsearch` and exposes a REST API. It doesn't listen
 from `Kafka`.
 
 === news-client
-Spring Boot Web java application that provides a User Interface to see the news. It implements a `Websocket` that
+`Spring Boot` Web java application that provides a User Interface to see the news. It implements a `Websocket` that
 consumes news events from the topic `collector.news`. So, news are updated on the fly on the main page. Besides,
 `news-client` communicates directly with `publisher-api` whenever search for a specific news or news update are needed.
 
@@ -49,23 +49,37 @@ image::images/websocket-operation.gif[]
 
 == Generate NewsEvent
 
-In `spring-cloud-stream-elasticsearch` folder run
-```
+In a terminal and inside `spring-cloud-stream-elasticsearch` folder run
+
+[source]
+----
 ./mvnw clean install --projects commons-news
-```
+----
 It will install `commons-news-1.0.0.jar` in you local Maven repository, so that it can be visible by all services.
 
 == Build Docker images
 
+In a terminal and inside `spring-cloud-stream-elasticsearch` folder, in order to build the applications docker images,
+you can just run the following script or manually run `./mvnw` commands for each application.
+
+[source]
+----
+build-apps.sh
+----
+
 === eureka-server
-```
+
+[source]
+----
 ./mvnw clean package dockerfile:build -DskipTests --projects eureka-server
-```
+----
 
 === producer-api
-```
+
+[source]
+----
 ./mvnw clean package dockerfile:build -DskipTests --projects producer-api
-```
+----
 |===
 |Environment Variable | Description
 
@@ -90,9 +104,11 @@ It will install `commons-news-1.0.0.jar` in you local Maven repository, so that 
 |===
 
 === categorizer-service
-```
+
+[source]
+----
 ./mvnw clean package dockerfile:build -DskipTests --projects categorizer-service
-```
+----
 |===
 |Environment Variable | Description
 
@@ -117,17 +133,22 @@ It will install `commons-news-1.0.0.jar` in you local Maven repository, so that 
 |===
 
 === collector-service
-```
+
+[source]
+----
 ./mvnw clean package dockerfile:build -DskipTests --projects collector-service
-```
+----
 |===
 |Environment Variable | Description
 
 |`ELASTICSEARCH_HOST`
 |Specify host of the `Elasticsearch` search engine to use (default `localhost`)
 
-|`ELASTICSEARCH_PORT`
-|Specify port of the `Elasticsearch` search engine to use (default `9300`)
+|`ELASTICSEARCH_NODES_PORT`
+|Specify nodes port of the `Elasticsearch` search engine to use (default `9300`)
+
+|`ELASTICSEARCH_REST_PORT`
+|Specify rest port of the `Elasticsearch` search engine to use (default `9200`)
 
 |`KAFKA_HOST`
 |Specify host of the `Kafka` message broker to use (default `localhost`)
@@ -150,17 +171,22 @@ It will install `commons-news-1.0.0.jar` in you local Maven repository, so that 
 |===
 
 === publisher-api
-```
+
+[source]
+----
 ./mvnw clean package dockerfile:build -DskipTests --projects publisher-api
-```
+----
 |===
 |Environment Variable | Description
 
 |`ELASTICSEARCH_HOST`
 |Specify host of the `Elasticsearch` search engine to use (default `localhost`)
 
-|`ELASTICSEARCH_PORT`
-|Specify port of the `Elasticsearch` search engine to use (default `9300`)
+|`ELASTICSEARCH_NODES_PORT`
+|Specify nodes port of the `Elasticsearch` search engine to use (default `9300`)
+
+|`ELASTICSEARCH_REST_PORT`
+|Specify rest port of the `Elasticsearch` search engine to use (default `9200`)
 
 |`EUREKA_HOST`
 |Specify host of the `Eureka` service discovery to use (default `localhost`)
@@ -177,9 +203,11 @@ It will install `commons-news-1.0.0.jar` in you local Maven repository, so that 
 |===
 
 === news-client
-```
+
+[source]
+----
 ./mvnw clean package dockerfile:build -DskipTests --projects news-client
-```
+----
 |===
 |Environment Variable | Description
 
@@ -206,15 +234,27 @@ It will install `commons-news-1.0.0.jar` in you local Maven repository, so that 
 == Start Environment
 
 Open a terminal and inside `spring-cloud-stream-elasticsearch` root folder run
-```
-docker-compose up -d
-```
 
-Wait a until all containers are Up (healthy). **Be patient! It will take time.** In my machine takes around 5 minutes.
-You can check their status by running
-```
+[source]
+----
+docker-compose up -d
+----
+
+Wait a until all containers are Up (healthy). You can check their status by running
+
+[source]
+----
 docker-compose ps
-```
+----
+
+== Running Applications as Docker containers
+
+Open a terminal and inside `spring-cloud-stream-elasticsearch` root folder run following script
+
+[source]
+----
+./start-apps.sh
+----
 
 == Application URLs
 
@@ -228,52 +268,72 @@ docker-compose ps
 |http://localhost:9083/swagger-ui.html
 
 |`news-client`
-|http://localhost:9084
+|http://localhost:8080
 
 |===
 
 == Running Applications with Maven
 
-During development, it is better to just run the applications instead of always build the docker images and run it.
-In order to do that, comment the applications in `docker-compose.yml` file or stop them in case they are running. Then,
-run them with Maven Wrapper.
+During development, it is easier to just run the applications instead of always build the docker images and run it.
+For it, inside `spring-cloud-stream-elasticsearch`, run the following Maven commands in different terminals
 
 === eureka-server
-```
+
+[source]
+----
 ./mvnw spring-boot:run --projects eureka-server
-```
+----
 
 === producer-api
-```
+
+[source]
+----
 ./mvnw spring-boot:run --projects producer-api -Dspring-boot.run.jvmArguments="-Dserver.port=9080"
-```
+----
 
 === categorizer-service
-```
+
+[source]
+----
 ./mvnw spring-boot:run --projects categorizer-service -Dspring-boot.run.jvmArguments="-Dserver.port=9081"
-```
+----
 
 === collector-service
-```
+
+[source]
+----
 ./mvnw spring-boot:run --projects collector-service -Dspring-boot.run.jvmArguments="-Dserver.port=9082"
-```
+----
 
 === publisher-api
-```
+
+[source]
+----
 ./mvnw spring-boot:run --projects publisher-api -Dspring-boot.run.jvmArguments="-Dserver.port=9083"
-```
+----
 
 === news-client
-```
-./mvnw spring-boot:run --projects news-client -Dspring-boot.run.jvmArguments="-Dserver.port=9084"
-```
+
+[source]
+----
+./mvnw spring-boot:run --projects news-client
+----
 
 == Shutdown
 
-Run the command below to stop and remove containers, networks and volumes
-```
+Run the command below to stop the applications
+
+[source]
+----
+./stop-apps.sh
+----
+
+Then, run the following command to stop and remove docker-compose containers, networks and volumes
+
+[source]
+----
 docker-compose down -v
-```
+----
 
 == Useful links
 
@@ -310,10 +370,49 @@ The figure below shows the consumers os the Kafka topics. As we can see, the con
 
 image::images/kafka-manager-consumers.png[]
 
+=== Elasticsearch REST API
+
+- Check ES is up and running
+
+[source]
+----
+curl http://localhost:9200
+----
+
+- Check indexes in ES
+
+[source]
+----
+curl http://localhost:9200/_cat/indices?v
+----
+
+- Check _news_ index mapping
+
+[source]
+----
+curl http://localhost:9200/news/_mapping
+----
+
+- Simple search
+
+[source]
+----
+curl http://localhost:9200/news/news/_search
+----
+
 == TODO
 
-- **add alias to the index**: wait for this feature be available in Spring Data Elasticsearch (https://jira.spring.io/browse/DATAES-192)
+- add alias to the index: wait for this feature be available in Spring Data Elasticsearch (https://jira.spring.io/browse/DATAES-192)
+- `news-client`: bug. everytime sync is clicked, it enables Websocket;
+- `news-client`: if websocket is enabled/disabled, sync button should be disabled/enabled;
+- `news-client`: implement pagination;
 
-- news-client: bug. everytime sync is clicked, it enables websocket;
-- news-client: if websocket is enabled/disabled, sync button should be disabled/enabled;
-- news-client: implement pagination;
+== Issues
+
+- Set the property `spring.sleuth.async.enabled` to `false` in order to overcome the following error
+
+[source]
+----
+ERROR [news-client,39ba826690e440da,39ba826690e440da,true] 1 --- [nio-8080-exec-2] o.s.c.s.i.web.ExceptionLoggingFilter     : Uncaught exception thrown
+org.springframework.web.util.NestedServletException: Request processing failed; nested exception is org.springframework.web.socket.sockjs.SockJsException: Uncaught failure in SockJS request, uri=http://localhost:8080/news-websocket/202/gcbccz4x/websocket; nested exception is org.springframework.web.socket.sockjs.SockJsException: Uncaught failure for request http://localhost:8080/news-websocket/202/gcbccz4x/websocket; nested exception is org.springframework.core.task.TaskRejectedException: Executor [java.util.concurrent.ScheduledThreadPoolExecutor@2427859c[Terminated, pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 1]] did not accept task: org.springframework.cloud.sleuth.instrument.async.TraceRunnable@51841203
+----

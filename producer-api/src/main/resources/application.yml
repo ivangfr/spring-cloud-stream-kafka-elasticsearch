@@ -13,7 +13,8 @@ spring:
             partition-key-expression: headers['partitionKey']
             partition-count: 2
   sleuth:
-    sampler.probability: 1.0
+    sampler:
+      probability: 1.0
 
 management:
   endpoints:

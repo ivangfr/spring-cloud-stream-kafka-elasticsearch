@@ -34,14 +34,17 @@ public class NewsStream {
         log.info("NewsEvent with id '{}' and title '{}' received from bus. topic: {}, partition: {}, offset: {}, deliveryAttempt: {}",
                 newsEvent.getId(), newsEvent.getTitle(), topic, partition, offset, deliveryAttempt);
 
+        simpMessagingTemplate.convertAndSend("/topic/news", createNews(newsEvent));
+    }
+
+    private News createNews(NewsEvent newsEvent) {
         News news = new News();
         news.setId(newsEvent.getId().toString());
         news.setTitle(newsEvent.getTitle().toString());
         news.setText(newsEvent.getText().toString());
         news.setCategory(newsEvent.getCategory().toString());
         news.setDatetime(DateTimeUtil.fromStringToDate(newsEvent.getDatetime().toString()));
-
-        simpMessagingTemplate.convertAndSend("/topic/news", news);
+        return news;
     }
 
 }

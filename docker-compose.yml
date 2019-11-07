@@ -3,7 +3,7 @@ version: "3.7"
 services:
 
   zookeeper:
-    image: confluentinc/cp-zookeeper:5.2.2
+    image: confluentinc/cp-zookeeper:5.3.1
     container_name: zookeeper
     restart: unless-stopped
     ports:
@@ -16,7 +16,7 @@ services:
       start_period: 1m
 
   kafka:
-    image: confluentinc/cp-kafka:5.2.2
+    image: confluentinc/cp-kafka:5.3.1
     container_name: kafka
     restart: unless-stopped
     depends_on:
@@ -35,7 +35,7 @@ services:
       start_period: 1m
 
   kafka-rest-proxy:
-    image: confluentinc/cp-kafka-rest:5.2.2
+    image: confluentinc/cp-kafka-rest:5.3.1
     container_name: kafka-rest-proxy
     restart: unless-stopped
     depends_on:
@@ -92,7 +92,7 @@ services:
 
   zipkin:
     container_name: zipkin
-    image: openzipkin/zipkin:2.15.0
+    image: openzipkin/zipkin:2.18.0
     restart: unless-stopped
     ports:
       - "9411:9411"
@@ -115,109 +115,3 @@ services:
 #    healthcheck:
 #      test: ""
 #      start_period: 30s
-
-  eureka:
-    container_name: eureka
-    image: docker.mycompany.com/eureka-server:1.0.0
-    restart: unless-stopped
-    ports:
-      - "8761:8761"
-    healthcheck:
-      test: [ "CMD", "nc", "-z", "localhost", "8761" ]
-      start_period: 1m
-
-  producer-api:
-    container_name: producer-api
-    image: docker.mycompany.com/producer-api:1.0.0
-    restart: unless-stopped
-    ports:
-      - "9080:8080"
-    depends_on:
-      - kafka
-      - eureka
-      - zipkin
-    environment:
-      KAFKA_HOST: kafka
-      KAFKA_PORT: 9092
-      EUREKA_HOST: eureka
-      ZIPKIN_HOST: zipkin
-    healthcheck:
-      test: [ "CMD", "nc", "-z", "localhost", "8080" ]
-      start_period: 2m
-
-  categorizer-service:
-    container_name: categorizer-service
-    image: docker.mycompany.com/categorizer-service:1.0.0
-    restart: unless-stopped
-    ports:
-      - "9081:8080"
-    depends_on:
-      - kafka
-      - eureka
-      - zipkin
-    environment:
-      KAFKA_HOST: kafka
-      KAFKA_PORT: 9092
-      EUREKA_HOST: eureka
-      ZIPKIN_HOST: zipkin
-    healthcheck:
-      test: [ "CMD", "nc", "-z", "localhost", "8080" ]
-      start_period: 2m
-
-  collector-service:
-    container_name: collector-service
-    image: docker.mycompany.com/collector-service:1.0.0
-    restart: unless-stopped
-    ports:
-      - "9082:8080"
-    depends_on:
-      - kafka
-      - elasticsearch
-      - eureka
-      - zipkin
-    environment:
-      KAFKA_HOST: kafka
-      KAFKA_PORT: 9092
-      ELASTICSEARCH_HOST: elasticsearch
-      EUREKA_HOST: eureka
-      ZIPKIN_HOST: zipkin
-    healthcheck:
-      test: [ "CMD", "nc", "-z", "localhost", "8080" ]
-      start_period: 2m
-
-  publisher-api:
-    container_name: publisher-api
-    image: docker.mycompany.com/publisher-api:1.0.0
-    restart: unless-stopped
-    ports:
-      - "9083:8080"
-    depends_on:
-      - elasticsearch
-      - eureka
-      - zipkin
-    environment:
-      ELASTICSEARCH_HOST: elasticsearch
-      EUREKA_HOST: eureka
-      ZIPKIN_HOST: zipkin
-    healthcheck:
-      test: [ "CMD", "nc", "-z", "localhost", "8080" ]
-      start_period: 2m
-
-  news-client:
-    container_name: news-client
-    image: docker.mycompany.com/news-client:1.0.0
-    restart: unless-stopped
-    ports:
-      - "9084:8080"
-    depends_on:
-      - elasticsearch
-      - eureka
-      - zipkin
-    environment:
-      KAFKA_HOST: kafka
-      KAFKA_PORT: 9092
-      EUREKA_HOST: eureka
-      ZIPKIN_HOST: zipkin
-    healthcheck:
-      test: [ "CMD", "nc", "-z", "localhost", "8080" ]
-      start_period: 2m

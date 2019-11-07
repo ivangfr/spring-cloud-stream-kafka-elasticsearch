@@ -15,7 +15,10 @@ spring:
             max-attempts: 4
             back-off-initial-interval: 10000
   sleuth:
-    sampler.probability: 1.0
+    async:
+      enabled: false
+    sampler:
+      probability: 1.0
 
 management:
   endpoints:
