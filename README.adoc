@@ -1,7 +1,8 @@
 = `spring-cloud-stream-elasticsearch`
 
-The goal of this project is to implement a "News" processing pipeline composed of 5 https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/[Spring Boot]
-applications: `producer-api`, `categorizer-service`, `collector-service`, `publisher-api` and `news-client`.
+The goal of this project is to implement a "News" processing pipeline composed of five
+https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/[Spring Boot] applications: `producer-api`,
+`categorizer-service`, `collector-service`, `publisher-api` and `news-client`.
 
 * We are using https://docs.spring.io/spring-cloud-stream/docs/current/reference/htmlsingle[Spring Cloud Stream]
 framework for building highly scalable event-driven applications connected with shared messaging systems.
@@ -64,7 +65,7 @@ you can just run the following script or manually run `./mvnw` commands for each
 
 [source]
 ----
-build-apps.sh
+./build-apps.sh
 ----
 
 === eureka-server
@@ -372,28 +373,28 @@ image::images/kafka-manager-consumers.png[]
 
 === Elasticsearch REST API
 
-- Check ES is up and running
+Check ES is up and running
 
 [source]
 ----
 curl http://localhost:9200
 ----
 
-- Check indexes in ES
+Check indexes in ES
 
 [source]
 ----
 curl http://localhost:9200/_cat/indices?v
 ----
 
-- Check _news_ index mapping
+Check _news_ index mapping
 
 [source]
 ----
 curl http://localhost:9200/news/_mapping
 ----
 
-- Simple search
+Simple search
 
 [source]
 ----
@@ -409,10 +410,14 @@ curl http://localhost:9200/news/news/_search
 
 == Issues
 
-- Set the property `spring.sleuth.async.enabled` to `false` in order to overcome the following error
+- In `news-client` `application.yml`, I needed to set the property `spring.sleuth.async.enabled` to `false` otherwise
+the Websocket wouldn't work. I was having the following exception
 
 [source]
 ----
 ERROR [news-client,39ba826690e440da,39ba826690e440da,true] 1 --- [nio-8080-exec-2] o.s.c.s.i.web.ExceptionLoggingFilter     : Uncaught exception thrown
-org.springframework.web.util.NestedServletException: Request processing failed; nested exception is org.springframework.web.socket.sockjs.SockJsException: Uncaught failure in SockJS request, uri=http://localhost:8080/news-websocket/202/gcbccz4x/websocket; nested exception is org.springframework.web.socket.sockjs.SockJsException: Uncaught failure for request http://localhost:8080/news-websocket/202/gcbccz4x/websocket; nested exception is org.springframework.core.task.TaskRejectedException: Executor [java.util.concurrent.ScheduledThreadPoolExecutor@2427859c[Terminated, pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 1]] did not accept task: org.springframework.cloud.sleuth.instrument.async.TraceRunnable@51841203
+org.springframework.web.util.NestedServletException: Request processing failed; nested exception is org.springframework.web.socket.sockjs.SockJsException:
+Uncaught failure in SockJS request, uri=http://localhost:8080/news-websocket/202/gcbccz4x/websocket; nested exception is org.springframework.web.socket.sockjs.SockJsException:
+Uncaught failure for request http://localhost:8080/news-websocket/202/gcbccz4x/websocket; nested exception is org.springframework.core.task.TaskRejectedException:
+Executor [java.util.concurrent.ScheduledThreadPoolExecutor@2427859c[Terminated, pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 1]] did not accept task: org.springframework.cloud.sleuth.instrument.async.TraceRunnable@51841203
 ----
