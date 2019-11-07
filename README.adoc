@@ -257,22 +257,6 @@ Open a terminal and inside `spring-cloud-stream-elasticsearch` root folder run f
 ./start-apps.sh
 ----
 
-== Application URLs
-
-|===
-|Application |URL
-
-|`producer-api`
-|http://localhost:9080/swagger-ui.html
-
-|`publisher-api`
-|http://localhost:9083/swagger-ui.html
-
-|`news-client`
-|http://localhost:8080
-
-|===
-
 == Running Applications with Maven
 
 During development, it is easier to just run the applications instead of always build the docker images and run it.
@@ -319,6 +303,22 @@ For it, inside `spring-cloud-stream-elasticsearch`, run the following Maven comm
 ----
 ./mvnw spring-boot:run --projects news-client
 ----
+
+== Application URLs
+
+|===
+|Application |URL
+
+|`producer-api`
+|http://localhost:9080/swagger-ui.html
+
+|`publisher-api`
+|http://localhost:9083/swagger-ui.html
+
+|`news-client`
+|http://localhost:8080
+
+|===
 
 == Shutdown
 
