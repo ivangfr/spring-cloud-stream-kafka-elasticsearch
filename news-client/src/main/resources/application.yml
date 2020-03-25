@@ -15,8 +15,6 @@ spring:
             max-attempts: 4
             back-off-initial-interval: 10000
   sleuth:
-    async:
-      enabled: false
     sampler:
       probability: 1.0
 
