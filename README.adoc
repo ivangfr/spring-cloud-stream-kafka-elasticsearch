@@ -1,30 +1,15 @@
-= `spring-cloud-stream-elasticsearch`
+= spring-cloud-stream-elasticsearch
 
 The goal of this project is to implement a "News" processing pipeline composed of five https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/[`Spring Boot`] applications: `producer-api`, `categorizer-service`, `collector-service`, `publisher-api` and `news-client`.
 
 == Technologies used
 
-|===
-|Technology |Description
-
-|https://docs.spring.io/spring-cloud-stream/docs/current/reference/htmlsingle[`Spring Cloud Stream`]
-|build highly scalable event-driven applications connected with shared messaging systems
-
-|https://docs.spring.io/spring-data/elasticsearch/docs/current/reference/html/[`Spring Data Elasticsearch`]
-|persist data in https://www.elastic.co/products/elasticsearch[`Elasticsearch`].
-
-|https://cloud.spring.io/spring-cloud-static/spring-cloud-openfeign/current/reference/html/[`Spring Cloud OpenFeign`]
-|write web service clients easily
-
-|https://www.thymeleaf.org/[`Thymeleaf`]
-|HTML template
-
-|https://zipkin.io[`Zipkin`]
-|visualize traces between and within applications
-
-|https://github.com/Netflix/eureka/wiki[`Eureka`]
-|service registration and discovery
-|===
+* https://docs.spring.io/spring-cloud-stream/docs/current/reference/htmlsingle[`Spring Cloud Stream`] build highly scalable event-driven applications connected with shared messaging systems
+* https://docs.spring.io/spring-data/elasticsearch/docs/current/reference/html/[`Spring Data Elasticsearch`] to persist data in https://www.elastic.co/products/elasticsearch[`Elasticsearch`]
+* https://cloud.spring.io/spring-cloud-static/spring-cloud-openfeign/current/reference/html/[`Spring Cloud OpenFeign`] to write web service clients easily
+* https://www.thymeleaf.org/[`Thymeleaf`] as HTML template
+* https://zipkin.io[`Zipkin`] to visualize traces between and within applications
+* https://github.com/Netflix/eureka/wiki[`Eureka`] as service registration and discovery
 
 NOTE: In https://github.com/ivangfr/docker-swarm-environment[`docker-swarm-environment`] repository, it is shown how to deploy this project into a cluster of Docker Engines in swarm mode.
 
