@@ -8,7 +8,7 @@ import org.elasticsearch.index.query.QueryBuilders;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
-import org.springframework.data.elasticsearch.core.query.SearchQuery;
+import org.springframework.data.elasticsearch.core.query.Query;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -19,7 +19,6 @@ public class NewsServiceImpl implements NewsService {
     public NewsServiceImpl(NewsRepository newsRepository) {
         this.newsRepository = newsRepository;
     }
-
 
     @Override
     public News validateAndGetNewsById(String id) throws NewsNotFoundException {
@@ -39,12 +38,12 @@ public class NewsServiceImpl implements NewsService {
                 .should(QueryBuilders.matchPhraseQuery("text", text))
                 .should(QueryBuilders.matchPhraseQuery("category", text));
 
-        SearchQuery searchQuery = new NativeSearchQueryBuilder()
+        Query query = new NativeSearchQueryBuilder()
                 .withQuery(queryBuilder)
                 .withPageable(pageable)
                 .build();
 
-        return newsRepository.search(searchQuery);
+        return newsRepository.search(query);
     }
 
 }

@@ -80,42 +80,42 @@ Inside `spring-cloud-stream-elasticsearch` root folder, run the following `Maven
 +
 [source]
 ----
-./mvnw spring-boot:run --projects eureka-server
+./mvnw clean spring-boot:run --projects eureka-server
 ----
 
 * *producer-api*
 +
 [source]
 ----
-./mvnw spring-boot:run --projects producer-api -Dspring-boot.run.jvmArguments="-Dserver.port=9080"
+./mvnw clean spring-boot:run --projects producer-api -Dspring-boot.run.jvmArguments="-Dserver.port=9080"
 ----
 
 * *categorizer-service*
 +
 [source]
 ----
-./mvnw spring-boot:run --projects categorizer-service -Dspring-boot.run.jvmArguments="-Dserver.port=9081"
+./mvnw clean spring-boot:run --projects categorizer-service -Dspring-boot.run.jvmArguments="-Dserver.port=9081"
 ----
 
 * *collector-service*
 +
 [source]
 ----
-./mvnw spring-boot:run --projects collector-service -Dspring-boot.run.jvmArguments="-Dserver.port=9082"
+./mvnw clean spring-boot:run --projects collector-service -Dspring-boot.run.jvmArguments="-Dserver.port=9082"
 ----
 
 * *publisher-api*
 +
 [source]
 ----
-./mvnw spring-boot:run --projects publisher-api -Dspring-boot.run.jvmArguments="-Dserver.port=9083"
+./mvnw clean spring-boot:run --projects publisher-api -Dspring-boot.run.jvmArguments="-Dserver.port=9083"
 ----
 
 * *news-client*
 +
 [source]
 ----
-./mvnw spring-boot:run --projects news-client
+./mvnw clean spring-boot:run --projects news-client
 ----
 
 == Running Applications as Docker containers
@@ -124,7 +124,7 @@ Inside `spring-cloud-stream-elasticsearch` root folder, run the following `Maven
 
 * In a terminal, make sure you are in `spring-cloud-stream-elasticsearch` root folder
 
-* In order to build the applications docker images, run the following script
+* In order to build the application's docker images, run the following script
 +
 [source]
 ----
@@ -301,7 +301,7 @@ Inside `spring-cloud-stream-elasticsearch` root folder, run the following `Maven
 
 * Stop applications
 ** If they were started with `Maven`, go to the terminals where they are running and press `Ctrl+C`
-** If they were started as a Docker container, run the script below
+** If they were started as a Docker container, make sure you are in `spring-cloud-stream-elasticsearch` and run the script below
 +
 [source]
 ----
@@ -320,6 +320,8 @@ docker-compose down -v
 * *Eureka*
 +
 `Eureka` can be accessed at http://localhost:8761
++
+image::images/eureka-with-apps.png[]
 
 * *Kafka Topics UI*
 +
@@ -341,7 +343,7 @@ The figure below shows the Kafka topics consumers. As we can see, the consumers 
 +
 image::images/kafka-manager-consumers.png[]
 +
-*Configuration*
+_Configuration_
 +
 - First, you must create a new cluster. Click on `Cluster` (dropdown button on the header) and then on `Add Cluster`
 - Type the name of your cluster in `Cluster Name` field, for example: `MyZooCluster`
@@ -376,11 +378,12 @@ Simple search
 +
 [source]
 ----
-curl http://localhost:9200/news/news/_search
+curl http://localhost:9200/news/_search
 ----
 
 == TODO
 
+* user Schema Registry to store and share the `AVRO` schema instead of `commons-news` sharing library;
 * add alias to the index: wait for this feature be available in Spring Data Elasticsearch (https://jira.spring.io/browse/DATAES-192)
 * `news-client`: bug. everytime sync is clicked, it enables Websocket;
 * `news-client`: if websocket is enabled/disabled, sync button should be disabled/enabled;
