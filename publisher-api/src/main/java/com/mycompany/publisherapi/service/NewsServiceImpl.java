@@ -3,12 +3,8 @@ package com.mycompany.publisherapi.service;
 import com.mycompany.publisherapi.exception.NewsNotFoundException;
 import com.mycompany.publisherapi.model.News;
 import com.mycompany.publisherapi.repository.NewsRepository;
-import org.elasticsearch.index.query.QueryBuilder;
-import org.elasticsearch.index.query.QueryBuilders;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
-import org.springframework.data.elasticsearch.core.query.Query;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -33,17 +29,7 @@ public class NewsServiceImpl implements NewsService {
 
     @Override
     public Page<News> search(String text, Pageable pageable) {
-        QueryBuilder queryBuilder = QueryBuilders.boolQuery()
-                .should(QueryBuilders.matchPhraseQuery("title", text))
-                .should(QueryBuilders.matchPhraseQuery("text", text))
-                .should(QueryBuilders.matchPhraseQuery("category", text));
-
-        Query query = new NativeSearchQueryBuilder()
-                .withQuery(queryBuilder)
-                .withPageable(pageable)
-                .build();
-
-        return newsRepository.search(query);
+        return newsRepository.findByTitleOrTextOrCategoryAllIgnoreCase(text, text, text, pageable);
     }
 
 }
