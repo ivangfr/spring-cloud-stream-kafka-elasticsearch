@@ -13,9 +13,16 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.3.0.RELEASE</version>
+        <version>2.3.1.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
+
+    <properties>
+        <java.version>11</java.version>
+        <spring-cloud.version>Hoxton.SR5</spring-cloud.version>
+        <jib.maven-plugin.version>2.4.0</jib.maven-plugin.version>
+        <docker.image.prefix>docker.mycompany.com</docker.image.prefix>
+    </properties>
 
     <modules>
         <module>eureka-server</module>
@@ -26,10 +33,6 @@
         <module>news-client</module>
         <module>commons-news</module>
     </modules>
-
-    <properties>
-        <spring-cloud.version>Hoxton.SR4</spring-cloud.version>
-    </properties>
 
     <dependencyManagement>
         <dependencies>
@@ -42,5 +45,32 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>build-info</id>
+                        <goals>
+                            <goal>build-info</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>com.google.cloud.tools</groupId>
+                <artifactId>jib-maven-plugin</artifactId>
+                <version>${jib.maven-plugin.version}</version>
+                <configuration>
+                    <to>
+                        <image>${docker.image.prefix}/${project.artifactId}:${project.version}</image>
+                    </to>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>

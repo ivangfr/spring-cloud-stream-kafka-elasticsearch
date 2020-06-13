@@ -2,6 +2,7 @@ package com.mycompany.categorizerservice.bus;
 
 import com.mycompany.categorizerservice.service.CategoryService;
 import com.mycompany.commons.avro.NewsEvent;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.cloud.stream.annotation.StreamListener;
@@ -14,15 +15,12 @@ import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Component;
 
 @Slf4j
+@RequiredArgsConstructor
 @Component
 @EnableBinding(Processor.class)
 public class NewsStream {
 
     private final CategoryService categoryService;
-
-    public NewsStream(CategoryService categoryService) {
-        this.categoryService = categoryService;
-    }
 
     @StreamListener(Processor.INPUT)
     @SendTo(Processor.OUTPUT)

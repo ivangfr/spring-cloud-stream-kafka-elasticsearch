@@ -43,6 +43,12 @@ The `Websocket` operation is shown in the short gif below. A news is created in 
 +
 image::images/websocket-operation.gif[]
 
+== Prerequisites
+
+* `Java 11+`
+* `Docker`
+* `Docker-Compose`
+
 == Generate NewsEvent
 
 * In a terminal, make sure you are in `spring-cloud-stream-elasticsearch` root folder
@@ -357,28 +363,28 @@ Check ES is up and running
 +
 [source]
 ----
-curl http://localhost:9200
+curl localhost:9200
 ----
 +
 Check indexes in ES
 +
 [source]
 ----
-curl http://localhost:9200/_cat/indices?v
+curl "localhost:9200/_cat/indices?v"
 ----
 +
 Check _news_ index mapping
 +
 [source]
 ----
-curl http://localhost:9200/news/_mapping
+curl localhost:9200/news/_mapping
 ----
 +
 Simple search
 +
 [source]
 ----
-curl http://localhost:9200/news/_search
+curl "localhost:9200/news/_search?pretty"
 ----
 
 == TODO

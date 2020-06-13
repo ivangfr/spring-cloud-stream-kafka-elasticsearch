@@ -1,12 +1,13 @@
 package com.mycompany.publisherapi.rest;
 
-import com.mycompany.publisherapi.rest.dto.SearchDto;
 import com.mycompany.publisherapi.exception.NewsNotFoundException;
 import com.mycompany.publisherapi.model.News;
+import com.mycompany.publisherapi.rest.dto.SearchDto;
 import com.mycompany.publisherapi.service.NewsService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,15 +19,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/news")
 public class NewsController {
 
     private final NewsService newsService;
-
-    public NewsController(NewsService newsService) {
-        this.newsService = newsService;
-    }
 
     @ApiOperation(
             value = "Get News",

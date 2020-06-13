@@ -4,6 +4,7 @@ import com.mycompany.newsclient.client.PublisherApiClient;
 import com.mycompany.newsclient.client.dto.MyPage;
 import com.mycompany.newsclient.client.dto.News;
 import com.mycompany.newsclient.client.dto.SearchDto;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,14 +14,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Slf4j
+@RequiredArgsConstructor
 @Controller
 public class NewsController {
 
     private final PublisherApiClient publisherApiClient;
-
-    public NewsController(PublisherApiClient publisherApiClient) {
-        this.publisherApiClient = publisherApiClient;
-    }
 
     @GetMapping(value = {"/news", "/"})
     public String getNews(@RequestParam(required = false) Integer page,
