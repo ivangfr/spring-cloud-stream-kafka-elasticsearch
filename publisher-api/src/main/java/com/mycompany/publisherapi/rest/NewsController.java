@@ -4,10 +4,10 @@ import com.mycompany.publisherapi.exception.NewsNotFoundException;
 import com.mycompany.publisherapi.model.News;
 import com.mycompany.publisherapi.rest.dto.SearchDto;
 import com.mycompany.publisherapi.service.NewsService;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import lombok.RequiredArgsConstructor;
+import org.springdoc.core.converters.models.PageableAsQueryParam;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,40 +26,25 @@ public class NewsController {
 
     private final NewsService newsService;
 
-    @ApiOperation(
-            value = "Get News",
-            notes = "To sort the results by a specified field (ex. 'datetime'), use in 'sort' field a string like: datetime,[asc|desc]")
-    @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "OK"),
-            @ApiResponse(code = 500, message = "Internal Server Error")
-    })
+    @Operation(summary = "Get News")
+    @PageableAsQueryParam
     @GetMapping
-    public Page<News> getNews(Pageable pageable) {
+    public Page<News> getNews(@Parameter(hidden = true) Pageable pageable) {
         return newsService.listAllNewsByPage(pageable);
     }
 
-    @ApiOperation(value = "Get News by Id")
-    @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "OK"),
-            @ApiResponse(code = 400, message = "Bad Request"),
-            @ApiResponse(code = 500, message = "Internal Server Error")
-    })
+    @Operation(summary = "Get News by Id")
     @GetMapping("/{id}")
     public News getNewsById(@PathVariable String id) throws NewsNotFoundException {
         return newsService.validateAndGetNewsById(id);
     }
 
-    @ApiOperation(
-            value = "Search for News",
-            notes = "This endpoint does a query for the 'string' informed in the fields 'title', 'text' and 'category'\n" +
-                    "To sort the results by a specified field (ex. 'datetime'), use in 'sort' field a string like: datetime,[asc|desc]")
-    @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "OK"),
-            @ApiResponse(code = 400, message = "Bad Request"),
-            @ApiResponse(code = 500, message = "Internal Server Error")
-    })
+    @Operation(
+            summary = "Search for News",
+            description = "This endpoint does a query for the 'string' informed in the fields 'title', 'text' and 'category'")
+    @PageableAsQueryParam
     @PutMapping("/search")
-    public Page<News> searchNews(@Valid @RequestBody SearchDto searchDto, Pageable pageable) {
+    public Page<News> searchNews(@Valid @RequestBody SearchDto searchDto, @Parameter(hidden = true) Pageable pageable) {
         return newsService.search(searchDto.getText(), pageable);
     }
 

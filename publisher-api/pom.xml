@@ -17,7 +17,7 @@
     </parent>
 
     <properties>
-        <springfox.version>2.9.2</springfox.version>
+        <springdoc.openapi-ui.version>1.4.1</springdoc.openapi-ui.version>
     </properties>
 
     <dependencies>
@@ -50,16 +50,11 @@
             <artifactId>spring-boot-starter-validation</artifactId>
         </dependency>
 
-        <!-- Swagger2 -->
+        <!-- SpringDoc OpenApi -->
         <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger2</artifactId>
-            <version>${springfox.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger-ui</artifactId>
-            <version>${springfox.version}</version>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-ui</artifactId>
+            <version>${springdoc.openapi-ui.version}</version>
         </dependency>
 
         <dependency>
