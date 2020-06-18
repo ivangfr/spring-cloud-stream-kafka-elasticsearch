@@ -8,7 +8,6 @@ import org.springdoc.core.SpringDocUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.data.domain.Pageable;
 
 @Configuration
 public class SpringDocOpenApiConfig {
@@ -26,8 +25,10 @@ public class SpringDocOpenApiConfig {
         return GroupedOpenApi.builder().group("api").pathsToMatch("/api/**").build();
     }
 
+    // It's important to set it in order to handle Pageable
     static {
-        SpringDocUtils.getConfig().replaceWithClass(org.springframework.data.domain.Pageable.class, Pageable.class);
+        SpringDocUtils.getConfig()
+                .replaceWithClass(org.springframework.data.domain.Pageable.class, org.springdoc.core.converters.models.Pageable.class);
     }
 
 }
