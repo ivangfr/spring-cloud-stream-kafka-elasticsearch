@@ -45,9 +45,9 @@ image::images/websocket-operation.gif[]
 
 == Prerequisites
 
-* `Java 11+`
-* `Docker`
-* `Docker-Compose`
+* https://www.oracle.com/java/technologies/javase-jdk11-downloads.html[`Java 11+`]
+* https://www.docker.com/[`Docker`]
+* https://docs.docker.com/compose/install/[`Docker-Compose`]
 
 == Generate NewsEvent
 

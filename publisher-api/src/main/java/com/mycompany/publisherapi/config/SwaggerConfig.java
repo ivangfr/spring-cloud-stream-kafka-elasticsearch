@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class SpringDocOpenApiConfig {
+public class SwaggerConfig {
 
     @Value("${spring.application.name}")
     private String applicationName;
@@ -23,6 +23,11 @@ public class SpringDocOpenApiConfig {
     @Bean
     public GroupedOpenApi customApi() {
         return GroupedOpenApi.builder().group("api").pathsToMatch("/api/**").build();
+    }
+
+    @Bean
+    public GroupedOpenApi actuatorApi() {
+        return GroupedOpenApi.builder().group("actuator").pathsToMatch("/actuator/**").build();
     }
 
     // It's important to set it in order to handle Pageable
