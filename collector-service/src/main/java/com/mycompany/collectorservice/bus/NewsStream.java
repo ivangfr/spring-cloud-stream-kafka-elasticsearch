@@ -3,7 +3,7 @@ package com.mycompany.collectorservice.bus;
 import com.mycompany.collectorservice.mapper.NewsMapper;
 import com.mycompany.collectorservice.model.News;
 import com.mycompany.collectorservice.service.NewsService;
-import com.mycompany.commons.avro.NewsEvent;
+import com.mycompany.commonsnews.avro.NewsEvent;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.stream.annotation.EnableBinding;

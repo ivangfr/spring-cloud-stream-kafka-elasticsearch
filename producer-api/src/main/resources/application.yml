@@ -1,5 +1,12 @@
 spring:
   cloud:
+    schema-registry-client:
+      enabled: true
+      endpoint: http://${SCHEMA_REGISTRY_HOST:localhost}:${SCHEMA_REGISTRY_PORT:8081}
+    schema:
+      avro:
+        schema-locations:
+          - classpath:avro/news-event.avsc
     stream:
       kafka:
         binder:

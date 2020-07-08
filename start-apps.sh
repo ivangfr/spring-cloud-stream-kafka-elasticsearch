@@ -17,7 +17,7 @@ echo "Starting producer-api..."
 
 docker run -d --rm --name producer-api \
   -p 9080:8080 --network=spring-cloud-stream-elasticsearch_default \
-  -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 -e EUREKA_HOST=eureka -e ZIPKIN_HOST=zipkin \
+  -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 -e SCHEMA_REGISTRY_HOST=schema-registry -e EUREKA_HOST=eureka -e ZIPKIN_HOST=zipkin \
   --health-cmd="curl -f http://localhost:8080/actuator/health || exit 1" --health-start-period=1m \
   docker.mycompany.com/producer-api:1.0.0
 
@@ -28,7 +28,7 @@ echo "Starting categorizer-service..."
 
 docker run -d --rm --name categorizer-service \
   -p 9081:8080 --network=spring-cloud-stream-elasticsearch_default \
-  -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 -e EUREKA_HOST=eureka -e ZIPKIN_HOST=zipkin \
+  -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 -e SCHEMA_REGISTRY_HOST=schema-registry -e EUREKA_HOST=eureka -e ZIPKIN_HOST=zipkin \
   --health-cmd="curl -f http://localhost:8080/actuator/health || exit 1" --health-start-period=1m \
   docker.mycompany.com/categorizer-service:1.0.0
 
@@ -39,7 +39,7 @@ echo "Starting collector-service..."
 
 docker run -d --rm --name collector-service \
   -p 9082:8080 --network=spring-cloud-stream-elasticsearch_default \
-  -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 -e ELASTICSEARCH_HOST=elasticsearch -e EUREKA_HOST=eureka -e ZIPKIN_HOST=zipkin \
+  -e ELASTICSEARCH_HOST=elasticsearch -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 -e SCHEMA_REGISTRY_HOST=schema-registry -e EUREKA_HOST=eureka -e ZIPKIN_HOST=zipkin \
   --health-cmd="curl -f http://localhost:8080/actuator/health || exit 1" --health-start-period=1m \
   docker.mycompany.com/collector-service:1.0.0
 
@@ -61,7 +61,7 @@ echo "Starting news-client..."
 
 docker run -d --rm --name news-client \
   -p 8080:8080 --network=spring-cloud-stream-elasticsearch_default \
-  -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 -e EUREKA_HOST=eureka -e ZIPKIN_HOST=zipkin \
+  -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 -e SCHEMA_REGISTRY_HOST=schema-registry -e EUREKA_HOST=eureka -e ZIPKIN_HOST=zipkin \
   --health-cmd="curl -f http://localhost:8080/actuator/health || exit 1" --health-start-period=1m \
   docker.mycompany.com/news-client:1.0.0
 

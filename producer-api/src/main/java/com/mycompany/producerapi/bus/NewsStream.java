@@ -1,6 +1,6 @@
 package com.mycompany.producerapi.bus;
 
-import com.mycompany.commons.avro.NewsEvent;
+import com.mycompany.commonsnews.avro.NewsEvent;
 import com.mycompany.producerapi.model.News;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

@@ -3,12 +3,6 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>publisher-api</artifactId>
-    <packaging>jar</packaging>
-
-    <name>publisher-api</name>
-    <description>Demo project for Spring Boot</description>
-
     <parent>
         <groupId>com.mycompany</groupId>
         <artifactId>spring-cloud-stream-elasticsearch</artifactId>
@@ -16,8 +10,12 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
 
+    <artifactId>publisher-api</artifactId>
+    <name>publisher-api</name>
+    <description>Demo project for Spring Boot</description>
+
     <properties>
-        <springdoc.openapi-ui.version>1.4.1</springdoc.openapi-ui.version>
+        <springdoc.openapi-ui.version>1.4.3</springdoc.openapi-ui.version>
     </properties>
 
     <dependencies>

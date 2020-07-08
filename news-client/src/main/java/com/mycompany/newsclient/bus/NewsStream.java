@@ -1,6 +1,6 @@
 package com.mycompany.newsclient.bus;
 
-import com.mycompany.commons.avro.NewsEvent;
+import com.mycompany.commonsnews.avro.NewsEvent;
 import com.mycompany.newsclient.client.dto.News;
 import com.mycompany.newsclient.util.DateTimeUtil;
 import lombok.RequiredArgsConstructor;

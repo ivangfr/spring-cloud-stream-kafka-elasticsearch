@@ -65,6 +65,9 @@
                 <artifactId>jib-maven-plugin</artifactId>
                 <version>${jib.maven-plugin.version}</version>
                 <configuration>
+                    <from>
+                        <image>openjdk:11.0.7</image>
+                    </from>
                     <to>
                         <image>${docker.image.prefix}/${project.artifactId}:${project.version}</image>
                     </to>

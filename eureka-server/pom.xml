@@ -3,18 +3,16 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>eureka-server</artifactId>
-    <packaging>jar</packaging>
-
-    <name>eureka-server</name>
-    <description>Demo project for Spring Boot</description>
-
     <parent>
         <groupId>com.mycompany</groupId>
         <artifactId>spring-cloud-stream-elasticsearch</artifactId>
         <version>1.0.0</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
+
+    <artifactId>eureka-server</artifactId>
+    <name>eureka-server</name>
+    <description>Demo project for Spring Boot</description>
 
     <dependencies>
         <dependency>

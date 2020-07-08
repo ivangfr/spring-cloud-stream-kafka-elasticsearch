@@ -1,15 +1,8 @@
 spring:
-  data:
-    elasticsearch:
-      cluster-name: docker-es-cluster
-      cluster-nodes: ${ELASTICSEARCH_HOST:localhost}:${ELASTICSEARCH_NODES_PORT:9300}
-  elasticsearch:
-    rest:
-      uris: http://${ELASTICSEARCH_HOST:localhost}:${ELASTICSEARCH_REST_PORT:9200}
-  sleuth:
-    sampler:
-      probability: 1.0
   cloud:
+    schema-registry-client:
+      enabled: true
+      endpoint: http://${SCHEMA_REGISTRY_HOST:localhost}:${SCHEMA_REGISTRY_PORT:8081}
     stream:
       kafka:
         binder:
@@ -30,6 +23,16 @@ spring:
           producer:
             partition-key-expression: headers['partitionKey']
             partition-count: 2
+  data:
+    elasticsearch:
+      cluster-name: docker-es-cluster
+      cluster-nodes: ${ELASTICSEARCH_HOST:localhost}:${ELASTICSEARCH_NODES_PORT:9300}
+  elasticsearch:
+    rest:
+      uris: http://${ELASTICSEARCH_HOST:localhost}:${ELASTICSEARCH_REST_PORT:9200}
+  sleuth:
+    sampler:
+      probability: 1.0
 
 management:
   endpoints:

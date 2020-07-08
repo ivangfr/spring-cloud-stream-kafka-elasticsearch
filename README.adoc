@@ -4,12 +4,13 @@ The goal of this project is to implement a "News" processing pipeline composed o
 
 == Technologies used
 
-* https://docs.spring.io/spring-cloud-stream/docs/current/reference/htmlsingle[`Spring Cloud Stream`] build highly scalable event-driven applications connected with shared messaging systems
-* https://docs.spring.io/spring-data/elasticsearch/docs/current/reference/html/[`Spring Data Elasticsearch`] to persist data in https://www.elastic.co/products/elasticsearch[`Elasticsearch`]
-* https://cloud.spring.io/spring-cloud-static/spring-cloud-openfeign/current/reference/html/[`Spring Cloud OpenFeign`] to write web service clients easily
-* https://www.thymeleaf.org/[`Thymeleaf`] as HTML template
-* https://zipkin.io[`Zipkin`] to visualize traces between and within applications
-* https://github.com/Netflix/eureka/wiki[`Eureka`] as service registration and discovery
+* https://docs.spring.io/spring-cloud-stream/docs/current/reference/htmlsingle[`Spring Cloud Stream`] to build highly scalable event-driven applications connected with shared messaging systems;
+* https://cloud.spring.io/spring-cloud-static/spring-cloud-schema-registry/1.0.6.RELEASE/reference/html/spring-cloud-schema-registry.html[`Spring Cloud Schema Registry`] that supports schema evolution so that the data can be evolved over time; besides, it lets you store schema information in a textual format (typically JSON) and makes that information accessible to various applications that need it to receive and send data in binary format;
+* https://docs.spring.io/spring-data/elasticsearch/docs/current/reference/html/[`Spring Data Elasticsearch`] to persist data in https://www.elastic.co/products/elasticsearch[`Elasticsearch`];
+* https://cloud.spring.io/spring-cloud-static/spring-cloud-openfeign/current/reference/html/[`Spring Cloud OpenFeign`] to write web service clients easily;
+* https://www.thymeleaf.org/[`Thymeleaf`] as HTML template;
+* https://zipkin.io[`Zipkin`] to visualize traces between and within applications;
+* https://github.com/Netflix/eureka/wiki[`Eureka`] as service registration and discovery.
 
 NOTE: In https://github.com/ivangfr/docker-swarm-environment[`docker-swarm-environment`] repository, it is shown how to deploy this project into a cluster of Docker Engines in swarm mode.
 
@@ -150,6 +151,12 @@ Inside `spring-cloud-stream-elasticsearch` root folder, run the following `Maven
 |`KAFKA_PORT`
 |Specify port of the `Kafka` message broker to use (default `29092`)
 
+|`SCHEMA_REGISTRY_HOST`
+|Specify host of the `Schema Registry` to use (default `localhost`)
+
+|`SCHEMA_REGISTRY_PORT`
+|Specify port of the `Schema Registry` to use (default `8081`)
+
 |`EUREKA_HOST`
 |Specify host of the `Eureka` service discovery to use (default `localhost`)
 
@@ -174,6 +181,12 @@ Inside `spring-cloud-stream-elasticsearch` root folder, run the following `Maven
 
 |`KAFKA_PORT`
 |Specify port of the `Kafka` message broker to use (default `29092`)
+
+|`SCHEMA_REGISTRY_HOST`
+|Specify host of the `Schema Registry` to use (default `localhost`)
+
+|`SCHEMA_REGISTRY_PORT`
+|Specify port of the `Schema Registry` to use (default `8081`)
 
 |`EUREKA_HOST`
 |Specify host of the `Eureka` service discovery to use (default `localhost`)
@@ -208,6 +221,12 @@ Inside `spring-cloud-stream-elasticsearch` root folder, run the following `Maven
 
 |`KAFKA_PORT`
 |Specify port of the `Kafka` message broker to use (default `29092`)
+
+|`SCHEMA_REGISTRY_HOST`
+|Specify host of the `Schema Registry` to use (default `localhost`)
+
+|`SCHEMA_REGISTRY_PORT`
+|Specify port of the `Schema Registry` to use (default `8081`)
 
 |`EUREKA_HOST`
 |Specify host of the `Eureka` service discovery to use (default `localhost`)
@@ -261,6 +280,12 @@ Inside `spring-cloud-stream-elasticsearch` root folder, run the following `Maven
 
 |`KAFKA_PORT`
 |Specify port of the `Kafka` message broker to use (default `29092`)
+
+|`SCHEMA_REGISTRY_HOST`
+|Specify host of the `Schema Registry` to use (default `localhost`)
+
+|`SCHEMA_REGISTRY_PORT`
+|Specify port of the `Schema Registry` to use (default `8081`)
 
 |`EUREKA_HOST`
 |Specify host of the `Eureka` service discovery to use (default `localhost`)
@@ -357,6 +382,12 @@ _Configuration_
 - Enable checkbox `Poll consumer information (Not recommended for large # of consumers if ZK is used for offsets tracking on older Kafka versions)`
 - Click on `Save` button at the bottom of the page.
 
+* *Schema Registry UI*
++
+`Schema Registry UI` can be accessed at http://localhost:8001
++
+image::images/schema-registry.png[]
+
 * *Elasticsearch REST API*
 +
 Check ES is up and running
@@ -389,7 +420,6 @@ curl "localhost:9200/news/_search?pretty"
 
 == TODO
 
-* user Schema Registry to store and share the `AVRO` schema instead of `commons-news` sharing library;
 * add alias to the index: wait for this feature be available in Spring Data Elasticsearch (https://jira.spring.io/browse/DATAES-192)
 * `news-client`: bug. everytime sync is clicked, it enables Websocket;
 * `news-client`: if websocket is enabled/disabled, sync button should be disabled/enabled;

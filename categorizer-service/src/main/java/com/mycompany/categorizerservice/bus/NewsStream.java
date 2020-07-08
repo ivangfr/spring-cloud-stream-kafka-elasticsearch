@@ -1,7 +1,7 @@
 package com.mycompany.categorizerservice.bus;
 
 import com.mycompany.categorizerservice.service.CategoryService;
-import com.mycompany.commons.avro.NewsEvent;
+import com.mycompany.commonsnews.avro.NewsEvent;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.stream.annotation.EnableBinding;

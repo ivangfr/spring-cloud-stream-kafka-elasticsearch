@@ -1,9 +1,29 @@
-version: "3.7"
+version: "3.8"
 
 services:
 
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch-oss:7.6.2
+    container_name: elasticsearch
+    restart: unless-stopped
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    environment:
+      cluster.name: docker-es-cluster
+      discovery.type: single-node
+      bootstrap.memory_lock: "true"
+      ES_JAVA_OPTS: "-Xms512m -Xmx512m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    healthcheck:
+      test: "curl -f http://localhost:9200 || exit 1"
+      start_period: 1m
+
   zookeeper:
-    image: confluentinc/cp-zookeeper:5.4.1
+    image: confluentinc/cp-zookeeper:5.5.1
     container_name: zookeeper
     restart: unless-stopped
     ports:
@@ -15,7 +35,7 @@ services:
       start_period: 1m
 
   kafka:
-    image: confluentinc/cp-kafka:5.4.1
+    image: confluentinc/cp-kafka:5.5.1
     container_name: kafka
     restart: unless-stopped
     depends_on:
@@ -32,8 +52,38 @@ services:
       test: [ "CMD", "nc", "-z", "localhost", "9092" ]
       start_period: 1m
 
+  schema-registry:
+    image: confluentinc/cp-schema-registry:5.5.1
+    container_name: schema-registry
+    restart: unless-stopped
+    depends_on:
+      - kafka
+    ports:
+      - "8081:8081"
+    environment:
+      SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS: kafka:9092
+      SCHEMA_REGISTRY_HOST_NAME: schema-registry
+      SCHEMA_REGISTRY_LISTENERS: http://0.0.0.0:8081
+    healthcheck:
+      test: "curl -f http://localhost:8081 || exit 1"
+      start_period: 1m
+
+  schema-registry-ui:
+    image: landoop/schema-registry-ui:0.9.5
+    container_name: kafka-schema-registry-ui
+    depends_on:
+      - schema-registry
+    ports:
+      - "8001:8000"
+    environment:
+      SCHEMAREGISTRY_URL: http://schema-registry:8081
+      PROXY: "true"
+    healthcheck:
+      test: "wget --quiet --tries=1 --spider http://localhost:8000 || exit 1"
+      start_period: 30s
+
   kafka-rest-proxy:
-    image: confluentinc/cp-kafka-rest:5.4.1
+    image: confluentinc/cp-kafka-rest:5.5.1
     container_name: kafka-rest-proxy
     restart: unless-stopped
     depends_on:
@@ -64,26 +114,6 @@ services:
       PROXY: "true"
     healthcheck:
       test: "wget --quiet --tries=1 --spider http://localhost:8000 || exit 1"
-      start_period: 1m
-
-  elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch-oss:7.6.2
-    container_name: elasticsearch
-    restart: unless-stopped
-    ports:
-      - "9200:9200"
-      - "9300:9300"
-    environment:
-      cluster.name: docker-es-cluster
-      discovery.type: single-node
-      bootstrap.memory_lock: "true"
-      ES_JAVA_OPTS: "-Xms512m -Xmx512m"
-    ulimits:
-      memlock:
-        soft: -1
-        hard: -1
-    healthcheck:
-      test: "curl -f http://localhost:9200 || exit 1"
       start_period: 1m
 
   zipkin:

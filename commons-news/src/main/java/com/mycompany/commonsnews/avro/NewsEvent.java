@@ -3,18 +3,19 @@
  *
  * DO NOT EDIT DIRECTLY
  */
-package com.mycompany.commons.avro;
+package com.mycompany.commonsnews.avro;
 
+import org.apache.avro.generic.GenericArray;
 import org.apache.avro.specific.SpecificData;
+import org.apache.avro.util.Utf8;
 import org.apache.avro.message.BinaryMessageEncoder;
 import org.apache.avro.message.BinaryMessageDecoder;
 import org.apache.avro.message.SchemaStore;
 
-@SuppressWarnings("all")
 @org.apache.avro.specific.AvroGenerated
 public class NewsEvent extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = -8678907097291321575L;
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"NewsEvent\",\"namespace\":\"com.mycompany.commons.avro\",\"fields\":[{\"name\":\"id\",\"type\":\"string\"},{\"name\":\"title\",\"type\":\"string\"},{\"name\":\"text\",\"type\":\"string\"},{\"name\":\"datetime\",\"type\":\"string\"},{\"name\":\"category\",\"type\":[\"null\",\"string\"],\"default\":null}]}");
+  private static final long serialVersionUID = 831340850809313753L;
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"NewsEvent\",\"namespace\":\"com.mycompany.commonsnews.avro\",\"fields\":[{\"name\":\"id\",\"type\":\"string\"},{\"name\":\"title\",\"type\":\"string\"},{\"name\":\"text\",\"type\":\"string\"},{\"name\":\"datetime\",\"type\":\"string\"},{\"name\":\"category\",\"type\":[\"null\",\"string\"],\"default\":null}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static SpecificData MODEL$ = new SpecificData();
@@ -26,7 +27,16 @@ public class NewsEvent extends org.apache.avro.specific.SpecificRecordBase imple
       new BinaryMessageDecoder<NewsEvent>(MODEL$, SCHEMA$);
 
   /**
+   * Return the BinaryMessageEncoder instance used by this class.
+   * @return the message encoder used by this class
+   */
+  public static BinaryMessageEncoder<NewsEvent> getEncoder() {
+    return ENCODER;
+  }
+
+  /**
    * Return the BinaryMessageDecoder instance used by this class.
+   * @return the message decoder used by this class
    */
   public static BinaryMessageDecoder<NewsEvent> getDecoder() {
     return DECODER;
@@ -35,17 +45,27 @@ public class NewsEvent extends org.apache.avro.specific.SpecificRecordBase imple
   /**
    * Create a new BinaryMessageDecoder instance for this class that uses the specified {@link SchemaStore}.
    * @param resolver a {@link SchemaStore} used to find schemas by fingerprint
+   * @return a BinaryMessageDecoder instance for this class backed by the given SchemaStore
    */
   public static BinaryMessageDecoder<NewsEvent> createDecoder(SchemaStore resolver) {
     return new BinaryMessageDecoder<NewsEvent>(MODEL$, SCHEMA$, resolver);
   }
 
-  /** Serializes this NewsEvent to a ByteBuffer. */
+  /**
+   * Serializes this NewsEvent to a ByteBuffer.
+   * @return a buffer holding the serialized data for this instance
+   * @throws java.io.IOException if this instance could not be serialized
+   */
   public java.nio.ByteBuffer toByteBuffer() throws java.io.IOException {
     return ENCODER.encode(this);
   }
 
-  /** Deserializes a NewsEvent from a ByteBuffer. */
+  /**
+   * Deserializes a NewsEvent from a ByteBuffer.
+   * @param b a byte buffer holding serialized data for an instance of this class
+   * @return a NewsEvent instance decoded from the given buffer
+   * @throws java.io.IOException if the given bytes could not be deserialized into an instance of this class
+   */
   public static NewsEvent fromByteBuffer(
       java.nio.ByteBuffer b) throws java.io.IOException {
     return DECODER.decode(b);
@@ -80,6 +100,7 @@ public class NewsEvent extends org.apache.avro.specific.SpecificRecordBase imple
     this.category = category;
   }
 
+  public org.apache.avro.specific.SpecificData getSpecificData() { return MODEL$; }
   public org.apache.avro.Schema getSchema() { return SCHEMA$; }
   // Used by DatumWriter.  Applications should not call.
   public java.lang.Object get(int field$) {
@@ -114,6 +135,7 @@ public class NewsEvent extends org.apache.avro.specific.SpecificRecordBase imple
     return id;
   }
 
+
   /**
    * Sets the value of the 'id' field.
    * @param value the value to set.
@@ -129,6 +151,7 @@ public class NewsEvent extends org.apache.avro.specific.SpecificRecordBase imple
   public java.lang.CharSequence getTitle() {
     return title;
   }
+
 
   /**
    * Sets the value of the 'title' field.
@@ -146,6 +169,7 @@ public class NewsEvent extends org.apache.avro.specific.SpecificRecordBase imple
     return text;
   }
 
+
   /**
    * Sets the value of the 'text' field.
    * @param value the value to set.
@@ -161,6 +185,7 @@ public class NewsEvent extends org.apache.avro.specific.SpecificRecordBase imple
   public java.lang.CharSequence getDatetime() {
     return datetime;
   }
+
 
   /**
    * Sets the value of the 'datetime' field.
@@ -178,6 +203,7 @@ public class NewsEvent extends org.apache.avro.specific.SpecificRecordBase imple
     return category;
   }
 
+
   /**
    * Sets the value of the 'category' field.
    * @param value the value to set.
@@ -190,8 +216,8 @@ public class NewsEvent extends org.apache.avro.specific.SpecificRecordBase imple
    * Creates a new NewsEvent RecordBuilder.
    * @return A new NewsEvent RecordBuilder
    */
-  public static com.mycompany.commons.avro.NewsEvent.Builder newBuilder() {
-    return new com.mycompany.commons.avro.NewsEvent.Builder();
+  public static com.mycompany.commonsnews.avro.NewsEvent.Builder newBuilder() {
+    return new com.mycompany.commonsnews.avro.NewsEvent.Builder();
   }
 
   /**
@@ -199,8 +225,12 @@ public class NewsEvent extends org.apache.avro.specific.SpecificRecordBase imple
    * @param other The existing builder to copy.
    * @return A new NewsEvent RecordBuilder
    */
-  public static com.mycompany.commons.avro.NewsEvent.Builder newBuilder(com.mycompany.commons.avro.NewsEvent.Builder other) {
-    return new com.mycompany.commons.avro.NewsEvent.Builder(other);
+  public static com.mycompany.commonsnews.avro.NewsEvent.Builder newBuilder(com.mycompany.commonsnews.avro.NewsEvent.Builder other) {
+    if (other == null) {
+      return new com.mycompany.commonsnews.avro.NewsEvent.Builder();
+    } else {
+      return new com.mycompany.commonsnews.avro.NewsEvent.Builder(other);
+    }
   }
 
   /**
@@ -208,13 +238,18 @@ public class NewsEvent extends org.apache.avro.specific.SpecificRecordBase imple
    * @param other The existing instance to copy.
    * @return A new NewsEvent RecordBuilder
    */
-  public static com.mycompany.commons.avro.NewsEvent.Builder newBuilder(com.mycompany.commons.avro.NewsEvent other) {
-    return new com.mycompany.commons.avro.NewsEvent.Builder(other);
+  public static com.mycompany.commonsnews.avro.NewsEvent.Builder newBuilder(com.mycompany.commonsnews.avro.NewsEvent other) {
+    if (other == null) {
+      return new com.mycompany.commonsnews.avro.NewsEvent.Builder();
+    } else {
+      return new com.mycompany.commonsnews.avro.NewsEvent.Builder(other);
+    }
   }
 
   /**
    * RecordBuilder for NewsEvent instances.
    */
+  @org.apache.avro.specific.AvroGenerated
   public static class Builder extends org.apache.avro.specific.SpecificRecordBuilderBase<NewsEvent>
     implements org.apache.avro.data.RecordBuilder<NewsEvent> {
 
@@ -233,27 +268,27 @@ public class NewsEvent extends org.apache.avro.specific.SpecificRecordBase imple
      * Creates a Builder by copying an existing Builder.
      * @param other The existing Builder to copy.
      */
-    private Builder(com.mycompany.commons.avro.NewsEvent.Builder other) {
+    private Builder(com.mycompany.commonsnews.avro.NewsEvent.Builder other) {
       super(other);
       if (isValidValue(fields()[0], other.id)) {
         this.id = data().deepCopy(fields()[0].schema(), other.id);
-        fieldSetFlags()[0] = true;
+        fieldSetFlags()[0] = other.fieldSetFlags()[0];
       }
       if (isValidValue(fields()[1], other.title)) {
         this.title = data().deepCopy(fields()[1].schema(), other.title);
-        fieldSetFlags()[1] = true;
+        fieldSetFlags()[1] = other.fieldSetFlags()[1];
       }
       if (isValidValue(fields()[2], other.text)) {
         this.text = data().deepCopy(fields()[2].schema(), other.text);
-        fieldSetFlags()[2] = true;
+        fieldSetFlags()[2] = other.fieldSetFlags()[2];
       }
       if (isValidValue(fields()[3], other.datetime)) {
         this.datetime = data().deepCopy(fields()[3].schema(), other.datetime);
-        fieldSetFlags()[3] = true;
+        fieldSetFlags()[3] = other.fieldSetFlags()[3];
       }
       if (isValidValue(fields()[4], other.category)) {
         this.category = data().deepCopy(fields()[4].schema(), other.category);
-        fieldSetFlags()[4] = true;
+        fieldSetFlags()[4] = other.fieldSetFlags()[4];
       }
     }
 
@@ -261,8 +296,8 @@ public class NewsEvent extends org.apache.avro.specific.SpecificRecordBase imple
      * Creates a Builder by copying an existing NewsEvent instance
      * @param other The existing instance to copy.
      */
-    private Builder(com.mycompany.commons.avro.NewsEvent other) {
-            super(SCHEMA$);
+    private Builder(com.mycompany.commonsnews.avro.NewsEvent other) {
+      super(SCHEMA$);
       if (isValidValue(fields()[0], other.id)) {
         this.id = data().deepCopy(fields()[0].schema(), other.id);
         fieldSetFlags()[0] = true;
@@ -293,12 +328,13 @@ public class NewsEvent extends org.apache.avro.specific.SpecificRecordBase imple
       return id;
     }
 
+
     /**
       * Sets the value of the 'id' field.
       * @param value The value of 'id'.
       * @return This builder.
       */
-    public com.mycompany.commons.avro.NewsEvent.Builder setId(java.lang.CharSequence value) {
+    public com.mycompany.commonsnews.avro.NewsEvent.Builder setId(java.lang.CharSequence value) {
       validate(fields()[0], value);
       this.id = value;
       fieldSetFlags()[0] = true;
@@ -318,7 +354,7 @@ public class NewsEvent extends org.apache.avro.specific.SpecificRecordBase imple
       * Clears the value of the 'id' field.
       * @return This builder.
       */
-    public com.mycompany.commons.avro.NewsEvent.Builder clearId() {
+    public com.mycompany.commonsnews.avro.NewsEvent.Builder clearId() {
       id = null;
       fieldSetFlags()[0] = false;
       return this;
@@ -332,12 +368,13 @@ public class NewsEvent extends org.apache.avro.specific.SpecificRecordBase imple
       return title;
     }
 
+
     /**
       * Sets the value of the 'title' field.
       * @param value The value of 'title'.
       * @return This builder.
       */
-    public com.mycompany.commons.avro.NewsEvent.Builder setTitle(java.lang.CharSequence value) {
+    public com.mycompany.commonsnews.avro.NewsEvent.Builder setTitle(java.lang.CharSequence value) {
       validate(fields()[1], value);
       this.title = value;
       fieldSetFlags()[1] = true;
@@ -357,7 +394,7 @@ public class NewsEvent extends org.apache.avro.specific.SpecificRecordBase imple
       * Clears the value of the 'title' field.
       * @return This builder.
       */
-    public com.mycompany.commons.avro.NewsEvent.Builder clearTitle() {
+    public com.mycompany.commonsnews.avro.NewsEvent.Builder clearTitle() {
       title = null;
       fieldSetFlags()[1] = false;
       return this;
@@ -371,12 +408,13 @@ public class NewsEvent extends org.apache.avro.specific.SpecificRecordBase imple
       return text;
     }
 
+
     /**
       * Sets the value of the 'text' field.
       * @param value The value of 'text'.
       * @return This builder.
       */
-    public com.mycompany.commons.avro.NewsEvent.Builder setText(java.lang.CharSequence value) {
+    public com.mycompany.commonsnews.avro.NewsEvent.Builder setText(java.lang.CharSequence value) {
       validate(fields()[2], value);
       this.text = value;
       fieldSetFlags()[2] = true;
@@ -396,7 +434,7 @@ public class NewsEvent extends org.apache.avro.specific.SpecificRecordBase imple
       * Clears the value of the 'text' field.
       * @return This builder.
       */
-    public com.mycompany.commons.avro.NewsEvent.Builder clearText() {
+    public com.mycompany.commonsnews.avro.NewsEvent.Builder clearText() {
       text = null;
       fieldSetFlags()[2] = false;
       return this;
@@ -410,12 +448,13 @@ public class NewsEvent extends org.apache.avro.specific.SpecificRecordBase imple
       return datetime;
     }
 
+
     /**
       * Sets the value of the 'datetime' field.
       * @param value The value of 'datetime'.
       * @return This builder.
       */
-    public com.mycompany.commons.avro.NewsEvent.Builder setDatetime(java.lang.CharSequence value) {
+    public com.mycompany.commonsnews.avro.NewsEvent.Builder setDatetime(java.lang.CharSequence value) {
       validate(fields()[3], value);
       this.datetime = value;
       fieldSetFlags()[3] = true;
@@ -435,7 +474,7 @@ public class NewsEvent extends org.apache.avro.specific.SpecificRecordBase imple
       * Clears the value of the 'datetime' field.
       * @return This builder.
       */
-    public com.mycompany.commons.avro.NewsEvent.Builder clearDatetime() {
+    public com.mycompany.commonsnews.avro.NewsEvent.Builder clearDatetime() {
       datetime = null;
       fieldSetFlags()[3] = false;
       return this;
@@ -449,12 +488,13 @@ public class NewsEvent extends org.apache.avro.specific.SpecificRecordBase imple
       return category;
     }
 
+
     /**
       * Sets the value of the 'category' field.
       * @param value The value of 'category'.
       * @return This builder.
       */
-    public com.mycompany.commons.avro.NewsEvent.Builder setCategory(java.lang.CharSequence value) {
+    public com.mycompany.commonsnews.avro.NewsEvent.Builder setCategory(java.lang.CharSequence value) {
       validate(fields()[4], value);
       this.category = value;
       fieldSetFlags()[4] = true;
@@ -474,7 +514,7 @@ public class NewsEvent extends org.apache.avro.specific.SpecificRecordBase imple
       * Clears the value of the 'category' field.
       * @return This builder.
       */
-    public com.mycompany.commons.avro.NewsEvent.Builder clearCategory() {
+    public com.mycompany.commonsnews.avro.NewsEvent.Builder clearCategory() {
       category = null;
       fieldSetFlags()[4] = false;
       return this;
@@ -491,6 +531,8 @@ public class NewsEvent extends org.apache.avro.specific.SpecificRecordBase imple
         record.datetime = fieldSetFlags()[3] ? this.datetime : (java.lang.CharSequence) defaultValue(fields()[3]);
         record.category = fieldSetFlags()[4] ? this.category : (java.lang.CharSequence) defaultValue(fields()[4]);
         return record;
+      } catch (org.apache.avro.AvroMissingFieldException e) {
+        throw e;
       } catch (java.lang.Exception e) {
         throw new org.apache.avro.AvroRuntimeException(e);
       }
@@ -515,4 +557,91 @@ public class NewsEvent extends org.apache.avro.specific.SpecificRecordBase imple
     READER$.read(this, SpecificData.getDecoder(in));
   }
 
+  @Override protected boolean hasCustomCoders() { return true; }
+
+  @Override public void customEncode(org.apache.avro.io.Encoder out)
+    throws java.io.IOException
+  {
+    out.writeString(this.id);
+
+    out.writeString(this.title);
+
+    out.writeString(this.text);
+
+    out.writeString(this.datetime);
+
+    if (this.category == null) {
+      out.writeIndex(0);
+      out.writeNull();
+    } else {
+      out.writeIndex(1);
+      out.writeString(this.category);
+    }
+
+  }
+
+  @Override public void customDecode(org.apache.avro.io.ResolvingDecoder in)
+    throws java.io.IOException
+  {
+    org.apache.avro.Schema.Field[] fieldOrder = in.readFieldOrderIfDiff();
+    if (fieldOrder == null) {
+      this.id = in.readString(this.id instanceof Utf8 ? (Utf8)this.id : null);
+
+      this.title = in.readString(this.title instanceof Utf8 ? (Utf8)this.title : null);
+
+      this.text = in.readString(this.text instanceof Utf8 ? (Utf8)this.text : null);
+
+      this.datetime = in.readString(this.datetime instanceof Utf8 ? (Utf8)this.datetime : null);
+
+      if (in.readIndex() != 1) {
+        in.readNull();
+        this.category = null;
+      } else {
+        this.category = in.readString(this.category instanceof Utf8 ? (Utf8)this.category : null);
+      }
+
+    } else {
+      for (int i = 0; i < 5; i++) {
+        switch (fieldOrder[i].pos()) {
+        case 0:
+          this.id = in.readString(this.id instanceof Utf8 ? (Utf8)this.id : null);
+          break;
+
+        case 1:
+          this.title = in.readString(this.title instanceof Utf8 ? (Utf8)this.title : null);
+          break;
+
+        case 2:
+          this.text = in.readString(this.text instanceof Utf8 ? (Utf8)this.text : null);
+          break;
+
+        case 3:
+          this.datetime = in.readString(this.datetime instanceof Utf8 ? (Utf8)this.datetime : null);
+          break;
+
+        case 4:
+          if (in.readIndex() != 1) {
+            in.readNull();
+            this.category = null;
+          } else {
+            this.category = in.readString(this.category instanceof Utf8 ? (Utf8)this.category : null);
+          }
+          break;
+
+        default:
+          throw new java.io.IOException("Corrupt ResolvingDecoder.");
+        }
+      }
+    }
+  }
 }
+
+
+
+
+
+
+
+
+
+

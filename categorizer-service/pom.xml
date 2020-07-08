@@ -3,12 +3,6 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>categorizer-service</artifactId>
-    <packaging>jar</packaging>
-
-    <name>categorizer-service</name>
-    <description>Demo project for Spring Boot</description>
-
     <parent>
         <groupId>com.mycompany</groupId>
         <artifactId>spring-cloud-stream-elasticsearch</artifactId>
@@ -16,7 +10,12 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
 
+    <artifactId>categorizer-service</artifactId>
+    <name>categorizer-service</name>
+    <description>Demo project for Spring Boot</description>
+
     <properties>
+        <avro.version>1.9.2</avro.version>
         <mycompany.commons-news.version>1.0.0</mycompany.commons-news.version>
     </properties>
 
@@ -48,6 +47,13 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-schema-registry-client</artifactId>
+        </dependency>
+
+        <!-- Avro -->
+        <dependency>
+            <groupId>org.apache.avro</groupId>
+            <artifactId>avro</artifactId>
+            <version>${avro.version}</version>
         </dependency>
 
         <!-- commons-news -->
