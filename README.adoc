@@ -421,6 +421,4 @@ curl "localhost:9200/news/_search?pretty"
 == TODO
 
 * add alias to the index: wait for this feature be available in Spring Data Elasticsearch (https://jira.spring.io/browse/DATAES-192)
-* `news-client`: bug. everytime sync is clicked, it enables Websocket;
-* `news-client`: if websocket is enabled/disabled, sync button should be disabled/enabled;
 * `news-client`: implement pagination;

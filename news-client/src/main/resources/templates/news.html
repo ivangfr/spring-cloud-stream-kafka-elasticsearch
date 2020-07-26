@@ -3,82 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <title>News-Client</title>
-    <!--Import Google Icon Font-->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <!--Import materialize.css-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <!--Let browser know website is optimized for mobile-->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <style>
-        body { display: flex; min-height: 100vh; flex-direction: column; }
-        main { flex: 1 0 auto; }
-    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
 </head>
 
 <body>
 
-<!-- Header -->
-<div th:insert="fragments/header :: header"></div>
-
 <main>
-    <div class="container">
-        <div class="row">
-            <!-- Search Form-->
-            <div class="col s8">
-                <form th:action="@{/news/search}" th:object="${searchDto}" method="post">
-                    <div class="valign-wrapper">
-                        <div class="input-field col s11">
+    <header>
+        <nav>
+            <div class="ui stackable large menu">
+                <a th:href="@{/}" class="header item">News-Client</a>
+                <div class="item">
+                    <!-- Search Form-->
+                    <form th:action="@{/news/search}" th:object="${searchDto}" method="post">
+                        <div class="ui action input">
                             <input type="text" id="searchInput" th:field="*{text}">
-                            <label for="searchInput">Search</label>
-                        </div>
-                        <div class="col s1">
-                            <button class="btn btn-floating waves-effect waves-light" type="submit">
-                                <i class=" material-icons right">search</i>
+                            <button class="ui teal icon button" type="submit">
+                                <i class="search icon"></i>
                             </button>
                         </div>
+                    </form>
+                </div>
+                <div class="right menu">
+                    <div class="item">
+                        <!-- Manual Sync -->
+                        <a th:href="@{/news}" class="ui teal button"><i class="refresh icon"></i>Manual Sync</a>
                     </div>
-                </form>
-            </div>
-
-            <!-- Manual Sync -->
-            <div class="col s1">
-                <label>Sync</label>
-                <a th:href="@{/news}" class="btn btn-floating waves-effect waves-light">
-                    <i class="material-icons">refresh</i>
-                </a>
-            </div>
-
-            <!-- Websocket Connection -->
-            <div class="col s3">
-                <label>Websocket</label>
-                <div class="switch">
-                    <label>
-                        Off
-                        <input id="websocketSwitch" type="checkbox" checked>
-                        <span class="lever"></span>
-                        On
-                    </label>
+                    <div class="item">
+                        <!-- Websocket Connection -->
+                        <div id="webSocketSwitch" class="ui slider checkbox disabled">
+                            <input type="checkbox" checked="checked">
+                            <label>WebSocket</label>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
+        </nav>
+    </header>
 
-        <div class="row">
-            <div class="col s12">
-
-                <!-- News List -->
-                <div id="newsList">
-                    <div th:each="news : ${newsList.content}">
-                        <div class="card">
-                            <div class="card-content">
-                            <span class="left blue lighten-4"
-                                  th:text="${#strings.toUpperCase(news.category)}">Category</span>
-                                <span class="right grey-text lighten-4"
-                                      th:text="${#dates.format(news.datetime, 'dd-MMM-yyyy HH:mm:ss')}">Datetime</span>
-                                <div class="clearfix"></div>
-                                <h5 th:text="${news.title}">Title</h5>
-                                <div class="divider"></div>
-                                <p th:text="${news.text}">Text</p>
-                            </div>
+    <div class="ui text container">
+        <div class="ui teal segment" style="margin-top:10px">
+            <!-- News List -->
+            <div id="newsList" class="ui unstackable divided items">
+                <div class="item" th:each="news : ${newsList.content}">
+                    <div class="image">
+                        <img th:src="@{${'/img/' + news.category + '.jpg'}}" style="width:150px; height:120px">
+                    </div>
+                    <div class="content">
+                        <div class="meta" style="float:right">
+                            <span th:text="${#dates.format(news.datetime, 'dd-MMM-yyyy HH:mm:ss')}">Datetime</span>
+                        </div>
+                        <div class="ui medium blue header" th:text="${#strings.toUpperCase(news.category)}">Category</div>
+                        <div class="ui divider"></div>
+                        <div class="ui large header" th:text="${news.title}">Title</div>
+                        <div class="description">
+                            <p th:text="${news.text}">Text</p>
                         </div>
                     </div>
                 </div>
@@ -87,15 +66,12 @@
     </div>
 </main>
 
-<!-- Footer -->
-<div th:insert="fragments/footer :: footer"></div>
-
 <!--JavaScript at end of body for optimized loading-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.4.0/sockjs.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.26.0/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
 <script src="/app.js"></script>
 
 </body>
