@@ -1,4 +1,4 @@
-= spring-cloud-stream-elasticsearch
+= spring-cloud-stream-kafka-elasticsearch
 
 The goal of this project is to implement a "News" processing pipeline composed of five https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/[`Spring Boot`] applications: `producer-api`, `categorizer-service`, `collector-service`, `publisher-api` and `news-client`.
 
@@ -52,7 +52,7 @@ image::images/websocket-operation.gif[]
 
 == Generate NewsEvent
 
-* In a terminal, make sure you are in `spring-cloud-stream-elasticsearch` root folder
+* In a terminal, make sure you are in `spring-cloud-stream-kafka-elasticsearch` root folder
 
 * Run the following command to generate `NewsEvent`
 +
@@ -65,7 +65,7 @@ It will install `commons-news-1.0.0.jar` in you local `Maven` repository, so tha
 
 == Start Environment
 
-* Open a terminal and inside `spring-cloud-stream-elasticsearch` root folder run
+* Open a terminal and inside `spring-cloud-stream-kafka-elasticsearch` root folder run
 +
 [source]
 ----
@@ -81,7 +81,7 @@ docker-compose ps
 
 == Running Applications with Maven
 
-Inside `spring-cloud-stream-elasticsearch` root folder, run the following `Maven` commands in different terminals
+Inside `spring-cloud-stream-kafka-elasticsearch` root folder, run the following `Maven` commands in different terminals
 
 * *eureka-server*
 +
@@ -129,7 +129,7 @@ Inside `spring-cloud-stream-elasticsearch` root folder, run the following `Maven
 
 === Build Application's Docker Image
 
-* In a terminal, make sure you are in `spring-cloud-stream-elasticsearch` root folder
+* In a terminal, make sure you are in `spring-cloud-stream-kafka-elasticsearch` root folder
 
 * In order to build the application's docker images, run the following script
 +
@@ -303,7 +303,7 @@ Inside `spring-cloud-stream-elasticsearch` root folder, run the following `Maven
 
 === Start Application's Docker Container
 
-* In a terminal, make sure you are inside `spring-cloud-stream-elasticsearch` root folder
+* In a terminal, make sure you are inside `spring-cloud-stream-kafka-elasticsearch` root folder
 
 * Run following script
 +
@@ -332,7 +332,7 @@ Inside `spring-cloud-stream-elasticsearch` root folder, run the following `Maven
 
 * Stop applications
 ** If they were started with `Maven`, go to the terminals where they are running and press `Ctrl+C`
-** If they were started as a Docker container, make sure you are in `spring-cloud-stream-elasticsearch` and run the script below
+** If they were started as a Docker container, make sure you are in `spring-cloud-stream-kafka-elasticsearch` and run the script below
 +
 [source]
 ----

@@ -5,7 +5,7 @@
 
     <parent>
         <groupId>com.mycompany</groupId>
-        <artifactId>spring-cloud-stream-elasticsearch</artifactId>
+        <artifactId>spring-cloud-stream-kafka-elasticsearch</artifactId>
         <version>1.0.0</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
