@@ -117,7 +117,7 @@ services:
       start_period: 1m
 
   zipkin:
-    image: openzipkin/zipkin:2.20.2
+    image: openzipkin/zipkin:2.21.5
     container_name: zipkin
     restart: unless-stopped
     ports:
@@ -127,7 +127,7 @@ services:
       start_period: 1m
 
   kafka-manager:
-    image: hlebalbau/kafka-manager:3.0.0.4
+    image: hlebalbau/kafka-manager:3.0.0.5
     container_name: kafka-manager
     restart: unless-stopped
     depends_on:

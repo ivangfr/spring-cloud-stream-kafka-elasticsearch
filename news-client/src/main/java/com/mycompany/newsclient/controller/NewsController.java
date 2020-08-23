@@ -20,7 +20,7 @@ public class NewsController {
 
     private final PublisherApiClient publisherApiClient;
 
-    @GetMapping(value = {"/news", "/"})
+    @GetMapping(value = {"/"})
     public String getNews(@RequestParam(required = false) Integer page,
                           @RequestParam(required = false) Integer size,
                           @RequestParam(required = false, defaultValue = "datetime,desc") String sort,
@@ -30,7 +30,7 @@ public class NewsController {
         return "news";
     }
 
-    @PostMapping("/news/search")
+    @PostMapping("/search")
     public String searchNews(@RequestParam(required = false) Integer page,
                              @RequestParam(required = false) Integer size,
                              @RequestParam(required = false, defaultValue = "datetime,desc") String sort,

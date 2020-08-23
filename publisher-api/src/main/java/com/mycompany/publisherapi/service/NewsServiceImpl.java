@@ -15,9 +15,8 @@ public class NewsServiceImpl implements NewsService {
     private final NewsRepository newsRepository;
 
     @Override
-    public News validateAndGetNewsById(String id) throws NewsNotFoundException {
-        return newsRepository.findById(id)
-                .orElseThrow(() -> new NewsNotFoundException(String.format("News with id '%s' doesn't exist", id)));
+    public News validateAndGetNewsById(String id) {
+        return newsRepository.findById(id).orElseThrow(() -> new NewsNotFoundException(id));
     }
 
     @Override

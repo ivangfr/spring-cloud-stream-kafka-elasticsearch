@@ -18,7 +18,7 @@
         <avro.version>1.9.2</avro.version>
         <mycompany.commons-news.version>1.0.0</mycompany.commons-news.version>
         <mapstruct.version>1.3.1.Final</mapstruct.version>
-        <springdoc.openapi-ui.version>1.4.3</springdoc.openapi-ui.version>
+        <springdoc.openapi.version>1.4.4</springdoc.openapi.version>
     </properties>
 
     <dependencies>
@@ -73,7 +73,7 @@
         <dependency>
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-ui</artifactId>
-            <version>${springdoc.openapi-ui.version}</version>
+            <version>${springdoc.openapi.version}</version>
         </dependency>
 
         <!-- MapStruct -->

@@ -1,6 +1,5 @@
 package com.mycompany.publisherapi.rest;
 
-import com.mycompany.publisherapi.exception.NewsNotFoundException;
 import com.mycompany.publisherapi.model.News;
 import com.mycompany.publisherapi.rest.dto.SearchDto;
 import com.mycompany.publisherapi.service.NewsService;
@@ -33,7 +32,7 @@ public class NewsController {
 
     @Operation(summary = "Get News by Id")
     @GetMapping("/{id}")
-    public News getNewsById(@PathVariable String id) throws NewsNotFoundException {
+    public News getNewsById(@PathVariable String id) {
         return newsService.validateAndGetNewsById(id);
     }
 

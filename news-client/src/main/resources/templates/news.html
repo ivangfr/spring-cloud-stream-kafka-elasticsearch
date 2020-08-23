@@ -15,7 +15,7 @@
                 <a th:href="@{/}" class="header item">News-Client</a>
                 <div class="item">
                     <!-- Search Form-->
-                    <form th:action="@{/news/search}" th:object="${searchDto}" method="post">
+                    <form th:action="@{/search}" th:object="${searchDto}" method="post">
                         <div class="ui action input">
                             <input type="text" id="searchInput" th:field="*{text}">
                             <button class="ui teal icon button" type="submit">
@@ -27,7 +27,7 @@
                 <div class="right menu">
                     <div class="item">
                         <!-- Manual Sync -->
-                        <a th:href="@{/news}" class="ui teal button"><i class="refresh icon"></i>Manual Sync</a>
+                        <a th:href="@{/}" class="ui teal button"><i class="refresh icon"></i>Manual Sync</a>
                     </div>
                     <div class="item">
                         <!-- Websocket Connection -->
