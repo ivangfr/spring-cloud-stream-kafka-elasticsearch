@@ -117,7 +117,7 @@ services:
       start_period: 1m
 
   zipkin:
-    image: openzipkin/zipkin:2.21.5
+    image: openzipkin/zipkin:2.23.0
     container_name: zipkin
     restart: unless-stopped
     ports:
