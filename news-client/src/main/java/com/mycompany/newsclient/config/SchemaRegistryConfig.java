@@ -18,6 +18,8 @@ public class SchemaRegistryConfig {
         return client;
     }
 
+    // If 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client' dependency is commented out
+    // in pom.xml, this explicitly CacheManager bean definition is not needed.
     @Bean
     CacheManager cacheManager() {
         return new ConcurrentMapCacheManager();
