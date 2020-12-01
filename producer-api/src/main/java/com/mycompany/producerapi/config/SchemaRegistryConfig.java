@@ -1,6 +1,8 @@
 package com.mycompany.producerapi.config;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cache.CacheManager;
+import org.springframework.cache.concurrent.ConcurrentMapCacheManager;
 import org.springframework.cloud.schema.registry.client.ConfluentSchemaRegistryClient;
 import org.springframework.cloud.schema.registry.client.SchemaRegistryClient;
 import org.springframework.context.annotation.Bean;
@@ -14,6 +16,11 @@ public class SchemaRegistryConfig {
         ConfluentSchemaRegistryClient client = new ConfluentSchemaRegistryClient();
         client.setEndpoint(endpoint);
         return client;
+    }
+
+    @Bean
+    CacheManager cacheManager() {
+        return new ConcurrentMapCacheManager();
     }
 
 }
