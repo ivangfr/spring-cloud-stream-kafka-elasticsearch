@@ -5,34 +5,39 @@ import com.mycompany.newsclient.client.dto.News;
 import com.mycompany.newsclient.util.DateTimeUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.cloud.stream.annotation.EnableBinding;
-import org.springframework.cloud.stream.annotation.StreamListener;
-import org.springframework.cloud.stream.messaging.Sink;
+import org.springframework.context.annotation.Bean;
 import org.springframework.integration.IntegrationMessageHeaderAccessor;
 import org.springframework.kafka.support.KafkaHeaders;
-import org.springframework.messaging.handler.annotation.Header;
-import org.springframework.messaging.handler.annotation.Payload;
+import org.springframework.messaging.Message;
+import org.springframework.messaging.MessageHeaders;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Component;
+
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.function.Consumer;
 
 @Slf4j
 @RequiredArgsConstructor
 @Component
-@EnableBinding(Sink.class)
 public class NewsStream {
 
     private final SimpMessagingTemplate simpMessagingTemplate;
 
-    @StreamListener(Sink.INPUT)
-    public void handleNewsEvent(@Payload NewsEvent newsEvent,
-                                @Header(KafkaHeaders.RECEIVED_TOPIC) String topic,
-                                @Header(KafkaHeaders.RECEIVED_PARTITION_ID) Integer partition,
-                                @Header(KafkaHeaders.OFFSET) Long offset,
-                                @Header(IntegrationMessageHeaderAccessor.DELIVERY_ATTEMPT) Integer deliveryAttempt) {
-        log.info("NewsEvent with id '{}' and title '{}' received from bus. topic: {}, partition: {}, offset: {}, deliveryAttempt: {}",
-                newsEvent.getId(), newsEvent.getTitle(), topic, partition, offset, deliveryAttempt);
+    @Bean
+    public Consumer<Message<NewsEvent>> listen() {
+        return message -> {
+            NewsEvent newsEvent = message.getPayload();
+            MessageHeaders messageHeaders = message.getHeaders();
+            log.info("NewsEvent with id '{}' and title '{}' received from bus. topic: {}, partition: {}, offset: {}, deliveryAttempt: {}",
+                    newsEvent.getId(),
+                    newsEvent.getTitle(),
+                    messageHeaders.get(KafkaHeaders.RECEIVED_TOPIC, String.class),
+                    messageHeaders.get(KafkaHeaders.RECEIVED_PARTITION_ID, Integer.class),
+                    messageHeaders.get(KafkaHeaders.OFFSET, Long.class),
+                    messageHeaders.get(IntegrationMessageHeaderAccessor.DELIVERY_ATTEMPT, AtomicInteger.class));
 
-        simpMessagingTemplate.convertAndSend("/topic/news", createNews(newsEvent));
+            simpMessagingTemplate.convertAndSend("/topic/news", createNews(newsEvent));
+        };
     }
 
     private News createNews(NewsEvent newsEvent) {

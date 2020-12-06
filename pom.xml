@@ -19,7 +19,7 @@
 
     <properties>
         <java.version>11</java.version>
-        <spring-cloud.version>2020.0.0-M5</spring-cloud.version>
+        <spring-cloud.version>2020.0.0-M6</spring-cloud.version>
         <jib.maven-plugin.version>2.6.0</jib.maven-plugin.version>
         <docker.image.prefix>docker.mycompany.com</docker.image.prefix>
     </properties>

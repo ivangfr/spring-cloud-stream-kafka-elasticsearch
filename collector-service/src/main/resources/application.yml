@@ -10,14 +10,14 @@ spring:
           auto-add-partitions: true
           min-partition-count: 2
       bindings:
-        input:
+        collect-in-0:
           destination: com.mycompany.newspipeline.categorizer.news
           content-type: application/*+avro
           group: collectorGroup
           consumer:
             max-attempts: 4
             back-off-initial-interval: 10000
-        output:
+        collect-out-0:
           destination: com.mycompany.newspipeline.collector.news
           content-type: application/*+avro
           producer:

@@ -10,7 +10,7 @@ spring:
           auto-add-partitions: true
           min-partition-count: 2
       bindings:
-        input:
+        listen-in-0:
           destination: com.mycompany.newspipeline.collector.news
           content-type: application/*+avro
           group: newsClientGroup
