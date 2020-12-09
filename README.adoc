@@ -40,7 +40,7 @@ image::images/project-diagram.png[]
 +
 `Spring Boot` Web java application that provides a User Interface to see the news. It implements a `Websocket` that consumes news events from the topic `collector.news`. So, news are updated on the fly on the main page. Besides, `news-client` communicates directly with `publisher-api` whenever search for a specific news or news update are needed.
 +
-The `Websocket` operation is shown in the short gif below. A news is created in `producer-api` and, immediately, it is shown in `news-client`.
+The `Websocket` operation is shown in the short gif below. News is created in `producer-api` and, immediately, it is shown in `news-client`.
 +
 image::images/websocket-operation.gif[]
 

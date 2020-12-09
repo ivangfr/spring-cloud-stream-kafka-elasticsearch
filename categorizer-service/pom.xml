@@ -15,7 +15,7 @@
     <description>Demo project for Spring Boot</description>
 
     <properties>
-        <avro.version>1.9.2</avro.version>
+        <avro.version>1.10.1</avro.version>
         <mycompany.commons-news.version>1.0.0</mycompany.commons-news.version>
     </properties>
 
