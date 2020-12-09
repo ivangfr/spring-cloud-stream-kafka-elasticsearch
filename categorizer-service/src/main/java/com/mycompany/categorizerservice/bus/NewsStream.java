@@ -23,7 +23,7 @@ public class NewsStream {
     private final CategoryService categoryService;
 
     @Bean
-    public Function<Message<NewsEvent>, Message<NewsEvent>> categorize() {
+    public Function<Message<NewsEvent>, Message<NewsEvent>> news() {
         return message -> {
             NewsEvent newsEvent = message.getPayload();
             MessageHeaders messageHeaders = message.getHeaders();

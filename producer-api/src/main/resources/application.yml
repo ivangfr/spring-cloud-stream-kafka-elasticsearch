@@ -7,12 +7,13 @@ spring:
         schema-locations:
           - classpath:avro/news-event.avsc
     stream:
+      source: news
       kafka:
         binder:
           brokers: ${KAFKA_HOST:localhost}:${KAFKA_PORT:29092}
           auto-add-partitions: true
       bindings:
-        produce-out-0:
+        news-out-0:
           destination: com.mycompany.newspipeline.producer.news
           content-type: application/*+avro
           producer:
