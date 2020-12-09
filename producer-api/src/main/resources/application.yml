@@ -1,7 +1,6 @@
 spring:
   cloud:
     schema-registry-client:
-      enabled: true
       endpoint: http://${SCHEMA_REGISTRY_HOST:localhost}:${SCHEMA_REGISTRY_PORT:8081}
     schema:
       avro:
@@ -13,7 +12,7 @@ spring:
           brokers: ${KAFKA_HOST:localhost}:${KAFKA_PORT:29092}
           auto-add-partitions: true
       bindings:
-        output:
+        produce-out-0:
           destination: com.mycompany.newspipeline.producer.news
           content-type: application/*+avro
           producer:

@@ -4,19 +4,18 @@ import com.mycompany.commonsnews.avro.NewsEvent;
 import com.mycompany.producerapi.model.News;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.cloud.stream.annotation.EnableBinding;
-import org.springframework.cloud.stream.messaging.Source;
+import org.springframework.cloud.stream.function.StreamBridge;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Component;
+import org.springframework.util.MimeType;
 
 @Slf4j
 @RequiredArgsConstructor
 @Component
-@EnableBinding(Source.class)
 public class NewsStream {
 
-    private final Source source;
+    private final StreamBridge streamBridge;
 
     public void newsCreated(News news) {
         NewsEvent newsEvent = NewsEvent.newBuilder()
@@ -29,10 +28,9 @@ public class NewsStream {
         Message<NewsEvent> message = MessageBuilder.withPayload(newsEvent)
                 .setHeader("partitionKey", newsEvent.getId().toString())
                 .build();
-        source.output().send(message);
+        streamBridge.send("produce-out-0", message, MimeType.valueOf("application/*+avro"));
 
-        log.info("NewsEvent with id '{}' and title '{}' sent to bus.",
-                message.getPayload().getId(), message.getPayload().getTitle());
+        log.info("NewsEvent with id '{}' and title '{}' sent to bus.", message.getPayload().getId(), message.getPayload().getTitle());
     }
 
 }
