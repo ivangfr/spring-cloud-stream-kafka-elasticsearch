@@ -417,8 +417,3 @@ Simple search
 ----
 curl "localhost:9200/news/_search?pretty"
 ----
-
-== TODO
-
-* add alias to the index: wait for this feature be available in Spring Data Elasticsearch (https://jira.spring.io/browse/DATAES-192)
-* `news-client`: implement pagination;
