@@ -71,11 +71,11 @@ public class NewsEvent extends org.apache.avro.specific.SpecificRecordBase imple
     return DECODER.decode(b);
   }
 
-  @Deprecated public java.lang.CharSequence id;
-  @Deprecated public java.lang.CharSequence title;
-  @Deprecated public java.lang.CharSequence text;
-  @Deprecated public java.lang.CharSequence datetime;
-  @Deprecated public java.lang.CharSequence category;
+   private java.lang.CharSequence id;
+   private java.lang.CharSequence title;
+   private java.lang.CharSequence text;
+   private java.lang.CharSequence datetime;
+   private java.lang.CharSequence category;
 
   /**
    * Default constructor.  Note that this does not initialize fields
@@ -110,7 +110,7 @@ public class NewsEvent extends org.apache.avro.specific.SpecificRecordBase imple
     case 2: return text;
     case 3: return datetime;
     case 4: return category;
-    default: throw new org.apache.avro.AvroRuntimeException("Bad index");
+    default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
   }
 
@@ -123,7 +123,7 @@ public class NewsEvent extends org.apache.avro.specific.SpecificRecordBase imple
     case 2: text = (java.lang.CharSequence)value$; break;
     case 3: datetime = (java.lang.CharSequence)value$; break;
     case 4: category = (java.lang.CharSequence)value$; break;
-    default: throw new org.apache.avro.AvroRuntimeException("Bad index");
+    default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
   }
 
