@@ -23,7 +23,7 @@ services:
       start_period: 1m
 
   zookeeper:
-    image: confluentinc/cp-zookeeper:5.5.1
+    image: confluentinc/cp-zookeeper:6.1.0
     container_name: zookeeper
     restart: unless-stopped
     ports:
@@ -35,7 +35,7 @@ services:
       start_period: 1m
 
   kafka:
-    image: confluentinc/cp-kafka:5.5.1
+    image: confluentinc/cp-kafka:6.1.0
     container_name: kafka
     restart: unless-stopped
     depends_on:
@@ -53,7 +53,7 @@ services:
       start_period: 1m
 
   schema-registry:
-    image: confluentinc/cp-schema-registry:5.5.1
+    image: confluentinc/cp-schema-registry:6.1.0
     container_name: schema-registry
     restart: unless-stopped
     depends_on:
@@ -83,7 +83,7 @@ services:
       start_period: 30s
 
   kafka-rest-proxy:
-    image: confluentinc/cp-kafka-rest:5.5.1
+    image: confluentinc/cp-kafka-rest:6.1.0
     container_name: kafka-rest-proxy
     restart: unless-stopped
     depends_on:
@@ -117,7 +117,7 @@ services:
       start_period: 1m
 
   zipkin:
-    image: openzipkin/zipkin:2.23.0
+    image: openzipkin/zipkin:2.23.2
     container_name: zipkin
     restart: unless-stopped
     ports:

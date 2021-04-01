@@ -2,23 +2,21 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
     <parent>
         <groupId>com.mycompany</groupId>
         <artifactId>spring-cloud-stream-kafka-elasticsearch</artifactId>
         <version>1.0.0</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
-
     <artifactId>producer-api</artifactId>
     <name>producer-api</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>
-        <avro.version>1.10.1</avro.version>
+        <avro.version>1.10.2</avro.version>
         <mycompany.commons-news.version>1.0.0</mycompany.commons-news.version>
-        <org.mapstruct.version>1.4.1.Final</org.mapstruct.version>
-        <springdoc.openapi.version>1.5.2</springdoc.openapi.version>
+        <org.mapstruct.version>1.4.2.Final</org.mapstruct.version>
+        <springdoc.openapi.version>1.5.6</springdoc.openapi.version>
     </properties>
 
     <dependencies>
@@ -122,17 +120,27 @@
     <build>
         <plugins>
             <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <excludes>
+                        <exclude>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                        </exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
                     <annotationProcessorPaths>
-                        <!-- Lombok -->
                         <path>
                             <groupId>org.projectlombok</groupId>
                             <artifactId>lombok</artifactId>
                             <version>${lombok.version}</version>
                         </path>
-                        <!-- MapStruct -->
                         <path>
                             <groupId>org.mapstruct</groupId>
                             <artifactId>mapstruct-processor</artifactId>

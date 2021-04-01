@@ -135,7 +135,7 @@ Inside `spring-cloud-stream-kafka-elasticsearch` root folder, run the following 
 +
 [source]
 ----
-./build-apps.sh
+./docker-build.sh
 ----
 
 === Application's Environment Variables
@@ -332,14 +332,14 @@ Inside `spring-cloud-stream-kafka-elasticsearch` root folder, run the following 
 
 * Stop applications
 ** If they were started with `Maven`, go to the terminals where they are running and press `Ctrl+C`
-** If they were started as a Docker container, make sure you are in `spring-cloud-stream-kafka-elasticsearch` and run the script below
+** If they were started as a Docker container, make sure you are in `spring-cloud-stream-kafka-elasticsearch` root folder and run the script below
 +
 [source]
 ----
 ./stop-apps.sh
 ----
 
-* Stop and remove docker-compose containers, networks and volumes
+* Stop and remove docker-compose containers, network and volumes by running the following command in `spring-cloud-stream-kafka-elasticsearch` root folder
 +
 [source]
 ----
