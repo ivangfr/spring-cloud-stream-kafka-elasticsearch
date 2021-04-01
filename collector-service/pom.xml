@@ -14,7 +14,7 @@
 
     <properties>
         <avro.version>1.10.2</avro.version>
-        <mycompany.commons-news.version>1.0.0</mycompany.commons-news.version>
+        <mycompany-commons-news.version>1.0.0</mycompany-commons-news.version>
         <org.mapstruct.version>1.4.2.Final</org.mapstruct.version>
     </properties>
 
@@ -75,7 +75,7 @@
         <dependency>
             <groupId>com.mycompany</groupId>
             <artifactId>commons-news</artifactId>
-            <version>${mycompany.commons-news.version}</version>
+            <version>${mycompany-commons-news.version}</version>
         </dependency>
 
         <!-- MapStruct -->

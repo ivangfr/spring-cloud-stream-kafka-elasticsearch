@@ -18,8 +18,9 @@
     <properties>
         <java.version>11</java.version>
         <spring-cloud.version>2020.0.2</spring-cloud.version>
-        <jib.maven-plugin.version>2.8.0</jib.maven-plugin.version>
-        <docker.image.prefix>docker.mycompany.com</docker.image.prefix>
+        <jib-maven-plugin.version>2.8.0</jib-maven-plugin.version>
+        <openjdk-image.version>11.0.10</openjdk-image.version>
+        <docker-image.prefix>docker.mycompany.com</docker-image.prefix>
     </properties>
 
     <modules>
@@ -61,13 +62,13 @@
             <plugin>
                 <groupId>com.google.cloud.tools</groupId>
                 <artifactId>jib-maven-plugin</artifactId>
-                <version>${jib.maven-plugin.version}</version>
+                <version>${jib-maven-plugin.version}</version>
                 <configuration>
                     <from>
-                        <image>openjdk:11.0.10</image>
+                        <image>openjdk:${openjdk-image.version}</image>
                     </from>
                     <to>
-                        <image>${docker.image.prefix}/${project.artifactId}:${project.version}</image>
+                        <image>${docker-image.prefix}/${project.artifactId}:${project.version}</image>
                     </to>
                 </configuration>
             </plugin>

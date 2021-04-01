@@ -14,9 +14,9 @@
 
     <properties>
         <avro.version>1.10.2</avro.version>
-        <mycompany.commons-news.version>1.0.0</mycompany.commons-news.version>
+        <mycompany-commons-news.version>1.0.0</mycompany-commons-news.version>
         <org.mapstruct.version>1.4.2.Final</org.mapstruct.version>
-        <springdoc.openapi.version>1.5.6</springdoc.openapi.version>
+        <springdoc-openapi.version>1.5.6</springdoc-openapi.version>
     </properties>
 
     <dependencies>
@@ -76,14 +76,14 @@
         <dependency>
             <groupId>com.mycompany</groupId>
             <artifactId>commons-news</artifactId>
-            <version>${mycompany.commons-news.version}</version>
+            <version>${mycompany-commons-news.version}</version>
         </dependency>
 
         <!-- SpringDoc OpenApi -->
         <dependency>
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-ui</artifactId>
-            <version>${springdoc.openapi.version}</version>
+            <version>${springdoc-openapi.version}</version>
         </dependency>
 
         <!-- MapStruct -->
