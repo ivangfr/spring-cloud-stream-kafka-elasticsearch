@@ -301,7 +301,7 @@ Inside `spring-cloud-stream-kafka-elasticsearch` root folder, run the following 
 
 |===
 
-=== Start Application's Docker Container
+=== Run Application's Docker Container
 
 * In a terminal, make sure you are inside `spring-cloud-stream-kafka-elasticsearch` root folder
 

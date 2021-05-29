@@ -14,6 +14,7 @@ spring:
           content-type: application/*+avro
           group: categorigerGroup
           consumer:
+            ack-mode: RECORD # setting it explicitly as suggest in https://githubmemory.com/repo/spring-cloud/spring-cloud-stream-binder-kafka/issues/1079
             max-attempts: 4
             back-off-initial-interval: 10000
         news-out-0:

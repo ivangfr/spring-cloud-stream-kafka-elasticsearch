@@ -30,7 +30,7 @@ public class SwaggerConfig {
         return GroupedOpenApi.builder().group("actuator").pathsToMatch("/actuator/**").build();
     }
 
-    // It's important to set it in order to handle Pageable
+    // It is needed to handle Pageable;
     static {
         SpringDocUtils.getConfig()
                 .replaceWithClass(org.springframework.data.domain.Pageable.class, org.springdoc.core.converters.models.Pageable.class);
