@@ -14,13 +14,9 @@ spring:
           content-type: application/*+avro
           group: newsClientGroup
           consumer:
-            ack-mode: RECORD # setting it explicitly as suggest in https://githubmemory.com/repo/spring-cloud/spring-cloud-stream-binder-kafka/issues/1079
             max-attempts: 4
             back-off-initial-interval: 10000
   sleuth:
-    integration:
-      websockets:
-        enabled: false # Workaround due to this issue -> https://github.com/spring-cloud/spring-cloud-sleuth/issues/1184
     sampler:
       probability: 1.0
 

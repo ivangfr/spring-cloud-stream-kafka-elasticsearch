@@ -17,7 +17,7 @@
 
     <properties>
         <java.version>11</java.version>
-        <spring-cloud.version>2020.0.3-SNAPSHOT</spring-cloud.version>
+        <spring-cloud.version>2020.0.3</spring-cloud.version>
         <jib-maven-plugin.version>3.0.0</jib-maven-plugin.version>
         <openjdk-image.version>11.0.11</openjdk-image.version>
         <docker-image.prefix>ivanfranchin</docker-image.prefix>
@@ -74,24 +74,5 @@
             </plugin>
         </plugins>
     </build>
-
-    <repositories>
-        <repository>
-            <id>spring-snapshots</id>
-            <name>Spring Snapshots</name>
-            <url>https://repo.spring.io/snapshot</url>
-            <releases>
-                <enabled>false</enabled>
-            </releases>
-        </repository>
-        <repository>
-            <id>spring-milestones</id>
-            <name>Spring Milestones</name>
-            <url>https://repo.spring.io/milestone</url>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-    </repositories>
 
 </project>
