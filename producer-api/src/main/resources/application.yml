@@ -11,7 +11,6 @@ spring:
         binder:
           brokers: ${KAFKA_HOST:localhost}:${KAFKA_PORT:29092}
           auto-add-partitions: true
-      source: news
       bindings:
         news-out-0:
           destination: com.mycompany.newspipeline.producer.news
@@ -42,3 +41,4 @@ springdoc:
   show-actuator: true
   swagger-ui:
     groups-order: DESC
+    disable-swagger-default-url: true

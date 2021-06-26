@@ -339,11 +339,18 @@ Inside `spring-cloud-stream-kafka-elasticsearch` root folder, run the following 
 ./stop-apps.sh
 ----
 
-* Stop and remove docker-compose containers, network and volumes by running the following command in `spring-cloud-stream-kafka-elasticsearch` root folder
+* Stop and remove docker-compose containers, network and volumes by running the following command inside `spring-cloud-stream-kafka-elasticsearch` root folder
 +
 [source]
 ----
 docker-compose down -v
+----
+
+* To remove the Docker images created by this project, make sure you are in `spring-cloud-stream-kafka-elasticsearch` root folder and run
++
+[source]
+----
+./remove-docker-images.sh
 ----
 
 == Useful links
