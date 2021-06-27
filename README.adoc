@@ -328,31 +328,6 @@ Inside `spring-cloud-stream-kafka-elasticsearch` root folder, run the following 
 
 |===
 
-== Shutdown
-
-* Stop applications
-** If they were started with `Maven`, go to the terminals where they are running and press `Ctrl+C`
-** If they were started as Docker containers, make sure you are in `spring-cloud-stream-kafka-elasticsearch` root folder and run the script below
-+
-[source]
-----
-./stop-apps.sh
-----
-
-* Stop and remove docker-compose containers, network and volumes by running the following command inside `spring-cloud-stream-kafka-elasticsearch` root folder
-+
-[source]
-----
-docker-compose down -v
-----
-
-* To remove the Docker images created by this project, make sure you are in `spring-cloud-stream-kafka-elasticsearch` root folder and run the following script
-+
-[source]
-----
-./remove-docker-images.sh
-----
-
 == Useful links
 
 * *Eureka*
@@ -423,4 +398,30 @@ Simple search
 [source]
 ----
 curl "localhost:9200/news/_search?pretty"
+----
+
+== Shutdown
+
+* To stop applications
+** If they were started with `Maven`, go to the terminals where they are running and press `Ctrl+C`
+** If they were started as Docker containers, go to a terminal and, inside `spring-cloud-stream-kafka-elasticsearch` root folder, run the script below
++
+[source]
+----
+./stop-apps.sh
+----
+
+* To stop and remove docker-compose containers, network and volumes, go to a terminal and, inside `spring-cloud-stream-kafka-elasticsearch` root folder, run the following command
++
+[source]
+----
+docker-compose down -v
+----
+
+== Cleanup
+
+To remove the Docker images created by this project, go to a terminal and, inside `spring-cloud-stream-kafka-elasticsearch` root folder, run the script below
+[source]
+----
+./remove-docker-images.sh
 ----
