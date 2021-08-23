@@ -336,10 +336,6 @@ Inside `spring-cloud-stream-kafka-elasticsearch` root folder, run the following 
 +
 image::images/eureka-with-apps.png[]
 
-* *Kafka Topics UI*
-+
-`Kafka Topics UI` can be accessed at http://localhost:8085
-
 * *Zipkin*
 +
 `Zipkin` can be accessed at http://localhost:9411
@@ -347,6 +343,10 @@ image::images/eureka-with-apps.png[]
 The figure below shows an example of the complete flow a news passes through. It goes since `producer-api`, where the news is created, until `news-client`.
 +
 image::images/zipkin-sample.png[]
+
+* *Kafka Topics UI*
++
+`Kafka Topics UI` can be accessed at http://localhost:8085
 
 * *Kafka Manager*
 +
@@ -390,7 +390,7 @@ Check _news_ index mapping
 +
 [source]
 ----
-curl localhost:9200/news/_mapping
+curl "localhost:9200/news/_mapping?pretty"
 ----
 +
 Simple search
