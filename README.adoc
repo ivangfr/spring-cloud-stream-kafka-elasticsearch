@@ -72,7 +72,7 @@ It will install `commons-news-1.0.0.jar` in you local `Maven` repository, so tha
 docker-compose up -d
 ----
 
-* Wait until all containers are Up (healthy). You can check their status by running
+* Wait for containers to be with status `running (healthy)`. To check it, run
 +
 [source]
 ----

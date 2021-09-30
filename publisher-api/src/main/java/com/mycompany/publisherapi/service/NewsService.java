@@ -11,5 +11,4 @@ public interface NewsService {
     Page<News> listAllNewsByPage(Pageable pageable);
 
     Page<News> search(String text, Pageable pageable);
-
 }

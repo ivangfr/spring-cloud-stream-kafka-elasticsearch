@@ -3,7 +3,7 @@ package com.mycompany.producerapi.rest;
 import com.mycompany.producerapi.bus.NewsStream;
 import com.mycompany.producerapi.mapper.NewsMapper;
 import com.mycompany.producerapi.model.News;
-import com.mycompany.producerapi.rest.dto.CreateNewsDto;
+import com.mycompany.producerapi.rest.dto.CreateNewsRequest;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -26,10 +26,9 @@ public class NewsController {
     @Operation(summary = "Create News")
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public News createNew(@Valid @RequestBody CreateNewsDto createNewsDto) {
-        News news = newsMapper.toNews(createNewsDto);
+    public News createNew(@Valid @RequestBody CreateNewsRequest createNewsRequest) {
+        News news = newsMapper.toNews(createNewsRequest);
         newsStream.newsCreated(news);
         return news;
     }
-
 }

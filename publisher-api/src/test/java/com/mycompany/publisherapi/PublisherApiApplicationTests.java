@@ -11,5 +11,4 @@ class PublisherApiApplicationTests {
     @Test
     void contextLoads() {
     }
-
 }

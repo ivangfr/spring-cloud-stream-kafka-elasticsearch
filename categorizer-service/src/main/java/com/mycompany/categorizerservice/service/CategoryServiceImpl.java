@@ -15,5 +15,4 @@ public class CategoryServiceImpl implements CategoryService {
     public String categorize(String title, String text) {
         return categories[random.nextInt(categories.length)];
     }
-
 }

@@ -14,5 +14,4 @@ public class MyPage<T> {
     private Integer numberOfElements;
     private Boolean first;
     private Boolean last;
-
 }

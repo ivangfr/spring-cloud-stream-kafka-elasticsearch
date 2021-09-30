@@ -11,5 +11,4 @@ class CollectorServiceApplicationTests {
     @Test
     void contextLoads() {
     }
-
 }

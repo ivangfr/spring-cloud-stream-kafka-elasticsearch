@@ -6,7 +6,7 @@ import lombok.Data;
 import javax.validation.constraints.NotBlank;
 
 @Data
-public class CreateNewsDto {
+public class CreateNewsRequest {
 
     @Schema(title = "the title of the news", example = "Brazil")
     @NotBlank
@@ -15,5 +15,4 @@ public class CreateNewsDto {
     @Schema(title = "the text of the news", example = "This news is about Brasilia")
     @NotBlank
     private String text;
-
 }

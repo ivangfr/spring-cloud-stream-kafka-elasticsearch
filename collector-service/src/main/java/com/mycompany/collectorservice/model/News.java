@@ -24,5 +24,4 @@ public class News {
 
     @Field(type = FieldType.Text)
     private String category;
-
 }

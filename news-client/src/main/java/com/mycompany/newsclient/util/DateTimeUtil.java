@@ -20,5 +20,4 @@ public class DateTimeUtil {
         ZonedDateTime zdt = ldt.atZone(ZoneId.of(ZONE_ID));
         return Date.from(zdt.toInstant());
     }
-
 }

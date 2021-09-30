@@ -11,5 +11,4 @@ class CategorizerServiceApplicationTests {
     @Test
     void contextLoads() {
     }
-
 }

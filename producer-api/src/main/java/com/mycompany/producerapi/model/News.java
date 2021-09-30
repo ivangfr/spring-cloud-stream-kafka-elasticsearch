@@ -17,5 +17,4 @@ public class News {
     private String title;
     private String text;
     private String datetime;
-
 }

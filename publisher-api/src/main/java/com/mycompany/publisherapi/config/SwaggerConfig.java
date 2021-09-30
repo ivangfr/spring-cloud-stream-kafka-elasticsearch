@@ -35,5 +35,4 @@ public class SwaggerConfig {
         SpringDocUtils.getConfig()
                 .replaceWithClass(org.springframework.data.domain.Pageable.class, org.springdoc.core.converters.models.Pageable.class);
     }
-
 }

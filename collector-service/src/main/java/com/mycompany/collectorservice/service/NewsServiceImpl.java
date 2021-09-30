@@ -15,5 +15,4 @@ public class NewsServiceImpl implements NewsService {
     public News createNews(News news) {
         return newsRepository.save(news);
     }
-
 }

@@ -1,7 +1,7 @@
 package com.mycompany.publisherapi.rest;
 
 import com.mycompany.publisherapi.model.News;
-import com.mycompany.publisherapi.rest.dto.SearchDto;
+import com.mycompany.publisherapi.rest.dto.SearchRequest;
 import com.mycompany.publisherapi.service.NewsService;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
@@ -40,8 +40,7 @@ public class NewsController {
             summary = "Search for News",
             description = "This endpoint does a query for the 'string' informed in the fields 'title', 'text' and 'category'")
     @PutMapping("/search")
-    public Page<News> searchNews(@Valid @RequestBody SearchDto searchDto, @ParameterObject Pageable pageable) {
-        return newsService.search(searchDto.getText(), pageable);
+    public Page<News> searchNews(@Valid @RequestBody SearchRequest searchRequest, @ParameterObject Pageable pageable) {
+        return newsService.search(searchRequest.getText(), pageable);
     }
-
 }

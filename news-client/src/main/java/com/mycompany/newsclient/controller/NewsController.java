@@ -3,7 +3,7 @@ package com.mycompany.newsclient.controller;
 import com.mycompany.newsclient.client.PublisherApiClient;
 import com.mycompany.newsclient.client.dto.MyPage;
 import com.mycompany.newsclient.client.dto.News;
-import com.mycompany.newsclient.client.dto.SearchDto;
+import com.mycompany.newsclient.client.dto.SearchRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -25,7 +25,7 @@ public class NewsController {
                           @RequestParam(required = false) Integer size,
                           @RequestParam(required = false, defaultValue = "datetime,desc") String sort,
                           Model model) {
-        model.addAttribute("searchDto", new SearchDto());
+        model.addAttribute("searchRequest", new SearchRequest());
         model.addAttribute("newsList", publisherApiClient.listNewsByPage(page, size, sort));
         return "news";
     }
@@ -34,16 +34,15 @@ public class NewsController {
     public String searchNews(@RequestParam(required = false) Integer page,
                              @RequestParam(required = false) Integer size,
                              @RequestParam(required = false, defaultValue = "datetime,desc") String sort,
-                             @ModelAttribute SearchDto searchDto,
+                             @ModelAttribute SearchRequest searchRequest,
                              Model model) {
         MyPage<News> result;
-        if (searchDto.getText().trim().isEmpty()) {
+        if (searchRequest.getText().trim().isEmpty()) {
             result = publisherApiClient.listNewsByPage(page, size, sort);
         } else {
-            result = publisherApiClient.searchNewsByPage(searchDto, page, size, sort);
+            result = publisherApiClient.searchNewsByPage(searchRequest, page, size, sort);
         }
         model.addAttribute("newsList", result);
         return "news";
     }
-
 }

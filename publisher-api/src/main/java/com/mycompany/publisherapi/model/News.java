@@ -14,5 +14,4 @@ public class News {
     private String text;
     private String datetime;
     private String category;
-
 }

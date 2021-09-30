@@ -36,5 +36,4 @@ public class NewsStream {
 
         log.info("NewsEvent with id '{}' and title '{}' sent to bus.", message.getPayload().getId(), message.getPayload().getTitle());
     }
-
 }

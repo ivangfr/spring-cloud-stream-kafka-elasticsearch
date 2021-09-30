@@ -3,8 +3,7 @@ package com.mycompany.newsclient.client.dto;
 import lombok.Data;
 
 @Data
-public class SearchDto {
+public class SearchRequest {
 
     private String text;
-
 }

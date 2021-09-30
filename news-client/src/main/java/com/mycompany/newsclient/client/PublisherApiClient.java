@@ -2,7 +2,7 @@ package com.mycompany.newsclient.client;
 
 import com.mycompany.newsclient.client.dto.MyPage;
 import com.mycompany.newsclient.client.dto.News;
-import com.mycompany.newsclient.client.dto.SearchDto;
+import com.mycompany.newsclient.client.dto.SearchRequest;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -17,7 +17,6 @@ public interface PublisherApiClient {
                                 @RequestParam String sort);
 
     @PutMapping("/api/news/search")
-    MyPage<News> searchNewsByPage(@RequestBody SearchDto searchDto, @RequestParam Integer page,
+    MyPage<News> searchNewsByPage(@RequestBody SearchRequest searchRequest, @RequestParam Integer page,
                                   @RequestParam Integer size, @RequestParam String sort);
-
 }

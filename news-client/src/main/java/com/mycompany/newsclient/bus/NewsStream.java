@@ -49,5 +49,4 @@ public class NewsStream {
         news.setDatetime(DateTimeUtil.fromStringToDate(newsEvent.getDatetime().toString()));
         return news;
     }
-
 }

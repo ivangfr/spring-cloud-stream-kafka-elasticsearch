@@ -24,5 +24,4 @@ public class SchemaRegistryConfig {
     CacheManager cacheManager() {
         return new ConcurrentMapCacheManager();
     }
-
 }

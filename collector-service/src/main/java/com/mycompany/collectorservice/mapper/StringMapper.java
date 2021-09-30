@@ -8,5 +8,4 @@ public class StringMapper {
     public String asString(CharSequence charSequence) {
         return charSequence != null ? charSequence.toString() : null;
     }
-
 }

@@ -28,5 +28,4 @@ public class NewsServiceImpl implements NewsService {
     public Page<News> search(String text, Pageable pageable) {
         return newsRepository.findByTitleOrTextOrCategoryAllIgnoreCase(text, text, text, pageable);
     }
-
 }

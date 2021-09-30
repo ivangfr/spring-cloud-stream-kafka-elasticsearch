@@ -15,7 +15,7 @@
                 <a th:href="@{/}" class="header item">News-Client</a>
                 <div class="item">
                     <!-- Search Form-->
-                    <form th:action="@{/search}" th:object="${searchDto}" method="post">
+                    <form th:action="@{/search}" th:object="${searchRequest}" method="post">
                         <div class="ui action input">
                             <input type="text" id="searchInput" th:field="*{text}">
                             <button class="ui teal icon button" type="submit">
