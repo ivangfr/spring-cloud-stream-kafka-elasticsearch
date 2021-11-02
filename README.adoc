@@ -16,7 +16,7 @@ NOTE: In https://github.com/ivangfr/docker-swarm-environment[`docker-swarm-envir
 
 == Project Architecture
 
-image::images/project-diagram.png[]
+image::documentation/project-diagram.png[]
 
 == Applications
 
@@ -42,11 +42,11 @@ image::images/project-diagram.png[]
 +
 The `Websocket` operation is shown in the short gif below. News is created in `producer-api` and, immediately, it is shown in `news-client`.
 +
-image::images/websocket-operation.gif[]
+image::documentation/websocket-operation.gif[]
 
 == Prerequisites
 
-* https://www.oracle.com/java/technologies/javase-jdk11-downloads.html[`Java 11+`]
+* https://www.oracle.com/java/technologies/downloads/#java11[`Java 11+`]
 * https://www.docker.com/[`Docker`]
 * https://docs.docker.com/compose/install/[`Docker-Compose`]
 
@@ -72,7 +72,7 @@ It will install `commons-news-1.0.0.jar` in you local `Maven` repository, so tha
 docker-compose up -d
 ----
 
-* Wait for containers to be with status `running (healthy)`. To check it, run
+* Wait for Docker containers to be up and running. To check it, run
 +
 [source]
 ----
@@ -334,7 +334,7 @@ Inside `spring-cloud-stream-kafka-elasticsearch` root folder, run the following 
 +
 `Eureka` can be accessed at http://localhost:8761
 +
-image::images/eureka-with-apps.png[]
+image::documentation/eureka-with-apps.png[]
 
 * *Zipkin*
 +
@@ -342,7 +342,7 @@ image::images/eureka-with-apps.png[]
 +
 The figure below shows an example of the complete flow a news passes through. It goes since `producer-api`, where the news is created, until `news-client`.
 +
-image::images/zipkin-sample.png[]
+image::documentation/zipkin-sample.png[]
 
 * *Kafka Topics UI*
 +
@@ -354,7 +354,7 @@ image::images/zipkin-sample.png[]
 +
 The figure below shows the Kafka topics consumers. As we can see, the consumers are updated as the `lag` is `0`
 +
-image::images/kafka-manager-consumers.png[]
+image::documentation/kafka-manager-consumers.png[]
 +
 _Configuration_
 +
@@ -368,7 +368,7 @@ _Configuration_
 +
 `Schema Registry UI` can be accessed at http://localhost:8001
 +
-image::images/schema-registry.png[]
+image::documentation/schema-registry.png[]
 
 * *Elasticsearch REST API*
 +
