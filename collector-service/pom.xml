@@ -13,6 +13,7 @@
     <description>Demo project for Spring Boot</description>
 
     <properties>
+        <spring-cloud-schema-registry-client.version>1.1.5</spring-cloud-schema-registry-client.version>
         <avro.version>1.10.2</avro.version>
         <mycompany-commons-news.version>1.0.0</mycompany-commons-news.version>
         <org.mapstruct.version>1.4.2.Final</org.mapstruct.version>
@@ -63,6 +64,7 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-schema-registry-client</artifactId>
+            <version>${spring-cloud-schema-registry-client.version}</version>
         </dependency>
 
         <!-- Avro -->

@@ -3,26 +3,20 @@ version: "3.8"
 services:
 
   elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.12.1
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.15.2
     container_name: elasticsearch
     restart: unless-stopped
     ports:
       - "9200:9200"
       - "9300:9300"
     environment:
-      cluster.name: docker-es-cluster
       discovery.type: single-node
-      bootstrap.memory_lock: "true"
-      ES_JAVA_OPTS: "-Xms512m -Xmx512m"
-    ulimits:
-      memlock:
-        soft: -1
-        hard: -1
+      xpack.security.enabled: false
     healthcheck:
       test: "curl -f http://localhost:9200 || exit 1"
 
   zookeeper:
-    image: confluentinc/cp-zookeeper:6.1.1
+    image: confluentinc/cp-zookeeper:7.0.1
     container_name: zookeeper
     restart: unless-stopped
     ports:
@@ -33,7 +27,7 @@ services:
       test: "echo stat | nc localhost $$ZOOKEEPER_CLIENT_PORT"
 
   kafka:
-    image: confluentinc/cp-kafka:6.1.1
+    image: confluentinc/cp-kafka:7.0.1
     container_name: kafka
     restart: unless-stopped
     depends_on:
@@ -50,7 +44,7 @@ services:
       test: [ "CMD", "nc", "-z", "localhost", "9092" ]
 
   schema-registry:
-    image: confluentinc/cp-schema-registry:6.1.1
+    image: confluentinc/cp-schema-registry:7.0.1
     container_name: schema-registry
     restart: unless-stopped
     depends_on:
@@ -78,7 +72,7 @@ services:
       test: "wget --quiet --tries=1 --spider http://localhost:8000 || exit 1"
 
   kafka-rest-proxy:
-    image: confluentinc/cp-kafka-rest:6.1.1
+    image: confluentinc/cp-kafka-rest:7.0.1
     container_name: kafka-rest-proxy
     restart: unless-stopped
     depends_on:
@@ -110,7 +104,7 @@ services:
       test: "wget --quiet --tries=1 --spider http://localhost:8000 || exit 1"
 
   zipkin:
-    image: openzipkin/zipkin:2.23.4
+    image: openzipkin/zipkin:2.23.15
     container_name: zipkin
     restart: unless-stopped
     ports:

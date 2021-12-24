@@ -1,7 +1,6 @@
 spring:
   data:
     elasticsearch:
-      cluster-name: docker-es-cluster
       cluster-nodes: ${ELASTICSEARCH_HOST:localhost}:${ELASTICSEARCH_NODES_PORT:9300}
   elasticsearch:
     rest:
