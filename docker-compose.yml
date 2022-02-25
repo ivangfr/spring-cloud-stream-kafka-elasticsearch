@@ -102,7 +102,7 @@ services:
       KAFKA_REST_PROXY_URL: http://kafka-rest-proxy:8082
       PROXY: "true"
     healthcheck:
-      test: "wget --quiet --tries=1 --spider http://localhost:8000 || exit 1"
+      test: "wget --quiet --tries=1 --spider http://localhost:8000 || exit 1"
 
   zipkin:
     image: openzipkin/zipkin:2.23.16

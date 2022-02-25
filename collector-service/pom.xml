@@ -14,7 +14,6 @@
 
     <properties>
         <spring-cloud-schema-registry-client.version>1.1.5</spring-cloud-schema-registry-client.version>
-        <avro.version>1.10.2</avro.version>
         <mycompany-commons-news.version>1.0.0</mycompany-commons-news.version>
         <org.mapstruct.version>1.4.2.Final</org.mapstruct.version>
         <lombok-mapstruct-binding.version>0.2.0</lombok-mapstruct-binding.version>
@@ -65,13 +64,6 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-schema-registry-client</artifactId>
             <version>${spring-cloud-schema-registry-client.version}</version>
-        </dependency>
-
-        <!-- Avro -->
-        <dependency>
-            <groupId>org.apache.avro</groupId>
-            <artifactId>avro</artifactId>
-            <version>${avro.version}</version>
         </dependency>
 
         <!-- commons-news -->
