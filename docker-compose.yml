@@ -3,7 +3,7 @@ version: "3.8"
 services:
 
   elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.15.2
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.17.3
     container_name: elasticsearch
     restart: unless-stopped
     ports:
@@ -103,15 +103,6 @@ services:
     healthcheck:
       test: "wget --quiet --tries=1 --spider http://localhost:8000 || exit 1"
 
-  zipkin:
-    image: openzipkin/zipkin:2.23.16
-    container_name: zipkin
-    restart: unless-stopped
-    ports:
-      - "9411:9411"
-    healthcheck:
-      test: [ "CMD", "nc", "-z", "localhost", "9411" ]
-
   kafka-manager:
     image: hlebalbau/kafka-manager:3.0.0.5
     container_name: kafka-manager
@@ -126,3 +117,12 @@ services:
     command: -Dpidfile.path=/dev/null
     healthcheck:
       test: "curl -f http://localhost:9000 || exit 1"
+
+  zipkin:
+    image: openzipkin/zipkin:2.23.16
+    container_name: zipkin
+    restart: unless-stopped
+    ports:
+      - "9411:9411"
+    healthcheck:
+      test: [ "CMD", "nc", "-z", "localhost", "9411" ]
