@@ -4,13 +4,13 @@ The goal of this project is to implement a "News" processing pipeline composed o
 
 == Technologies used
 
-* https://docs.spring.io/spring-cloud-stream/docs/current/reference/htmlsingle[`Spring Cloud Stream`] to build highly scalable event-driven applications connected with shared messaging systems;
-* https://cloud.spring.io/spring-cloud-static/spring-cloud-schema-registry/1.0.6.RELEASE/reference/html/spring-cloud-schema-registry.html[`Spring Cloud Schema Registry`] that supports schema evolution so that the data can be evolved over time; besides, it lets you store schema information in a textual format (typically JSON) and makes that information accessible to various applications that need it to receive and send data in binary format;
+* https://docs.spring.io/spring-cloud-stream/docs/current/reference/html/[`Spring Cloud Stream`] to build highly scalable event-driven applications connected with shared messaging systems;
+* https://cloud.spring.io/spring-cloud-static/spring-cloud-schema-registry/current/reference/html/spring-cloud-schema-registry.html[`Spring Cloud Schema Registry`] that supports schema evolution so that the data can be evolved over time; besides, it lets you store schema information in a textual format (typically JSON) and makes that information accessible to various applications that need it to receive and send data in binary format;
 * https://docs.spring.io/spring-data/elasticsearch/docs/current/reference/html/[`Spring Data Elasticsearch`] to persist data in https://www.elastic.co/products/elasticsearch[`Elasticsearch`];
-* https://cloud.spring.io/spring-cloud-static/spring-cloud-openfeign/current/reference/html/[`Spring Cloud OpenFeign`] to write web service clients easily;
+* https://docs.spring.io/spring-cloud-openfeign/docs/current/reference/html/[`Spring Cloud OpenFeign`] to write web service clients easily;
 * https://www.thymeleaf.org/[`Thymeleaf`] as HTML template;
 * https://zipkin.io[`Zipkin`] to visualize traces between and within applications;
-* https://github.com/Netflix/eureka/wiki[`Eureka`] as service registration and discovery.
+* https://github.com/Netflix/eureka[`Eureka`] as service registration and discovery.
 
 NOTE: In https://github.com/ivangfr/docker-swarm-environment[`docker-swarm-environment`] repository, it is shown how to deploy this project into a cluster of Docker Engines in swarm mode.
 
@@ -318,10 +318,10 @@ Inside `spring-cloud-stream-kafka-elasticsearch` root folder, run the following 
 |Application |URL
 
 |producer-api
-|http://localhost:9080/swagger-ui.html
+|http://localhost:9080/swagger-ui/index.html
 
 |publisher-api
-|http://localhost:9083/swagger-ui.html
+|http://localhost:9083/swagger-ui/index.html
 
 |news-client
 |http://localhost:8080
@@ -334,7 +334,7 @@ Inside `spring-cloud-stream-kafka-elasticsearch` root folder, run the following 
 +
 `Eureka` can be accessed at http://localhost:8761
 +
-image::documentation/eureka-with-apps.png[]
+image::documentation/eureka-with-apps.jpeg[]
 
 * *Zipkin*
 +
@@ -342,7 +342,7 @@ image::documentation/eureka-with-apps.png[]
 +
 The figure below shows an example of the complete flow a news passes through. It goes since `producer-api`, where the news is created, until `news-client`.
 +
-image::documentation/zipkin-sample.png[]
+image::documentation/zipkin-sample.jpeg[]
 
 * *Kafka Topics UI*
 +
@@ -354,7 +354,7 @@ image::documentation/zipkin-sample.png[]
 +
 The figure below shows the Kafka topics consumers. As we can see, the consumers are updated as the `lag` is `0`
 +
-image::documentation/kafka-manager-consumers.png[]
+image::documentation/kafka-manager-consumers.jpeg[]
 +
 _Configuration_
 +
@@ -368,7 +368,7 @@ _Configuration_
 +
 `Schema Registry UI` can be accessed at http://localhost:8001
 +
-image::documentation/schema-registry.png[]
+image::documentation/schema-registry.jpeg[]
 
 * *Elasticsearch REST API*
 +

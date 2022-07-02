@@ -14,7 +14,6 @@
             <div class="ui stackable large menu">
                 <a th:href="@{/}" class="header item">News-Client</a>
                 <div class="item">
-                    <!-- Search Form-->
                     <form th:action="@{/search}" th:object="${searchRequest}" method="post">
                         <div class="ui action input">
                             <input type="text" id="searchInput" th:field="*{text}">
@@ -26,11 +25,9 @@
                 </div>
                 <div class="right menu">
                     <div class="item">
-                        <!-- Manual Sync -->
                         <a th:href="@{/}" class="ui teal button"><i class="refresh icon"></i>Manual Sync</a>
                     </div>
                     <div class="item">
-                        <!-- Websocket Connection -->
                         <div id="webSocketSwitch" class="ui slider checkbox disabled">
                             <input type="checkbox" checked="checked">
                             <label>WebSocket</label>
@@ -43,7 +40,6 @@
 
     <div class="ui text container">
         <div class="ui teal segment" style="margin-top:10px">
-            <!-- News List -->
             <div id="newsList" class="ui unstackable divided items">
                 <div class="item" th:each="news : ${newsList.content}">
                     <div class="image">
@@ -66,7 +62,6 @@
     </div>
 </main>
 
-<!--JavaScript at end of body for optimized loading-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.6.1/sockjs.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>

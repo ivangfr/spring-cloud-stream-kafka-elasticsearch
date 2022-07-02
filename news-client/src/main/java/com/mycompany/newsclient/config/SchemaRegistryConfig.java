@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Configuration;
 public class SchemaRegistryConfig {
 
     @Bean
-    SchemaRegistryClient schemaRegistryClient(@Value("${spring.cloud.schema-registry-client.endpoint}") String endpoint) {
+    public SchemaRegistryClient schemaRegistryClient(@Value("${spring.cloud.schema-registry-client.endpoint}") String endpoint) {
         ConfluentSchemaRegistryClient client = new ConfluentSchemaRegistryClient();
         client.setEndpoint(endpoint);
         return client;
@@ -21,7 +21,7 @@ public class SchemaRegistryConfig {
     // If 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client' dependency is commented out
     // in pom.xml, this explicitly CacheManager bean definition is not needed.
     @Bean
-    CacheManager cacheManager() {
+    public CacheManager cacheManager() {
         return new ConcurrentMapCacheManager();
     }
 }
