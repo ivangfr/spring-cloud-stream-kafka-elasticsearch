@@ -41,12 +41,12 @@ public class NewsStream {
     }
 
     private News createNews(NewsEvent newsEvent) {
-        News news = new News();
-        news.setId(newsEvent.getId().toString());
-        news.setTitle(newsEvent.getTitle().toString());
-        news.setText(newsEvent.getText().toString());
-        news.setCategory(newsEvent.getCategory().toString());
-        news.setDatetime(DateTimeUtil.fromStringToDate(newsEvent.getDatetime().toString()));
-        return news;
+        return new News(
+                newsEvent.getId().toString(),
+                newsEvent.getTitle().toString(),
+                newsEvent.getText().toString(),
+                DateTimeUtil.fromStringToDate(newsEvent.getDatetime().toString()),
+                newsEvent.getCategory().toString()
+        );
     }
 }

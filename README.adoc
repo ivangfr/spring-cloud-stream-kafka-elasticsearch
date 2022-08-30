@@ -46,7 +46,7 @@ image::documentation/websocket-operation.gif[]
 
 == Prerequisites
 
-* https://www.oracle.com/java/technologies/downloads/#java11[`Java 11+`]
+* https://www.oracle.com/java/technologies/downloads/#java17[`Java 17+`]
 * https://www.docker.com/[`Docker`]
 * https://docs.docker.com/compose/install/[`Docker-Compose`]
 
