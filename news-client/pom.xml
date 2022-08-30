@@ -3,7 +3,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>com.mycompany</groupId>
+        <groupId>com.ivanfranchin</groupId>
         <artifactId>spring-cloud-stream-kafka-elasticsearch</artifactId>
         <version>1.0.0</version>
         <relativePath>../pom.xml</relativePath>
@@ -14,7 +14,7 @@
 
     <properties>
         <spring-cloud-schema-registry-client.version>1.1.5</spring-cloud-schema-registry-client.version>
-        <mycompany-commons-news.version>1.0.0</mycompany-commons-news.version>
+        <ivanfranchin-commons-news.version>1.0.0</ivanfranchin-commons-news.version>
     </properties>
 
     <dependencies>
@@ -74,9 +74,9 @@
 
         <!-- commons-news -->
         <dependency>
-            <groupId>com.mycompany</groupId>
+            <groupId>com.ivanfranchin</groupId>
             <artifactId>commons-news</artifactId>
-            <version>${mycompany-commons-news.version}</version>
+            <version>${ivanfranchin-commons-news.version}</version>
         </dependency>
 
         <dependency>

@@ -10,14 +10,14 @@ spring:
           min-partition-count: 2
       bindings:
         news-in-0:
-          destination: com.mycompany.newspipeline.categorizer.news
+          destination: com.ivanfranchin.newspipeline.categorizer.news
           content-type: application/*+avro
           group: collectorGroup
           consumer:
             max-attempts: 4
             back-off-initial-interval: 10000
         news-out-0:
-          destination: com.mycompany.newspipeline.collector.news
+          destination: com.ivanfranchin.newspipeline.collector.news
           content-type: application/*+avro
           producer:
             partition-key-expression: headers['partitionKey']

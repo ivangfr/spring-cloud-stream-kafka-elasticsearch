@@ -10,7 +10,7 @@ spring:
           min-partition-count: 2
       bindings:
         news-in-0:
-          destination: com.mycompany.newspipeline.collector.news
+          destination: com.ivanfranchin.newspipeline.collector.news
           content-type: application/*+avro
           group: newsClientGroup
           consumer:

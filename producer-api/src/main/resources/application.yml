@@ -13,7 +13,7 @@ spring:
           auto-add-partitions: true
       bindings:
         news-out-0:
-          destination: com.mycompany.newspipeline.producer.news
+          destination: com.ivanfranchin.newspipeline.producer.news
           content-type: application/*+avro
           producer:
             partition-key-expression: headers['partitionKey']
