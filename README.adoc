@@ -379,7 +379,7 @@ Check ES is up and running
 curl localhost:9200
 ----
 +
-Check indexes in ES
+Check indexes
 +
 [source]
 ----
@@ -398,6 +398,13 @@ Simple search
 [source]
 ----
 curl "localhost:9200/news/_search?pretty"
+----
++
+Delete _news_ index
++
+[source]
+----
+curl -X DELETE localhost:9200/news
 ----
 
 == Shutdown

@@ -12,6 +12,6 @@ public class News {
     private String id;
     private String title;
     private String text;
-    private String datetime;
     private String category;
+    private String datetime;
 }
