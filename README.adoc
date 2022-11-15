@@ -318,10 +318,10 @@ Inside `spring-cloud-stream-kafka-elasticsearch` root folder, run the following 
 |Application |URL
 
 |producer-api
-|http://localhost:9080/swagger-ui/index.html
+|http://localhost:9080/swagger-ui.html
 
 |publisher-api
-|http://localhost:9083/swagger-ui/index.html
+|http://localhost:9083/swagger-ui.html
 
 |news-client
 |http://localhost:8080

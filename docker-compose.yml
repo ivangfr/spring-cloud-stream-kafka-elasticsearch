@@ -3,7 +3,7 @@ version: "3.8"
 services:
 
   elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.17.4
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.17.6
     container_name: elasticsearch
     restart: unless-stopped
     ports:
@@ -119,7 +119,7 @@ services:
       test: "curl -f http://localhost:9000 || exit 1"
 
   zipkin:
-    image: openzipkin/zipkin:2.23.18
+    image: openzipkin/zipkin:2.23.19
     container_name: zipkin
     restart: unless-stopped
     ports:
