@@ -1,13 +1,6 @@
 spring:
-  data:
-    elasticsearch:
-      cluster-nodes: ${ELASTICSEARCH_HOST:localhost}:${ELASTICSEARCH_NODES_PORT:9300}
   elasticsearch:
-    rest:
-      uris: http://${ELASTICSEARCH_HOST:localhost}:${ELASTICSEARCH_REST_PORT:9200}
-  sleuth:
-    sampler:
-      probability: 1.0
+    uris: http://${ELASTICSEARCH_HOST:localhost}:${ELASTICSEARCH_REST_PORT:9200}
 
 management:
   endpoints:
@@ -16,6 +9,9 @@ management:
   endpoint:
     health:
       show-details: always
+  tracing:
+    sampling:
+      probability: 1.0
 
 eureka:
   client:
@@ -29,3 +25,7 @@ springdoc:
   swagger-ui:
     groups-order: DESC
     disable-swagger-default-url: true
+
+logging:
+  pattern:
+    level: "%5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}]"

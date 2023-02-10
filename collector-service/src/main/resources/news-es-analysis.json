@@ -2,6 +2,7 @@
   "analysis": {
     "analyzer": {
       "my_analyzer": {
+        "type": "custom",
         "tokenizer": "standard",
         "filter": [
           "lowercase",
@@ -9,6 +10,7 @@
         ]
       },
       "my_search_analyzer": {
+        "type": "custom",
         "tokenizer": "standard",
         "filter": [
           "lowercase"

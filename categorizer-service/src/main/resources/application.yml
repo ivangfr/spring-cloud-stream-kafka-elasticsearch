@@ -22,9 +22,6 @@ spring:
           producer:
             partition-key-expression: headers['partitionKey']
             partition-count: 2
-  sleuth:
-    sampler:
-      probability: 1.0
   main:
     allow-bean-definition-overriding: true
 
@@ -35,6 +32,9 @@ management:
   endpoint:
     health:
       show-details: always
+  tracing:
+    sampling:
+      probability: 1.0
 
 eureka:
   client:
@@ -42,3 +42,7 @@ eureka:
       defaultZone: http://${EUREKA_HOST:localhost}:${EUREKA_PORT:8761}/eureka
   instance:
     preferIpAddress: true
+
+logging:
+  pattern:
+    level: "%5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}]"

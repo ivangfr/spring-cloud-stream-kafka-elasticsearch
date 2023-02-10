@@ -11,6 +11,7 @@ spring:
         binder:
           brokers: ${KAFKA_HOST:localhost}:${KAFKA_PORT:29092}
           auto-add-partitions: true
+      source: news
       bindings:
         news-out-0:
           destination: com.ivanfranchin.newspipeline.producer.news
@@ -18,9 +19,6 @@ spring:
           producer:
             partition-key-expression: headers['partitionKey']
             partition-count: 2
-  sleuth:
-    sampler:
-      probability: 1.0
   main:
     allow-bean-definition-overriding: true
 
@@ -31,6 +29,9 @@ management:
   endpoint:
     health:
       show-details: always
+  tracing:
+    sampling:
+      probability: 1.0
 
 eureka:
   client:
@@ -44,3 +45,7 @@ springdoc:
   swagger-ui:
     groups-order: DESC
     disable-swagger-default-url: true
+
+logging:
+  pattern:
+    level: "%5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}]"

@@ -1,6 +1,8 @@
 spring:
   application:
     name: news-client
+
+management:
   zipkin:
-    baseUrl: http://${ZIPKIN_HOST:localhost}:${ZIPKIN_PORT:9411}
-    sender.type: web
+    tracing:
+      endpoint: http://${ZIPKIN_HOST:localhost}:${ZIPKIN_PORT:9411}/api/v2/spans

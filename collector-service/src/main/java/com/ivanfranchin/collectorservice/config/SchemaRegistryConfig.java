@@ -1,12 +1,14 @@
 package com.ivanfranchin.collectorservice.config;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.cache.CacheManager;
-import org.springframework.cache.concurrent.ConcurrentMapCacheManager;
+import org.springframework.cloud.schema.registry.avro.AvroSchemaMessageConverter;
+import org.springframework.cloud.schema.registry.avro.AvroSchemaServiceManagerImpl;
 import org.springframework.cloud.schema.registry.client.ConfluentSchemaRegistryClient;
 import org.springframework.cloud.schema.registry.client.SchemaRegistryClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.messaging.converter.MessageConverter;
+import org.springframework.util.MimeType;
 
 @Configuration
 public class SchemaRegistryConfig {
@@ -18,10 +20,8 @@ public class SchemaRegistryConfig {
         return client;
     }
 
-    // If 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client' dependency is commented out
-    // in pom.xml, this explicitly CacheManager bean definition is not needed.
     @Bean
-    public CacheManager cacheManager() {
-        return new ConcurrentMapCacheManager();
+    public MessageConverter avroSchemaMessageConverter() {
+        return new AvroSchemaMessageConverter(MimeType.valueOf("application/*+avro"), new AvroSchemaServiceManagerImpl());
     }
 }
