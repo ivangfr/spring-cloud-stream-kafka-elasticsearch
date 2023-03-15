@@ -16,7 +16,7 @@ NOTE: In https://github.com/ivangfr/docker-swarm-environment[`docker-swarm-envir
 
 == Project Architecture
 
-image::documentation/project-diagram.png[]
+image::documentation/project-diagram.jpeg[]
 
 == Applications
 
@@ -333,16 +333,10 @@ Inside `spring-cloud-stream-kafka-elasticsearch` root folder, run the following 
 * *Eureka*
 +
 `Eureka` can be accessed at http://localhost:8761
-+
-image::documentation/eureka-with-apps.jpeg[]
 
 * *Zipkin*
 +
 `Zipkin` can be accessed at http://localhost:9411
-+
-The figure below shows an example of the complete flow a news passes through. It goes since `producer-api`, where the news is created, until `news-client`.
-+
-image::documentation/zipkin-sample.jpeg[]
 
 * *Kafka Topics UI*
 +
@@ -351,10 +345,6 @@ image::documentation/zipkin-sample.jpeg[]
 * *Kafka Manager*
 +
 `Kafka Manager` can be accessed at http://localhost:9000
-+
-The figure below shows the Kafka topics consumers. As we can see, the consumers are updated as the `lag` is `0`
-+
-image::documentation/kafka-manager-consumers.jpeg[]
 +
 _Configuration_
 +
@@ -367,8 +357,6 @@ _Configuration_
 * *Schema Registry UI*
 +
 `Schema Registry UI` can be accessed at http://localhost:8001
-+
-image::documentation/schema-registry.jpeg[]
 
 * *Elasticsearch REST API*
 +

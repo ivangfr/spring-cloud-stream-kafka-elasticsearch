@@ -1,4 +1,6 @@
 spring:
+  application:
+    name: collector-service
   cloud:
     schema-registry-client:
       endpoint: http://${SCHEMA_REGISTRY_HOST:localhost}:${SCHEMA_REGISTRY_PORT:8081}
@@ -37,6 +39,9 @@ management:
   tracing:
     sampling:
       probability: 1.0
+  zipkin:
+    tracing:
+      endpoint: http://${ZIPKIN_HOST:localhost}:${ZIPKIN_PORT:9411}/api/v2/spans
 
 eureka:
   client:
