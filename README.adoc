@@ -2,6 +2,10 @@
 
 The goal of this project is to implement a "News" processing pipeline composed of five https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/[`Spring Boot`] applications: `producer-api`, `categorizer-service`, `collector-service`, `publisher-api` and `news-client`.
 
+== Proof-of-Concepts & Articles
+
+On https://ivangfr.github.io[ivangfr.github.io], I have compiled my Proof-of-Concepts (PoCs) and articles. You can easily search for the technology you are interested in by using the filter. Who knows, perhaps I have already implemented a PoC or written an article about what you are looking for.
+
 == Technologies used
 
 * https://docs.spring.io/spring-cloud-stream/docs/current/reference/html/[`Spring Cloud Stream`] to build highly scalable event-driven applications connected with shared messaging systems;
