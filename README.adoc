@@ -52,7 +52,6 @@ image::documentation/websocket-operation.gif[]
 
 * https://www.oracle.com/java/technologies/downloads/#java17[`Java 17+`]
 * https://www.docker.com/[`Docker`]
-* https://docs.docker.com/compose/install/[`Docker-Compose`]
 
 == Generate NewsEvent
 
@@ -73,14 +72,14 @@ It will install `commons-news-1.0.0.jar` in you local `Maven` repository, so tha
 +
 [source]
 ----
-docker-compose up -d
+docker compose up -d
 ----
 
 * Wait for Docker containers to be up and running. To check it, run
 +
 [source]
 ----
-docker-compose ps
+docker compose ps
 ----
 
 == Running Applications with Maven
@@ -410,11 +409,11 @@ curl -X DELETE localhost:9200/news
 ./stop-apps.sh
 ----
 
-* To stop and remove docker-compose containers, network and volumes, go to a terminal and, inside `spring-cloud-stream-kafka-elasticsearch` root folder, run the following command
+* To stop and remove docker compose containers, network and volumes, go to a terminal and, inside `spring-cloud-stream-kafka-elasticsearch` root folder, run the following command
 +
 [source]
 ----
-docker-compose down -v
+docker compose down -v
 ----
 
 == Cleanup
