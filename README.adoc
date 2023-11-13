@@ -6,6 +6,14 @@ The goal of this project is to implement a "News" processing pipeline composed o
 
 On https://ivangfr.github.io[ivangfr.github.io], I have compiled my Proof-of-Concepts (PoCs) and articles. You can easily search for the technology you are interested in by using the filter. Who knows, perhaps I have already implemented a PoC or written an article about what you are looking for.
 
+== Additional Readings
+
+* [Medium]: https://medium.com/javarevisited/implementing-a-kafka-producer-and-consumer-using-spring-cloud-stream-d4b9a6a9eab1[**Implementing a Kafka Producer and Consumer using Spring Cloud Stream**]
+* [Medium]: https://medium.com/javarevisited/implementing-unit-tests-for-a-kafka-producer-and-consumer-that-uses-spring-cloud-stream-f7a98a89fcf2[**Implementing Unit Tests for a Kafka Producer and Consumer that uses Spring Cloud Stream**]
+* [Medium]: https://medium.com/javarevisited/implementing-end-to-end-testing-for-a-kafka-producer-and-consumer-that-uses-spring-cloud-stream-fbf5e666899e[**Implementing End-to-End testing for a Kafka Producer and Consumer that uses Spring Cloud Stream**]
+* [Medium]: https://medium.com/javarevisited/configuring-distributed-tracing-with-zipkin-in-a-kafka-producer-and-consumer-that-uses-spring-cloud-9f1e55468b9e[**Configuring Distributed Tracing with Zipkin in a Kafka Producer and Consumer that uses Spring Cloud Stream**]
+* [Medium]: https://medium.com/@ivangfr/using-cloudevents-in-a-kafka-producer-and-consumer-that-uses-spring-cloud-stream-9c51670b5566[**Using Cloudevents in a Kafka Producer and Consumer that uses Spring Cloud Stream**]
+
 == Technologies used
 
 * https://docs.spring.io/spring-cloud-stream/docs/current/reference/html/[`Spring Cloud Stream`] to build highly scalable event-driven applications connected with shared messaging systems;
