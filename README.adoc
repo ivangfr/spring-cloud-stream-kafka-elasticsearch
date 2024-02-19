@@ -355,7 +355,7 @@ Inside `spring-cloud-stream-kafka-elasticsearch` root folder, run the following 
 
 * *Kafka Manager*
 +
-`Kafka Manager` can be accessed at http://localhost:9000
+`Kafka Manager` can be accessed at http://localhost:9001
 +
 _Configuration_
 +
