@@ -14,7 +14,7 @@ spring:
           brokers: ${KAFKA_HOST:localhost}:${KAFKA_PORT:29092}
           auto-add-partitions: true
           enable-observation: true
-      output-bindings: news
+      output-bindings: news-out-0
       bindings:
         news-out-0:
           destination: com.ivanfranchin.newspipeline.producer.news

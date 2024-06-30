@@ -1,9 +1,7 @@
-version: "3.8"
-
 services:
 
   elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:8.10.4
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.13.4
     container_name: elasticsearch
     restart: unless-stopped
     ports:
@@ -17,7 +15,7 @@ services:
       test: "curl -f http://localhost:9200 || exit 1"
 
   zookeeper:
-    image: confluentinc/cp-zookeeper:7.5.3
+    image: confluentinc/cp-zookeeper:7.6.1
     container_name: zookeeper
     restart: unless-stopped
     ports:
@@ -28,7 +26,7 @@ services:
       test: "echo stat | nc localhost $$ZOOKEEPER_CLIENT_PORT"
 
   kafka:
-    image: confluentinc/cp-kafka:7.5.3
+    image: confluentinc/cp-kafka:7.6.1
     container_name: kafka
     restart: unless-stopped
     depends_on:
@@ -44,7 +42,7 @@ services:
       test: [ "CMD", "nc", "-z", "localhost", "9092" ]
 
   schema-registry:
-    image: confluentinc/cp-schema-registry:7.5.3
+    image: confluentinc/cp-schema-registry:7.6.1
     container_name: schema-registry
     restart: unless-stopped
     depends_on:
@@ -72,7 +70,7 @@ services:
       test: "wget --quiet --tries=1 --spider http://localhost:8000 || exit 1"
 
   kafka-rest-proxy:
-    image: confluentinc/cp-kafka-rest:7.5.3
+    image: confluentinc/cp-kafka-rest:7.6.1
     container_name: kafka-rest-proxy
     restart: unless-stopped
     depends_on:

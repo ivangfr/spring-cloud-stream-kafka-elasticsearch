@@ -65,7 +65,7 @@ image::documentation/websocket-operation.gif[]
 
 * In a terminal, make sure you are in `spring-cloud-stream-kafka-elasticsearch` root folder
 
-* Run the following command to generate `NewsEvent`
+* Run the following command to generate `NewsEvent`:
 +
 [source]
 ----
@@ -76,14 +76,14 @@ It will install `commons-news-1.0.0.jar` in you local `Maven` repository, so tha
 
 == Start Environment
 
-* Open a terminal and inside `spring-cloud-stream-kafka-elasticsearch` root folder run
+* Open a terminal and inside `spring-cloud-stream-kafka-elasticsearch` root folder run:
 +
 [source]
 ----
 docker compose up -d
 ----
 
-* Wait for Docker containers to be up and running. To check it, run
+* Wait for Docker containers to be up and running. To check it, run:
 +
 [source]
 ----
@@ -92,7 +92,7 @@ docker compose ps
 
 == Running Applications with Maven
 
-Inside `spring-cloud-stream-kafka-elasticsearch` root folder, run the following `Maven` commands in different terminals
+Inside `spring-cloud-stream-kafka-elasticsearch` root folder, run the following `Maven` commands in different terminals:
 
 * *eureka-server*
 +
@@ -142,7 +142,7 @@ Inside `spring-cloud-stream-kafka-elasticsearch` root folder, run the following 
 
 * In a terminal, make sure you are in `spring-cloud-stream-kafka-elasticsearch` root folder
 
-* In order to build the application's docker images, run the following script
+* In order to build the application's docker images, run the following script:
 +
 [source]
 ----
@@ -316,7 +316,7 @@ Inside `spring-cloud-stream-kafka-elasticsearch` root folder, run the following 
 
 * In a terminal, make sure you are inside `spring-cloud-stream-kafka-elasticsearch` root folder
 
-* Run following script
+* Run following script:
 +
 [source]
 ----
@@ -408,16 +408,16 @@ curl -X DELETE localhost:9200/news
 
 == Shutdown
 
-* To stop applications
-** If they were started with `Maven`, go to the terminals where they are running and press `Ctrl+C`
-** If they were started as Docker containers, go to a terminal and, inside `spring-cloud-stream-kafka-elasticsearch` root folder, run the script below
+* To stop applications:
+** If they were started with `Maven`, go to the terminals where they are running and press `Ctrl+C`;
+** If they were started as Docker containers, go to a terminal and, inside `spring-cloud-stream-kafka-elasticsearch` root folder, run the script below:
 +
 [source]
 ----
 ./stop-apps.sh
 ----
 
-* To stop and remove docker compose containers, network and volumes, go to a terminal and, inside `spring-cloud-stream-kafka-elasticsearch` root folder, run the following command
+* To stop and remove docker compose containers, network and volumes, go to a terminal and, inside `spring-cloud-stream-kafka-elasticsearch` root folder, run the following command:
 +
 [source]
 ----
@@ -426,7 +426,7 @@ docker compose down -v
 
 == Cleanup
 
-To remove the Docker images created by this project, go to a terminal and, inside `spring-cloud-stream-kafka-elasticsearch` root folder, run the script below
+To remove the Docker images created by this project, go to a terminal and, inside `spring-cloud-stream-kafka-elasticsearch` root folder, run the script below:
 [source]
 ----
 ./remove-docker-images.sh
