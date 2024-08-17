@@ -1,6 +1,6 @@
 = spring-cloud-stream-kafka-elasticsearch
 
-The goal of this project is to implement a "News" processing pipeline composed of five https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/[`Spring Boot`] applications: `producer-api`, `categorizer-service`, `collector-service`, `publisher-api` and `news-client`.
+The goal of this project is to implement a "News" processing pipeline composed of five https://docs.spring.io/spring-boot/index.html[`Spring Boot`] applications: `producer-api`, `categorizer-service`, `collector-service`, `publisher-api` and `news-client`.
 
 == Proof-of-Concepts & Articles
 
@@ -8,17 +8,17 @@ On https://ivangfr.github.io[ivangfr.github.io], I have compiled my Proof-of-Con
 
 == Additional Readings
 
-* [Medium]: https://medium.com/javarevisited/implementing-a-kafka-producer-and-consumer-using-spring-cloud-stream-d4b9a6a9eab1[**Implementing a Kafka Producer and Consumer using Spring Cloud Stream**]
-* [Medium]: https://medium.com/javarevisited/implementing-unit-tests-for-a-kafka-producer-and-consumer-that-uses-spring-cloud-stream-f7a98a89fcf2[**Implementing Unit Tests for a Kafka Producer and Consumer that uses Spring Cloud Stream**]
-* [Medium]: https://medium.com/javarevisited/implementing-end-to-end-testing-for-a-kafka-producer-and-consumer-that-uses-spring-cloud-stream-fbf5e666899e[**Implementing End-to-End testing for a Kafka Producer and Consumer that uses Spring Cloud Stream**]
-* [Medium]: https://medium.com/javarevisited/configuring-distributed-tracing-with-zipkin-in-a-kafka-producer-and-consumer-that-uses-spring-cloud-9f1e55468b9e[**Configuring Distributed Tracing with Zipkin in a Kafka Producer and Consumer that uses Spring Cloud Stream**]
-* [Medium]: https://medium.com/@ivangfr/using-cloudevents-in-a-kafka-producer-and-consumer-that-uses-spring-cloud-stream-9c51670b5566[**Using Cloudevents in a Kafka Producer and Consumer that uses Spring Cloud Stream**]
+* [Medium]: https://medium.com/@ivangfr/implementing-a-kafka-producer-and-consumer-using-spring-cloud-stream-d4b9a6a9eab1[**Implementing a Kafka Producer and Consumer using Spring Cloud Stream**]
+* [Medium]: https://medium.com/@ivangfr/implementing-unit-tests-for-a-kafka-producer-and-consumer-that-uses-spring-cloud-stream-f7a98a89fcf2[**Implementing Unit Tests for a Kafka Producer and Consumer that uses Spring Cloud Stream**]
+* [Medium]: https://medium.com/@ivangfr/implementing-end-to-end-testing-for-a-kafka-producer-and-consumer-that-uses-spring-cloud-stream-fbf5e666899e[**Implementing End-to-End testing for a Kafka Producer and Consumer that uses Spring Cloud Stream**]
+* [Medium]: https://medium.com/@ivangfr/configuring-distributed-tracing-with-zipkin-in-a-kafka-producer-and-consumer-that-uses-spring-cloud-9f1e55468b9e[**Configuring Distributed Tracing with Zipkin in a Kafka Producer and Consumer that uses Spring Cloud Stream**]
+* [Medium]: https://medium.com/@ivangfr/using-cloudevents-in-a-kafka-producer-and-consumer-that-uses-spring-cloud-stream-9c51670b5566[**Using CloudEvents in a Kafka Producer and Consumer that uses Spring Cloud Stream**]
 
 == Technologies used
 
 * https://docs.spring.io/spring-cloud-stream/docs/current/reference/html/[`Spring Cloud Stream`] to build highly scalable event-driven applications connected with shared messaging systems;
-* https://cloud.spring.io/spring-cloud-static/spring-cloud-schema-registry/current/reference/html/spring-cloud-schema-registry.html[`Spring Cloud Schema Registry`] that supports schema evolution so that the data can be evolved over time; besides, it lets you store schema information in a textual format (typically JSON) and makes that information accessible to various applications that need it to receive and send data in binary format;
-* https://docs.spring.io/spring-data/elasticsearch/docs/current/reference/html/[`Spring Data Elasticsearch`] to persist data in https://www.elastic.co/products/elasticsearch[`Elasticsearch`];
+* https://docs.spring.io/spring-cloud-schema-registry/docs/current/reference/html/spring-cloud-schema-registry.html[`Spring Cloud Schema Registry`] that supports schema evolution so that the data can be evolved over time; besides, it lets you store schema information in a textual format (typically JSON) and makes that information accessible to various applications that need it to receive and send data in binary format;
+* https://docs.spring.io/spring-data/elasticsearch/reference/[`Spring Data Elasticsearch`] to persist data in https://www.elastic.co/elasticsearch[`Elasticsearch`];
 * https://docs.spring.io/spring-cloud-openfeign/docs/current/reference/html/[`Spring Cloud OpenFeign`] to write web service clients easily;
 * https://www.thymeleaf.org/[`Thymeleaf`] as HTML template;
 * https://zipkin.io[`Zipkin`] to visualize traces between and within applications;
