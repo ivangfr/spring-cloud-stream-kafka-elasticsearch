@@ -58,7 +58,7 @@ image::documentation/websocket-operation.gif[]
 
 == Prerequisites
 
-* https://www.oracle.com/java/technologies/downloads/#java17[`Java 17+`]
+* https://www.oracle.com/java/technologies/downloads/#java21[`Java 21+`]
 * https://www.docker.com/[`Docker`]
 
 == Generate NewsEvent
@@ -344,10 +344,14 @@ Inside `spring-cloud-stream-kafka-elasticsearch` root folder, run the following 
 * *Eureka*
 +
 `Eureka` can be accessed at http://localhost:8761
++
+image::documentation/eureka.jpg[]
 
 * *Zipkin*
 +
 `Zipkin` can be accessed at http://localhost:9411
++
+image::documentation/zipkin.jpg[]
 
 * *Kafka Topics UI*
 +
