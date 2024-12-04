@@ -1,38 +1,42 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.4.0</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
     <groupId>com.ivanfranchin</groupId>
     <artifactId>spring-cloud-stream-kafka-elasticsearch</artifactId>
     <version>1.0.0</version>
     <packaging>pom</packaging>
     <name>spring-cloud-stream-kafka-elasticsearch</name>
     <description>News Pipeline</description>
-
-    <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.3.4</version>
-        <relativePath/> <!-- lookup parent from repository -->
-    </parent>
-
+    <url/>
+    <licenses>
+        <license/>
+    </licenses>
+    <developers>
+        <developer/>
+    </developers>
+    <scm>
+        <connection/>
+        <developerConnection/>
+        <tag/>
+        <url/>
+    </scm>
     <properties>
         <java.version>21</java.version>
-        <spring-cloud.version>2023.0.3</spring-cloud.version>
+        <spring-cloud.version>2024.0.0</spring-cloud.version>
         <jib-maven-plugin.version>3.4.4</jib-maven-plugin.version>
-        <jdk-image.version>21.0.4</jdk-image.version>
-        <docker-image.prefix>ivanfranchin</docker-image.prefix>
     </properties>
-
-    <modules>
-        <module>eureka-server</module>
-        <module>producer-api</module>
-        <module>categorizer-service</module>
-        <module>collector-service</module>
-        <module>publisher-api</module>
-        <module>news-client</module>
-        <module>commons-news</module>
-    </modules>
-
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-stream</artifactId>
+        </dependency>
+    </dependencies>
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -48,31 +52,21 @@
     <build>
         <plugins>
             <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>build-info</id>
-                        <goals>
-                            <goal>build-info</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
                 <groupId>com.google.cloud.tools</groupId>
                 <artifactId>jib-maven-plugin</artifactId>
                 <version>${jib-maven-plugin.version}</version>
-                <configuration>
-                    <from>
-                        <image>amazoncorretto:${jdk-image.version}</image>
-                    </from>
-                    <to>
-                        <image>${docker-image.prefix}/${project.artifactId}:${project.version}</image>
-                    </to>
-                </configuration>
             </plugin>
         </plugins>
     </build>
+
+    <modules>
+        <module>eureka-server</module>
+        <module>producer-api</module>
+        <module>categorizer-service</module>
+        <module>collector-service</module>
+        <module>publisher-api</module>
+        <module>news-client</module>
+        <module>commons-news</module>
+    </modules>
 
 </project>
