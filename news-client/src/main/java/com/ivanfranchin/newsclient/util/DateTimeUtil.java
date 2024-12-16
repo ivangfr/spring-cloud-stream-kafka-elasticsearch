@@ -6,18 +6,22 @@ import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
-public class DateTimeUtil {
+public final class DateTimeUtil {
 
     private static final String PATTERN = "yyyy-MM-dd'T'HH:mm:ssX";
-    private static final String ZONE_ID = "UTC";
+    private static final ZoneId ZONE_ID = ZoneId.of("UTC");
     private static final DateTimeFormatter DTF = DateTimeFormatter.ofPattern(PATTERN);
 
     private DateTimeUtil() {
+        throw new UnsupportedOperationException("Utility class cannot be instantiated");
     }
 
-    public static Date fromStringToDate(String string) {
-        LocalDateTime ldt = LocalDateTime.parse(string, DTF);
-        ZonedDateTime zdt = ldt.atZone(ZoneId.of(ZONE_ID));
-        return Date.from(zdt.toInstant());
+    public static Date fromStringToDate(String dateTimeString) {
+        if (dateTimeString == null || dateTimeString.isEmpty()) {
+            throw new IllegalArgumentException("Input string cannot be null or empty");
+        }
+        LocalDateTime localDateTime = LocalDateTime.parse(dateTimeString, DTF);
+        ZonedDateTime zonedDateTime = localDateTime.atZone(ZONE_ID);
+        return Date.from(zonedDateTime.toInstant());
     }
 }
