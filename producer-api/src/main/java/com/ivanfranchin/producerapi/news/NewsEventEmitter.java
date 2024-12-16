@@ -23,12 +23,12 @@ public class NewsEventEmitter {
     @Value("${spring.cloud.stream.bindings.news-out-0.content-type}")
     private String newsOutMimeType;
 
-    public void newsCreated(String title, String text) {
+    public void newsCreated(News news) {
         NewsEvent newsEvent = NewsEvent.newBuilder()
-                .setId(UUID.randomUUID().toString())
-                .setTitle(title)
-                .setText(text)
-                .setDatetime(Instant.ofEpochSecond(Instant.now().getEpochSecond()).toString())
+                .setId(news.id())
+                .setTitle(news.title())
+                .setText(news.text())
+                .setDatetime(news.datetime())
                 .build();
 
         Message<NewsEvent> message = MessageBuilder.withPayload(newsEvent)

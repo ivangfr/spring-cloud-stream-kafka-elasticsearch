@@ -18,7 +18,9 @@ public class NewsController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public void createNew(@Valid @RequestBody CreateNewsRequest createNewsRequest) {
-        newsEventEmitter.newsCreated(createNewsRequest.getTitle(), createNewsRequest.getText());
+    public News createNew(@Valid @RequestBody CreateNewsRequest createNewsRequest) {
+        News news = News.from(createNewsRequest);
+        newsEventEmitter.newsCreated(news);
+        return news;
     }
 }
