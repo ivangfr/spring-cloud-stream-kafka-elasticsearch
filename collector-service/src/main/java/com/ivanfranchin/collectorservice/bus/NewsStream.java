@@ -26,7 +26,7 @@ public class NewsStream {
     private final NewsMapper newsMapper;
 
     @Bean
-    public Function<Message<NewsEvent>, Message<NewsEvent>> news() {
+    Function<Message<NewsEvent>, Message<NewsEvent>> news() {
         return message -> {
             NewsEvent newsEvent = message.getPayload();
             MessageHeaders messageHeaders = message.getHeaders();

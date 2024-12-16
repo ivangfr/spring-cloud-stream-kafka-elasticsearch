@@ -24,7 +24,7 @@ public class NewsStream {
     private final SimpMessagingTemplate simpMessagingTemplate;
 
     @Bean
-    public Consumer<Message<NewsEvent>> news() {
+    Consumer<Message<NewsEvent>> news() {
         return message -> {
             NewsEvent newsEvent = message.getPayload();
             MessageHeaders messageHeaders = message.getHeaders();

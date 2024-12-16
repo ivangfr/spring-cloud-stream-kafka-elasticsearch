@@ -87,7 +87,7 @@ docker compose up -d
 +
 [source]
 ----
-docker compose ps
+docker ps -a
 ----
 
 == Running Applications with Maven
@@ -146,7 +146,7 @@ Inside the `spring-cloud-stream-kafka-elasticsearch` root folder, run the follow
 +
 [source]
 ----
-./docker-build.sh
+./build-docker-images.sh
 ----
 
 === Application's Environment Variables
