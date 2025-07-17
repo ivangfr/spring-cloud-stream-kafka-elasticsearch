@@ -52,14 +52,14 @@ image::documentation/project-diagram.jpeg[]
 +
 `Spring Boot` Web java application that provides a User Interface to see the news. It implements a `Websocket` that consumes news events from the topic `collector.news`. So, news are updated on the fly on the main page. Besides, `news-client` communicates directly with `publisher-api` whenever search for a specific news or news update are needed.
 +
-The `Websocket` operation is shown in the short gif below. News is created in `producer-api` and, immediately, it is shown in `news-client`.
+The `Websocket` operation is shown in the short gif below. News is created in `producer-api` and, immediately, it appears in `news-client`.
 +
 image::documentation/websocket-operation.gif[]
 
 == Prerequisites
 
-* https://www.oracle.com/java/technologies/downloads/#java21[`Java 21+`]
-* Some containerization tool https://www.docker.com[`Docker`], https://podman.io[`Podman`], etc.
+* https://www.oracle.com/java/technologies/downloads/#java21[`Java 21`] or higher;
+* A containerization tool https://www.docker.com[`Docker`], https://podman.io[`Podman`], etc.
 
 == Generate NewsEvent
 
@@ -67,25 +67,25 @@ image::documentation/websocket-operation.gif[]
 
 * Run the following command to generate `NewsEvent`:
 +
-[source]
+[source,bash]
 ----
 ./mvnw clean install --projects commons-news
 ----
 +
-It will install `commons-news-1.0.0.jar` in you local `Maven` repository, so that it can be visible by all services.
+It will install `commons-news-1.0.0.jar` in your local `Maven` repository, so that it can be visible by all services.
 
 == Start Environment
 
 * In a terminal, navigate to the `spring-cloud-stream-kafka-elasticsearch` root folder, and run:
 +
-[source]
+[source,bash]
 ----
 docker compose up -d
 ----
 
 * Wait for Docker containers to be up and running. To check it, run:
 +
-[source]
+[source,bash]
 ----
 docker ps -a
 ----
@@ -96,42 +96,42 @@ Inside the `spring-cloud-stream-kafka-elasticsearch` root folder, run the follow
 
 * *eureka-server*
 +
-[source]
+[source,bash]
 ----
 ./mvnw clean spring-boot:run --projects eureka-server
 ----
 
 * *producer-api*
 +
-[source]
+[source,bash]
 ----
 ./mvnw clean spring-boot:run --projects producer-api -Dspring-boot.run.jvmArguments="-Dserver.port=9080"
 ----
 
 * *categorizer-service*
 +
-[source]
+[source,bash]
 ----
 ./mvnw clean spring-boot:run --projects categorizer-service -Dspring-boot.run.jvmArguments="-Dserver.port=9081"
 ----
 
 * *collector-service*
 +
-[source]
+[source,bash]
 ----
 ./mvnw clean spring-boot:run --projects collector-service -Dspring-boot.run.jvmArguments="-Dserver.port=9082"
 ----
 
 * *publisher-api*
 +
-[source]
+[source,bash]
 ----
 ./mvnw clean spring-boot:run --projects publisher-api -Dspring-boot.run.jvmArguments="-Dserver.port=9083"
 ----
 
 * *news-client*
 +
-[source]
+[source,bash]
 ----
 ./mvnw clean spring-boot:run --projects news-client
 ----
@@ -142,9 +142,9 @@ Inside the `spring-cloud-stream-kafka-elasticsearch` root folder, run the follow
 
 * In a terminal, make sure you are in the `spring-cloud-stream-kafka-elasticsearch` root folder;
 
-* In order to build the application's docker images, run the following script:
+* To build the application's Docker images, run the following script:
 +
-[source]
+[source,bash]
 ----
 ./build-docker-images.sh
 ----
@@ -318,7 +318,7 @@ Inside the `spring-cloud-stream-kafka-elasticsearch` root folder, run the follow
 
 * Run following script:
 +
-[source]
+[source,bash]
 ----
 ./start-apps.sh
 ----
@@ -375,37 +375,37 @@ _Configuration_
 
 * *Elasticsearch REST API*
 +
-Check ES is up and running
+Check if ES is up and running
 +
-[source]
+[source,bash]
 ----
 curl localhost:9200
 ----
 +
 Check indexes
 +
-[source]
+[source,bash]
 ----
 curl "localhost:9200/_cat/indices?v"
 ----
 +
 Check _news_ index mapping
 +
-[source]
+[source,bash]
 ----
 curl "localhost:9200/news/_mapping?pretty"
 ----
 +
 Simple search
 +
-[source]
+[source,bash]
 ----
 curl "localhost:9200/news/_search?pretty"
 ----
 +
 Delete _news_ index
 +
-[source]
+[source,bash]
 ----
 curl -X DELETE localhost:9200/news
 ----
@@ -413,17 +413,17 @@ curl -X DELETE localhost:9200/news
 == Shutdown
 
 * To stop applications:
-** If they were started with `Maven`, go to the terminals where they are running and press `Ctrl+C`;
+** If they were started with `Maven`, go to the terminals where they are running and press `Ctrl+C`.
 ** If they were started as Docker containers, in a terminal and inside the `spring-cloud-stream-kafka-elasticsearch` root folder, run the script below:
 +
-[source]
+[source,bash]
 ----
 ./stop-apps.sh
 ----
 
-* To stop and remove docker compose containers, network and volumes, in a terminal, navigate to the `spring-cloud-stream-kafka-elasticsearch` root folder, and run the following command:
+* To stop and remove Docker Compose containers, network and volumes, in a terminal, navigate to the `spring-cloud-stream-kafka-elasticsearch` root folder, and run the following command:
 +
-[source]
+[source,bash]
 ----
 docker compose down -v
 ----
@@ -431,7 +431,7 @@ docker compose down -v
 == Cleanup
 
 To remove the Docker images created by this project, in a terminal and inside the `spring-cloud-stream-kafka-elasticsearch` root folder, run the script below:
-[source]
+[source,bash]
 ----
 ./remove-docker-images.sh
 ----
