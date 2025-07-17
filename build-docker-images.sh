@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
+if [ "$1" = "podman" ]; then
+  PODMAN_SOCK=$(podman machine inspect --format '{{.ConnectionInfo.PodmanSocket.Path}}')
+  export DOCKER_HOST="unix://$PODMAN_SOCK"
+fi
+
 DOCKER_IMAGE_PREFIX="ivanfranchin"
 APP_VERSION="1.0.0"
 
