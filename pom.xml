@@ -4,7 +4,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.4.0</version>
+        <version>3.5.3</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.ivanfranchin</groupId>
@@ -28,8 +28,8 @@
     </scm>
     <properties>
         <java.version>21</java.version>
-        <spring-cloud.version>2024.0.0</spring-cloud.version>
-        <jib-maven-plugin.version>3.4.4</jib-maven-plugin.version>
+        <spring-cloud.version>2025.0.0</spring-cloud.version>
+        <jib-maven-plugin.version>3.4.5</jib-maven-plugin.version>
     </properties>
     <dependencies>
         <dependency>
