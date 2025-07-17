@@ -19,32 +19,32 @@ NEWS_CLIENT_DOCKER_IMAGE_NAME="${DOCKER_IMAGE_PREFIX}/${NEWS_CLIENT_APP_NAME}:${
 
 SKIP_TESTS="true"
 
-./mvnw clean compile jib:dockerBuild \
+./mvnw clean spring-boot:build-image \
   --projects "$EUREKA_SERVER_APP_NAME" \
   -DskipTests="$SKIP_TESTS" \
-  -Dimage="$EUREKA_SERVER_DOCKER_IMAGE_NAME"
+  -Dspring-boot.build-image.imageName="$EUREKA_SERVER_DOCKER_IMAGE_NAME"
 
-./mvnw clean compile jib:dockerBuild \
+./mvnw clean spring-boot:build-image \
   --projects "$PRODUCER_API_APP_NAME" \
   -DskipTests="$SKIP_TESTS" \
-  -Dimage="$PRODUCER_API_DOCKER_IMAGE_NAME"
+  -Dspring-boot.build-image.imageName="$PRODUCER_API_DOCKER_IMAGE_NAME"
 
-./mvnw clean compile jib:dockerBuild \
+./mvnw clean spring-boot:build-image \
   --projects "$CATEGORIZER_SERVICE_APP_NAME" \
   -DskipTests="$SKIP_TESTS" \
-  -Dimage="$CATEGORIZER_SERVICE_DOCKER_IMAGE_NAME"
+  -Dspring-boot.build-image.imageName="$CATEGORIZER_SERVICE_DOCKER_IMAGE_NAME"
 
-./mvnw clean compile jib:dockerBuild \
+./mvnw clean spring-boot:build-image \
   --projects "$COLLECTOR_SERVICE_APP_NAME" \
   -DskipTests="$SKIP_TESTS" \
-  -Dimage="$COLLECTOR_SERVICE_DOCKER_IMAGE_NAME"
+  -Dspring-boot.build-image.imageName="$COLLECTOR_SERVICE_DOCKER_IMAGE_NAME"
 
-./mvnw clean compile jib:dockerBuild \
+./mvnw clean spring-boot:build-image \
   --projects "$PUBLISHER_API_APP_NAME" \
   -DskipTests="$SKIP_TESTS" \
-  -Dimage="$PUBLISHER_API_DOCKER_IMAGE_NAME"
+  -Dspring-boot.build-image.imageName="$PUBLISHER_API_DOCKER_IMAGE_NAME"
 
-./mvnw clean compile jib:dockerBuild \
+./mvnw clean spring-boot:build-image \
   --projects "$NEWS_CLIENT_APP_NAME" \
   -DskipTests="$SKIP_TESTS" \
-  -Dimage="$NEWS_CLIENT_DOCKER_IMAGE_NAME"
+  -Dspring-boot.build-image.imageName="$NEWS_CLIENT_DOCKER_IMAGE_NAME"

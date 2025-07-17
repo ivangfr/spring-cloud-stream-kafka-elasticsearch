@@ -29,7 +29,6 @@
     <properties>
         <java.version>21</java.version>
         <spring-cloud.version>2025.0.0</spring-cloud.version>
-        <jib-maven-plugin.version>3.4.5</jib-maven-plugin.version>
     </properties>
     <dependencies>
         <dependency>
@@ -49,16 +48,6 @@
         </dependencies>
     </dependencyManagement>
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>com.google.cloud.tools</groupId>
-                <artifactId>jib-maven-plugin</artifactId>
-                <version>${jib-maven-plugin.version}</version>
-            </plugin>
-        </plugins>
-    </build>
-
     <modules>
         <module>eureka-server</module>
         <module>producer-api</module>
@@ -68,5 +57,4 @@
         <module>news-client</module>
         <module>commons-news</module>
     </modules>
-
 </project>
