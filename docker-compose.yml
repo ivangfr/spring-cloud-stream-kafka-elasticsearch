@@ -1,7 +1,7 @@
 services:
 
   elasticsearch:
-    image: 'docker.elastic.co/elasticsearch/elasticsearch:9.0.2'
+    image: 'docker.elastic.co/elasticsearch/elasticsearch:8.18.8'
     container_name: 'elasticsearch'
     restart: 'unless-stopped'
     ports:
@@ -15,7 +15,7 @@ services:
       test: 'curl -f http://localhost:9200 || exit 1'
 
   zookeeper:
-    image: 'confluentinc/cp-zookeeper:7.8.0'
+    image: 'confluentinc/cp-zookeeper:7.9.5'
     container_name: 'zookeeper'
     restart: 'unless-stopped'
     ports:
@@ -26,7 +26,7 @@ services:
       test: 'echo stat | nc localhost $$ZOOKEEPER_CLIENT_PORT'
 
   kafka:
-    image: 'confluentinc/cp-kafka:7.8.0'
+    image: 'confluentinc/cp-kafka:7.9.5'
     container_name: 'kafka'
     restart: 'unless-stopped'
     depends_on:
@@ -42,7 +42,7 @@ services:
       test: [ "CMD", "nc", "-z", "localhost", "9092" ]
 
   schema-registry:
-    image: 'confluentinc/cp-schema-registry:7.8.0'
+    image: 'confluentinc/cp-schema-registry:7.9.5'
     container_name: 'schema-registry'
     restart: 'unless-stopped'
     depends_on:
@@ -70,7 +70,7 @@ services:
       test: 'wget --quiet --tries=1 --spider http://localhost:8000 || exit 1'
 
   kafdrop:
-    image: 'obsidiandynamics/kafdrop:4.1.0'
+    image: 'obsidiandynamics/kafdrop:4.2.0'
     container_name: 'kafdrop'
     restart: 'unless-stopped'
     depends_on:
@@ -83,7 +83,7 @@ services:
       test: 'curl -f http://localhost:9000 || exit 1'
 
   zipkin:
-    image: 'openzipkin/zipkin:3.5.0'
+    image: 'openzipkin/zipkin:3.5.1'
     container_name: 'zipkin'
     restart: 'unless-stopped'
     ports:

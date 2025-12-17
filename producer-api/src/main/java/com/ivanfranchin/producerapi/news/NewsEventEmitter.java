@@ -10,9 +10,6 @@ import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Component;
 import org.springframework.util.MimeType;
 
-import java.time.Instant;
-import java.util.UUID;
-
 @Slf4j
 @RequiredArgsConstructor
 @Component
