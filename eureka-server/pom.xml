@@ -25,7 +25,7 @@
         <url/>
     </scm>
     <properties>
-        <spring-cloud.version>2025.0.0</spring-cloud.version>
+        <spring-cloud.version>2025.1.0</spring-cloud.version>
     </properties>
     <dependencies>
         <dependency>
@@ -39,7 +39,7 @@
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
+            <artifactId>spring-boot-starter-actuator-test</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>

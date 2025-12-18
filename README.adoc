@@ -58,7 +58,7 @@ image::documentation/websocket-operation.gif[]
 
 == Prerequisites
 
-* https://www.oracle.com/java/technologies/downloads/#java21[`Java 21`] or higher;
+* https://www.oracle.com/java/technologies/downloads/#java25[`Java 25`] or higher;
 * A containerization tool https://www.docker.com[`Docker`], https://podman.io[`Podman`], etc.
 
 == Generate NewsEvent
